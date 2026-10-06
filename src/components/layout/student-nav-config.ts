@@ -5,7 +5,6 @@ import {
     CalendarCheck,
     FolderKanban,
     Award,
-    UserRound,
     type LucideIcon,
 } from 'lucide-react'
 

@@ -95,6 +95,8 @@ export const DEFAULT_PERMISSION_MATRIX: PermissionMatrix = {
   manager: MANAGER_ACCESS,
   team_leader: TEAM_LEADER_ACCESS,
   salesperson: SALESPERSON_ACCESS,
+  mentor: ADMIN_ACCESS,
+  student: ADMIN_ACCESS,
 }
 
 export const ROLE_LABELS: Record<Role, string> = {
@@ -103,4 +105,6 @@ export const ROLE_LABELS: Record<Role, string> = {
   manager: 'Manager',
   team_leader: 'Team leader',
   salesperson: 'Salesperson',
+  mentor: 'Mentor',
+  student: 'Student',
 }
