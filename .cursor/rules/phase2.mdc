@@ -1,0 +1,10 @@
+---
+description: Phase 2 constraints
+alwaysApply: true
+---
+
+- Phase 2 is still FRONTEND ONLY with the mock backend. No real calls to WhatsApp, Meta, Google, email providers, or telephony.
+- Everything external is simulated behind the same `services/api` interfaces (connection state, incoming messages, webhook deliveries, sync results), so a real backend can replace the mock later.
+- Simulated external events (an incoming WhatsApp reply, a Facebook lead, an email open) are triggered from a dev-only "Simulator" panel gated by import.meta.env.DEV.
+- Secrets (tokens, API keys, webhook secrets) are shown masked after creation, and shown in full only once at creation time.
+- Reuse existing components, hooks, permission checks, audit logging, and the Timeline. Do not rebuild what Phase 1 already provides.

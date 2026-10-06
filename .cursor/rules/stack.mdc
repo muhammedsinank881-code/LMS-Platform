@@ -1,0 +1,14 @@
+---
+description: Tech stack and conventions for LeadFlow
+alwaysApply: true
+---
+
+- React 19 + Vite + TypeScript strict. Never use `any`.
+- Tailwind v3 only, using design tokens from tailwind.config.ts. No inline styles, no other CSS libs.
+- Data access only through TanStack Query hooks in features/\*/hooks. Components never import mock data.
+- Forms use React Hook Form + Zod; infer types from schemas.
+- Use the `@/` path alias. Max ~250 lines per file; split components early.
+- Reuse components from components/ui before creating new ones.
+- Statuses, sources, and stages are DATA, never hardcoded enums.
+- Every data view needs loading, empty, and error states.
+- Currency is formatted via the shared INR formatter in lib/.

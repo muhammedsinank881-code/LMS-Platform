@@ -1,0 +1,10 @@
+---
+description: How to work on tasks
+alwaysApply: true
+---
+
+- Work only on the step I ask for. Do not build ahead.
+- Before coding, state a short plan and list assumptions.
+- After coding, run `npm run lint` and `npx tsc --noEmit` and fix errors.
+- Do not rewrite files unrelated to the task. Keep diffs minimal.
+- End with a summary: files created/changed and how to verify.

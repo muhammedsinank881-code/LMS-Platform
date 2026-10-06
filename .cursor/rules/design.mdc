@@ -1,0 +1,8 @@
+---
+description: Visual design rules
+globs: src/**/*.tsx
+---
+- Clean and minimal: neutral grays, indigo brand color, 1px gray-200 borders, light shadows only on popovers/modals.
+- Inter font, 8px spacing grid, 8px radius (12px for modals).
+- Semantic colors only for status/priority/score (Hot red-orange, Warm amber, Cold blue).
+- Must be responsive and keyboard accessible, with visible focus rings.

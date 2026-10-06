@@ -1,0 +1,15 @@
+export const LEAD_COLUMN_LABELS: { id: string; label: string }[] = [
+  { id: 'id', label: 'Lead ID' },
+  { id: 'name', label: 'Name' },
+  { id: 'phone', label: 'Phone' },
+  { id: 'sourceId', label: 'Source' },
+  { id: 'campaignId', label: 'Campaign' },
+  { id: 'statusId', label: 'Status' },
+  { id: 'score', label: 'Score' },
+  { id: 'assignedTo', label: 'Assigned to' },
+  { id: 'budget', label: 'Budget' },
+  { id: 'tags', label: 'Tags' },
+  { id: 'lastContactedAt', label: 'Last contacted' },
+  { id: 'nextFollowUpAt', label: 'Next follow-up' },
+  { id: 'createdAt', label: 'Created' },
+]

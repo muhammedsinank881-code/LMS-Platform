@@ -1,0 +1,46 @@
+import {
+  AtSign,
+  Bell,
+  BellRing,
+  CalendarClock,
+  CheckSquare,
+  Clock,
+  Globe,
+  GitBranch,
+  Mail,
+  MessageCircle,
+  MoveRight,
+  Handshake,
+  StickyNote,
+  Tag,
+  Tags,
+  UserCheck,
+  UserPlus,
+  Pencil,
+  Repeat,
+  type LucideIcon,
+} from 'lucide-react'
+import type { AutomationActionType } from '@/types'
+
+export const ACTION_ICONS: Record<AutomationActionType, LucideIcon> = {
+  assign: UserPlus,
+  change_status: Repeat,
+  add_tags: Tag,
+  remove_tags: Tags,
+  set_field: Pencil,
+  create_followup: CalendarClock,
+  create_task: CheckSquare,
+  send_whatsapp: MessageCircle,
+  send_email: Mail,
+  notify_user: Bell,
+  notify_team: BellRing,
+  create_customer: UserCheck,
+  create_deal: Handshake,
+  move_deal_stage: MoveRight,
+  add_note: StickyNote,
+  call_webhook: Globe,
+  wait: Clock,
+  branch: GitBranch,
+}
+
+export const MENTION_ICON = AtSign

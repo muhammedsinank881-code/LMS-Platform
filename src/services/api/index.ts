@@ -1,0 +1,41 @@
+import { mockApi } from '@/services/mock'
+import type { Api } from './api'
+
+export * from './ad-sets'
+export * from './api'
+export * from './api-keys'
+export * from './audit-logs'
+export * from './integrations'
+export * from './lead-forms'
+export * from './webhooks'
+export * from './auth'
+export * from './automations'
+export * from './broadcasts'
+export * from './call-logs'
+export * from './campaigns'
+export * from './config'
+export * from './conversations'
+export * from './customers'
+export * from './deals'
+export * from './errors'
+export * from './followups'
+export * from './leads'
+export * from './notifications'
+export * from './performance'
+export * from './pipelines'
+export * from './quick-replies'
+export * from './reports'
+export * from './resource'
+export * from './saved-views'
+export * from './settings'
+export * from './simulator'
+export * from './spend'
+export * from './tasks'
+export * from './team'
+export * from './templates'
+
+/**
+ * The one place the backend is chosen. Swap `mockApi` for a REST implementation of `Api` and no
+ * hook, page or component changes.
+ */
+export const api: Api = mockApi
