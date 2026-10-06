@@ -86,6 +86,26 @@ const ACME_PEOPLE: PersonSpec[] = [
     language: 'Malayalam',
     location: 'Kochi',
   },
+
+  {
+    id: 'user-mentor',
+    name: 'Demo Mentor',
+    email: 'mentor@leadflow.test',
+    role: 'mentor',
+    team: null,
+    language: 'English',
+    location: 'Kochi',
+  },
+  {
+    id: 'user-student',
+    name: 'Demo Student',
+    email: 'student@leadflow.test',
+    role: 'student',
+    team: null,
+    language: 'English',
+    location: 'Kochi',
+  },
+
 ]
 
 // Northwind: the five demo accounts (they belong to both workspaces) in a single team.
