@@ -21,7 +21,7 @@ describe('seed data', () => {
   })
 
   it('seeds the full Acme workspace to the spec', () => {
-    expect(acme(t.users)).toHaveLength(8)
+    expect(acme(t.users)).toHaveLength(10)
     expect(new Set(acme(t.users).map((u) => u.role))).toEqual(new Set(ROLES))
     expect(acme(t.teams)).toHaveLength(2)
     expect(acme(t.leadStatuses)).toHaveLength(12)

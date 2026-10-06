@@ -22,6 +22,8 @@ export function defaultSectionGrants(): SectionGrants {
     manager: { ...PROFILE_ONLY, lead_capture: true },
     team_leader: { ...PROFILE_ONLY },
     salesperson: { ...PROFILE_ONLY },
+    mentor: { ...ALL_TRUE },
+    student: { ...ALL_TRUE },
   }
 }
 

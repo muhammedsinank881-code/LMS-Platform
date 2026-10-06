@@ -2,9 +2,10 @@ import { NavLink } from 'react-router-dom'
 import { Tooltip } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import type { NavItem } from './nav-config'
+import type {StudentNavItem } from './student-nav-config'
 
 export interface SidebarNavItemProps {
-  item: NavItem
+  item: NavItem | StudentNavItem   
   collapsed: boolean
   badge?: number
   onNavigate?: () => void
