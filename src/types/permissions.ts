@@ -1,4 +1,4 @@
-export const ROLES = ['super_admin', 'admin', 'manager', 'team_leader', 'salesperson'] as const
+export const ROLES = ['super_admin', 'admin', 'manager', 'team_leader', 'salesperson', 'mentor', 'student'] as const
 export type Role = (typeof ROLES)[number]
 
 /** One entry per top-level module. Matches the sidebar navigation. */

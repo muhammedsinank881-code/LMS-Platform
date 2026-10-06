@@ -44,6 +44,20 @@ const demoUsers: Array<Omit<MockUserRecord, 'password'> & { role: MockMembership
     role: 'salesperson',
     teamId: 'team-north',
   },
+  {
+    id: 'user-Hasna',
+    name: 'Hasna PK',
+    email: 'Mentor@leadflow.test',
+    role: 'mentor',
+    teamId: 'team-north',
+  },
+  {
+    id: 'user-sinan',
+    name: 'Sinan',
+    email: 'student@leadflow.test',
+    role: 'student',
+    teamId: null,
+  },
 ]
 
 /** Two onboarded workspaces; every demo user belongs to both so the switcher is always usable. */
