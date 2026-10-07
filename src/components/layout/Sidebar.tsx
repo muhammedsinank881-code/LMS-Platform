@@ -7,6 +7,7 @@ import { cn } from '@/lib/cn'
 import { BrandMark } from './BrandMark'
 import { NAV_ITEMS } from './nav-config'
 import { SidebarNavItem } from './SidebarNavItem'
+import { STUDENT_NAV_ITEMS } from './student-nav-config'
 import { WorkspaceSwitcher } from './WorkspaceSwitcher'
 
 export interface SidebarProps {
@@ -19,10 +20,13 @@ export interface SidebarProps {
 }
 
 export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }: SidebarProps) {
-  const { can } = usePermission()
+  const { can, role } = usePermission()
   const summary = useFollowUpSummary()
   const inboxUnread = useInboxUnreadCount()
-  const visibleItems = NAV_ITEMS.filter((item) => can(item.resource, 'view'))
+  const isStudent = role === 'student'
+  const visibleItems = isStudent
+    ? STUDENT_NAV_ITEMS
+    : NAV_ITEMS.filter((item) => can(item.resource, 'view'))
   const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose
   const toggleLabel = collapsed ? 'Expand sidebar' : 'Collapse sidebar'
 
@@ -39,14 +43,14 @@ export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }:
       <nav aria-label="Main" className="flex-1 overflow-y-auto px-3 py-2">
         <ul className="space-y-1">
           {visibleItems.map((item) => (
-            <li key={item.resource}>
+            <li key={item.path}>
               <SidebarNavItem
                 item={item}
                 collapsed={collapsed}
                 badge={
-                  item.resource === 'followups'
+                  'resource' in item && item.resource === 'followups'
                     ? summary.dueNow
-                    : item.resource === 'inbox'
+                    : 'resource' in item && item.resource === 'inbox'
                       ? inboxUnread
                       : 0
                 }
