@@ -1,4 +1,5 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
+import { RoleIndexRedirect } from './RoleIndexRedirect'
 import { lazyPage } from './lazy-route'
 import { RouteErrorBoundary } from './RouteErrorBoundary'
 import { RouteFallback } from './RouteFallback'
@@ -11,7 +12,7 @@ export const router = createBrowserRouter([
     errorElement: <RouteErrorBoundary fullPage />,
     HydrateFallback: RouteFallback,
     children: [
-      { index: true, element: <Navigate to="/dashboard" replace /> },
+      { index: true, element: <RoleIndexRedirect /> },
       ...publicRoutes,
       ...protectedRoutes,
       { path: '*', lazy: lazyPage(() => import('./NotFoundPage'), 'NotFoundPage') },

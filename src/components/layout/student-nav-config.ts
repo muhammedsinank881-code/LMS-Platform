@@ -12,6 +12,7 @@ export interface StudentNavItem {
   label: string
   path: string
   icon: LucideIcon
+  section?: string
 }
 
 export const STUDENT_NAV_ITEMS : StudentNavItem [] =[

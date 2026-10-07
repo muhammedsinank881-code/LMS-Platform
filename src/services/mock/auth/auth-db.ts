@@ -63,18 +63,31 @@ export function readDb(): MockAuthDb {
       if (isMockAuthDb(parsed)) {
         const seeded = createSeedAuthDb()
         let modified = false
-        for (const user of seeded.users) {
-          if (!parsed.users.some((u) => normalizeEmail(u.email) === normalizeEmail(user.email))) {
-            parsed.users.push(user)
+
+        for (const seedUser of seeded.users) {
+          if (
+            !parsed.users.some(
+              (user) => normalizeEmail(user.email) === normalizeEmail(seedUser.email),
+            )
+          ) {
+            parsed.users.push(seedUser)
             modified = true
           }
         }
-        for (const membership of seeded.memberships) {
-          if (!parsed.memberships.some((m) => m.userId === membership.userId && m.tenantId === membership.tenantId)) {
-            parsed.memberships.push(membership)
+
+        for (const seedMembership of seeded.memberships) {
+          if (
+            !parsed.memberships.some(
+              (membership) =>
+                membership.userId === seedMembership.userId &&
+                membership.tenantId === seedMembership.tenantId,
+            )
+          ) {
+            parsed.memberships.push(seedMembership)
             modified = true
           }
         }
+
         if (modified) writeDb(parsed)
         return parsed
       }
@@ -82,6 +95,7 @@ export function readDb(): MockAuthDb {
   } catch {
     // Corrupt storage: fall through and reseed.
   }
+
   const seeded = createSeedAuthDb()
   writeDb(seeded)
   return seeded

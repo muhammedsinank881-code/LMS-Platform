@@ -86,7 +86,7 @@ export const mockAuthApi: AuthApiClient = {
   async login({ email, password }: LoginInput) {
     await delay()
     const db = readDb()
-    const user = db.users.find((u) => u.email === normalizeEmail(email))
+    const user = db.users.find((u) => normalizeEmail(u.email) === normalizeEmail(email))
     // Same message for unknown email and wrong password: no account enumeration.
     if (!user || user.password !== password) {
       throw new ApiError('invalid_credentials', 'Incorrect email or password.')
