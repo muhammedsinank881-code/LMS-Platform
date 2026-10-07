@@ -15,9 +15,9 @@ export function ActiveCourseCard() {
 
   return (
     <>
-      <div
+      <button
         onClick={handleCardClick}
-        className="group relative cursor-pointer rounded-xl border border-border bg-surface p-5 transition-all hover:border-primary/50 hover:shadow-md"
+        className="group w-full relative cursor-pointer rounded-xl border border-border bg-surface p-5 transition-all hover:border-primary/50 hover:shadow-md"
       >
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
           <div>
@@ -32,7 +32,7 @@ export function ActiveCourseCard() {
             </h3>
           </div>
 
-          <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+          <button className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
             <Button
               variant="outline"
               size="sm"
@@ -54,7 +54,7 @@ export function ActiveCourseCard() {
               <Radio className="h-3.5 w-3.5" />
               {activeCourse.isLiveClassActive ? 'Join Live Class' : 'No Live Class'}
             </Button>
-          </div>
+          </button>
         </div>
 
         {/* Progress & Next Lesson */}
@@ -94,7 +94,7 @@ export function ActiveCourseCard() {
             View Full Course Details <ChevronRight className="h-3.5 w-3.5" />
           </span>
         </div>
-      </div>
+      </button>
 
       {/* Syllabus Notes Modal */}
       <Modal open={notesOpen} onOpenChange={setNotesOpen}>

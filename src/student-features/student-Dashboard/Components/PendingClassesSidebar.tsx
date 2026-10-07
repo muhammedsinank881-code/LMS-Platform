@@ -31,7 +31,7 @@ export function PendingClassesSidebar() {
 
       <div className="mt-3 space-y-2.5 flex-1 overflow-y-auto">
         {pendingClasses.map((cls) => (
-          <div
+          <button
             key={cls.id}
             onClick={() => handleClassClick(cls)}
             className="group flex cursor-pointer items-center gap-3 rounded-lg border border-border/50 bg-surface-hover p-2.5 transition-all hover:border-primary/50 hover:bg-muted/70"
@@ -55,7 +55,7 @@ export function PendingClassesSidebar() {
               </p>
               <p className="truncate text-[10px] text-muted-foreground">{cls.module}</p>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </Card>

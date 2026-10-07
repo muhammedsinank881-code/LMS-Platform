@@ -20,7 +20,7 @@ export function StudentVideoClassPage() {
       <div className="flex items-center gap-2">
         <Link
           to="/student/dashboard"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Student Dashboard
         </Link>
@@ -43,12 +43,18 @@ export function StudentVideoClassPage() {
                 poster={selectedClass.thumbnail}
                 className="h-full w-full object-contain"
               >
+                <track
+                  kind="captions"
+                  src={selectedClass.videoUrl}
+                  srcLang="en"
+                  label="English"
+                />
                 <source src={selectedClass.videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
 
-            <div className="p-4 space-y-2">
+            <div className="space-y-2 p-4">
               <div className="flex items-center justify-between">
                 <span className="rounded bg-primary-subtle px-2 py-0.5 text-xs font-semibold text-primary">
                   {selectedClass.module}
@@ -59,7 +65,8 @@ export function StudentVideoClassPage() {
               </div>
               <h2 className="text-lg font-bold text-foreground">{selectedClass.title}</h2>
               <p className="text-xs text-muted-foreground">
-                In this video session, we dive into practical hands-on examples, state management patterns, and interactive component building for full-stack applications.
+                In this video session, we dive into practical hands-on examples, state management
+                patterns, and interactive component building for full-stack applications.
               </p>
             </div>
           </Card>
@@ -71,9 +78,9 @@ export function StudentVideoClassPage() {
               <TabsTrigger value="discussion">Discussion (4)</TabsTrigger>
             </TabsList>
             <TabsContent value="notes">
-              <Card className="p-4 text-xs space-y-2">
+              <Card className="space-y-2 p-4 text-xs">
                 <h4 className="font-semibold text-foreground">Summary & Code Snippets</h4>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                <ul className="list-inside list-disc space-y-1 text-muted-foreground">
                   <li>Review key state hooks and Zustand persistence.</li>
                   <li>Recharts responsive container configuration.</li>
                   <li>Role-based access control inside sidebar components.</li>
@@ -81,14 +88,18 @@ export function StudentVideoClassPage() {
               </Card>
             </TabsContent>
             <TabsContent value="discussion">
-              <Card className="p-4 text-xs space-y-3">
+              <Card className="space-y-3 p-4 text-xs">
                 <div className="border-b border-border pb-2">
                   <p className="font-semibold text-foreground">Rahul Verma</p>
-                  <p className="text-muted-foreground">Great lecture! The explanation of Recharts tooltips was super helpful.</p>
+                  <p className="text-muted-foreground">
+                    Great lecture! The explanation of Recharts tooltips was super helpful.
+                  </p>
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">Mentor Hasna PK</p>
-                  <p className="text-muted-foreground">Thanks Rahul! Check out the assignment lab for hands-on practice.</p>
+                  <p className="text-muted-foreground">
+                    Thanks Rahul! Check out the assignment lab for hands-on practice.
+                  </p>
                 </div>
               </Card>
             </TabsContent>
@@ -97,29 +108,33 @@ export function StudentVideoClassPage() {
 
         {/* Video Class Playlist / Queue */}
         <div>
-          <Card className="p-4 space-y-3">
+          <Card className="space-y-3 p-4">
             <h3 className="text-sm font-semibold text-foreground">Course Video Modules</h3>
             <div className="space-y-2">
               {MOCK_STUDENT_DATA.pendingClasses.map((cls) => {
                 const isActive = cls.id === selectedClass.id
                 return (
-                  <div
+                  <button
                     key={cls.id}
                     onClick={() => setSelectedClass(cls)}
                     className={`flex cursor-pointer items-center gap-3 rounded-lg border p-2.5 transition-all ${
                       isActive
                         ? 'border-primary bg-primary-subtle/50 font-semibold'
-                        : 'border-border/60 bg-surface-hover hover:border-primary/50'
+                        : 'bg-surface-hover border-border/60 hover:border-primary/50'
                     }`}
                   >
-                    <PlayCircle className={`h-5 w-5 shrink-0 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
+                    <PlayCircle
+                      className={`h-5 w-5 shrink-0 ${isActive ? 'text-primary' : 'text-muted-foreground'}`}
+                    />
                     <div className="min-w-0 flex-1">
-                      <p className={`truncate text-xs ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                      <p
+                        className={`truncate text-xs ${isActive ? 'text-primary' : 'text-foreground'}`}
+                      >
                         {cls.title}
                       </p>
                       <p className="text-[10px] text-muted-foreground">{cls.duration}</p>
                     </div>
-                  </div>
+                  </button>
                 )
               })}
             </div>
