@@ -61,9 +61,38 @@ export function readDb(): MockAuthDb {
     const raw = localStorage.getItem(DB_KEY)
     if (raw) {
       const parsed: unknown = JSON.parse(raw)
-      if (isMockAuthDb(parsed)) {
-        db = parsed
-      }
+     if (isMockAuthDb(parsed)) {
+  const seeded = createSeedAuthDb()
+  let modified = false
+
+  for (const user of seeded.users) {
+    if (
+      !parsed.users.some(
+        (u) => normalizeEmail(u.email) === normalizeEmail(user.email)
+      )
+    ) {
+      parsed.users.push(user)
+      modified = true
+    }
+  }
+
+  for (const membership of seeded.memberships) {
+    if (
+      !parsed.memberships.some(
+        (m) =>
+          m.userId === membership.userId &&
+          m.tenantId === membership.tenantId
+      )
+    ) {
+      parsed.memberships.push(membership)
+      modified = true
+    }
+  }
+
+  if (modified) writeDb(parsed)
+
+  return parsed
+}
     }
   } catch {
     // Corrupt storage: fall through and reseed.

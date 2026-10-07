@@ -4,6 +4,8 @@ import { usePermission } from '@/hooks/use-permission'
 import { cn } from '@/lib/cn'
 import { getNavItem, MOBILE_TAB_RESOURCES } from './nav-config'
 
+import { STUDENT_NAV_ITEMS } from './student-nav-config'
+
 export interface MobileTabBarProps {
   onOpenMore: () => void
 }
@@ -13,8 +15,11 @@ const tabClasses =
 
 /** Bottom tab bar for phones: Home, Follow-ups, Leads, Inbox, More (opens the full nav drawer). */
 export function MobileTabBar({ onOpenMore }: MobileTabBarProps) {
-  const { can } = usePermission()
-  const tabs = MOBILE_TAB_RESOURCES.map(getNavItem).filter((item) => can(item.resource, 'view'))
+  const { can, role } = usePermission()
+  const isStudent = role === 'student'
+  const tabs = isStudent
+    ? STUDENT_NAV_ITEMS.slice(0, 4)
+    : MOBILE_TAB_RESOURCES.map(getNavItem).filter((item) => can(item.resource, 'view'))
 
   return (
     <nav
@@ -23,7 +28,7 @@ export function MobileTabBar({ onOpenMore }: MobileTabBarProps) {
     >
       {tabs.map((item) => (
         <NavLink
-          key={item.resource}
+          key={item.path}
           to={item.path}
           className={({ isActive }) =>
             cn(
@@ -33,7 +38,7 @@ export function MobileTabBar({ onOpenMore }: MobileTabBarProps) {
           }
         >
           <item.icon aria-hidden="true" className="h-5 w-5" />
-          {item.resource === 'dashboard' ? 'Home' : item.label}
+          {'resource' in item && item.resource === 'dashboard' ? 'Home' : item.label}
         </NavLink>
       ))}
       <button

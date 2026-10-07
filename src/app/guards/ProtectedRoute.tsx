@@ -14,6 +14,7 @@ export function ProtectedRoute() {
   const userRole = useAuthStore((state) => state.user?.role)
   const intentionalSignOut = useAuthStore((state) => state.intentionalSignOut)
   const onboardingCompleted = useAuthStore((state) => state.tenant?.onboardingCompleted ?? false)
+  const user = useAuthStore((state) => state.user)
 
   if (!isAuthenticated) {
     const returnTo = intentionalSignOut ? undefined : `${location.pathname}${location.search}`

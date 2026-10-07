@@ -131,16 +131,49 @@ const shellPages: RouteObject[] = [
       { path: 'api-keys', lazy: lazyPage(() => import('@/features/developer/pages/ApiKeysWebhooksPage'), 'ApiKeysWebhooksPage') },
     ],
   },
+  {
+    path: 'student',
+    children: [
+      {
+        path: 'dashboard',
+        lazy: lazyPage(() => import('@/student-features/student-Dashboard/page/StudentDashboardPage'), 'StudentDashboardPage'),
+      },
+      {
+        path: 'courses',
+        lazy: lazyPage(() => import('@/student-features/pages/StudentCoursesPage'), 'StudentCoursesPage'),
+      },
+      {
+        path: 'assignments',
+        lazy: lazyPage(() => import('@/student-features/pages/StudentAssignmentsPage'), 'StudentAssignmentsPage'),
+      },
+      {
+        path: 'attendance',
+        lazy: lazyPage(() => import('@/student-features/pages/StudentAttendancePage'), 'StudentAttendancePage'),
+      },
+      {
+        path: 'projects',
+        lazy: lazyPage(() => import('@/student-features/pages/StudentProjectsPage'), 'StudentProjectsPage'),
+      },
+      {
+        path: 'certificates',
+        lazy: lazyPage(() => import('@/student-features/pages/StudentCertificatesPage'), 'StudentCertificatesPage'),
+      },
+      {
+        path: 'video-class',
+        lazy: lazyPage(() => import('@/student-features/pages/StudentVideoClassPage'), 'StudentVideoClassPage'),
+      },
+    ],
+  },
 ]
 
 /** Hidden developer tools, absent from production builds. Outside the AppShell on purpose. */
 const devPages: RouteObject[] = import.meta.env.DEV
   ? [
-      {
-        path: 'dev/data-check',
-        lazy: lazyPage(() => import('@/features/dev/pages/DataCheckPage'), 'DataCheckPage'),
-      },
-    ]
+    {
+      path: 'dev/data-check',
+      lazy: lazyPage(() => import('@/features/dev/pages/DataCheckPage'), 'DataCheckPage'),
+    },
+  ]
   : []
 
 export const protectedRoutes: RouteObject[] = [
