@@ -52,15 +52,15 @@ export function StudentDetailsDrawer({
         {/* Content Body */}
         <div className="p-5 space-y-6 flex-1 text-[#17324D] dark:text-foreground">
           {/* Main Info Box */}
-          <div className="flex items-start gap-4 pb-4 border-b border-[#E2E8F0] dark:border-border">
-            <div className="w-14 h-14 rounded-full bg-[#0F9F83]/10 text-[#0F9F83] font-extrabold text-lg flex items-center justify-center shrink-0 border border-[#0F9F83]/20">
+          <div className="flex items-start gap-4 pb-4 border-b border-border">
+            <div className="w-14 h-14 rounded-full bg-primary-subtle text-primary font-extrabold text-lg flex items-center justify-center shrink-0 border border-primary/20">
               {student.avatarInitials}
             </div>
             <div className="min-w-0 space-y-1">
-              <h2 className="text-lg font-bold text-[#17324D] dark:text-foreground truncate">
+              <h2 className="text-lg font-bold text-foreground truncate">
                 {student.name}
               </h2>
-              <p className="text-xs font-semibold text-[#64748B] dark:text-slate-400">
+              <p className="text-xs font-semibold text-muted-foreground">
                 {student.rollNumber} • {student.classBatch}
               </p>
               <div className="pt-1">
@@ -75,20 +75,20 @@ export function StudentDetailsDrawer({
 
           {/* Quick Metrics */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-[#F8FAFC] dark:bg-slate-900/60 border border-[#E2E8F0] dark:border-border rounded-xl p-3.5 space-y-1">
-              <div className="text-xs text-[#64748B] dark:text-slate-400 font-medium">
+            <div className="bg-muted/50 border border-border rounded-md p-3.5 space-y-1">
+              <div className="text-xs text-muted-foreground font-medium">
                 Attendance Rate
               </div>
-              <div className="text-xl font-extrabold text-[#059669] dark:text-emerald-400">
+              <div className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400">
                 {student.attendancePercentage}%
               </div>
             </div>
 
-            <div className="bg-[#F8FAFC] dark:bg-slate-900/60 border border-[#E2E8F0] dark:border-border rounded-xl p-3.5 space-y-1">
-              <div className="text-xs text-[#64748B] dark:text-slate-400 font-medium">
+            <div className="bg-muted/50 border border-border rounded-md p-3.5 space-y-1">
+              <div className="text-xs text-muted-foreground font-medium">
                 GPA Score
               </div>
-              <div className="text-xl font-extrabold text-[#4F46E5] dark:text-indigo-400">
+              <div className="text-xl font-extrabold text-primary">
                 {student.academicSummary.gpa}
               </div>
             </div>
@@ -96,43 +96,43 @@ export function StudentDetailsDrawer({
 
           {/* Contact Information */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Contact Details
             </h4>
-            <div className="bg-[#F8FAFC] dark:bg-slate-900/40 border border-[#E2E8F0] dark:border-border rounded-xl p-3.5 space-y-2.5 text-xs">
-              <div className="flex items-center gap-2.5 text-[#17324D] dark:text-foreground">
-                <Mail className="size-4 text-[#64748B] shrink-0" />
+            <div className="bg-muted/50 border border-border rounded-md p-3.5 space-y-2.5 text-xs">
+              <div className="flex items-center gap-2.5 text-foreground">
+                <Mail className="size-4 text-muted-foreground shrink-0" />
                 <span className="truncate">{student.email}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-[#17324D] dark:text-foreground">
-                <Phone className="size-4 text-[#64748B] shrink-0" />
+              <div className="flex items-center gap-2.5 text-foreground">
+                <Phone className="size-4 text-muted-foreground shrink-0" />
                 <span>{student.phone}</span>
               </div>
-              <div className="flex items-center gap-2.5 text-[#64748B] dark:text-slate-400 pt-1 border-t border-[#E2E8F0] dark:border-border">
+              <div className="flex items-center gap-2.5 text-muted-foreground pt-1 border-t border-border">
                 <UserCheck className="size-4 shrink-0" />
-                <span>Assigned Mentor: <strong className="text-[#17324D] dark:text-foreground">{student.assignedMentorName}</strong></span>
+                <span>Assigned Mentor: <strong className="text-foreground">{student.assignedMentorName}</strong></span>
               </div>
             </div>
           </div>
 
           {/* Academic & Capstone Summary */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Academic Progress
             </h4>
-            <div className="bg-[#F8FAFC] dark:bg-slate-900/40 border border-[#E2E8F0] dark:border-border rounded-xl p-3.5 space-y-3 text-xs">
+            <div className="bg-muted/50 border border-border rounded-md p-3.5 space-y-3 text-xs">
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-2 text-[#64748B]">
+                <span className="flex items-center gap-2 text-muted-foreground">
                   <BookOpen className="size-4" /> Assignments
                 </span>
-                <span className="font-semibold text-[#17324D] dark:text-foreground">
+                <span className="font-semibold text-foreground">
                   {student.academicSummary.assignmentsCompleted} / {student.academicSummary.totalAssignments} Completed
                 </span>
               </div>
               <div className="space-y-1">
-                <div className="flex items-center justify-between text-[11px] text-[#64748B]">
+                <div className="flex items-center justify-between text-[11px] text-muted-foreground">
                   <span>Capstone Project</span>
-                  <Award className="size-3.5 text-[#0F9F83]" />
+                  <Award className="size-3.5 text-primary" />
                 </div>
                 <div className="font-semibold text-[#17324D] dark:text-foreground leading-snug">
                   {student.academicSummary.capstoneProject}

@@ -1,4 +1,6 @@
 import { BookOpen, Calendar, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react'
+import { Badge, Card } from '@/components/ui'
+import { PageHeader } from '@/components/layout/PageHeader'
 import { useAuthStore } from '@/store/auth-store'
 
 export function Profile() {
@@ -6,10 +8,19 @@ export function Profile() {
   const name = user?.name || 'Ms. Husna'
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 text-[#17324D] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
+      <PageHeader
+        title="My Profile"
+        description="View your mentor profile and academic responsibilities"
+        breadcrumbs={[
+          { label: 'Dashboard', to: '/mentor/dashboard' },
+          { label: 'Profile' },
+        ]}
+      />
+
       {/* Header Profile Card */}
-      <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5 shadow-2xs">
-        <div className="w-20 h-20 rounded-full bg-[#E8F7F3] text-[#0F9F83] text-2xl font-extrabold flex items-center justify-center border-2 border-[#0F9F83]/30 shrink-0">
+      <Card className="p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+        <div className="w-20 h-20 rounded-full bg-primary-subtle text-primary text-2xl font-extrabold flex items-center justify-center border-2 border-primary/30 shrink-0">
           {name.split(' ').map((n) => n[0]).join('').substring(0, 2).toUpperCase()}
         </div>
 
@@ -17,71 +28,71 @@ export function Profile() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <h1 className="text-xl sm:text-2xl font-bold tracking-tight">{name}</h1>
-              <p className="text-xs sm:text-sm font-semibold text-[#0F9F83]">
+              <p className="text-xs sm:text-sm font-semibold text-primary">
                 Senior Teacher • Computer Science Department
               </p>
             </div>
 
-            <span className="px-3 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-[#059669] border border-emerald-200/60 self-center sm:self-start">
+            <Badge tone="success" className="self-center sm:self-start">
               Active Mentor
-            </span>
+            </Badge>
           </div>
 
-          <p className="text-xs text-[#64748B] dark:text-slate-400 pt-2 leading-relaxed">
+          <p className="text-xs text-muted-foreground pt-2 leading-relaxed">
             Passionate software engineer and computer science lecturer with 6+ years of experience in Web Development, Database Systems, and mentoring capstone project teams.
           </p>
         </div>
-      </div>
+      </Card>
 
       {/* Details Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Contact Info */}
-        <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-5 space-y-4 shadow-2xs">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-[#64748B]">
+        <Card className="p-5 space-y-4">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Contact Information
           </h3>
           <div className="space-y-3 text-xs">
             <div className="flex items-center gap-3">
-              <Mail className="size-4 text-[#0F9F83]" />
+              <Mail className="size-4 text-primary" />
               <span>{user?.email || 'husna.teacher@leadflow-lms.edu'}</span>
             </div>
             <div className="flex items-center gap-3">
-              <Phone className="size-4 text-[#0F9F83]" />
+              <Phone className="size-4 text-primary" />
               <span>+91 98765 43200</span>
             </div>
             <div className="flex items-center gap-3">
-              <MapPin className="size-4 text-[#0F9F83]" />
+              <MapPin className="size-4 text-primary" />
               <span>Main CS Faculty Block, Room 302</span>
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Academic Responsibilities */}
-        <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-5 space-y-4 shadow-2xs">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-[#64748B]">
+        <Card className="p-5 space-y-4">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             Assigned Responsibilities
           </h3>
           <div className="space-y-3 text-xs">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <BookOpen className="size-4 text-[#0F9F83]" /> Assigned Batches
+                <BookOpen className="size-4 text-primary" /> Assigned Batches
               </span>
               <span className="font-bold">3 Batches (24 Students)</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <Calendar className="size-4 text-[#0F9F83]" /> Office Hours
+                <Calendar className="size-4 text-primary" /> Office Hours
               </span>
               <span className="font-bold">Mon & Thu (02:00 PM - 04:00 PM)</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <ShieldCheck className="size-4 text-[#0F9F83]" /> Role Scope
+                <ShieldCheck className="size-4 text-primary" /> Role Scope
               </span>
               <span className="font-bold">Teacher / Mentor</span>
             </div>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   )

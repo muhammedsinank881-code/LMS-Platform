@@ -13,8 +13,8 @@ export function MyStudentsSummary({
 }: MyStudentsSummaryProps) {
   return (
     <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm font-semibold">
-      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-card border border-[#E2E8F0] dark:border-border text-[#17324D] dark:text-foreground">
-        <GraduationCap className="size-4 text-[#0F9F83]" />
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-surface border border-border text-foreground">
+        <GraduationCap className="size-4 text-primary" />
         <span>{totalAssigned} Assigned Students</span>
       </div>
 

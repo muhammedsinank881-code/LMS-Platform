@@ -48,7 +48,7 @@ export function ExamEmptyState({
 
   return (
     <div className="flex flex-col items-center justify-center p-8 sm:p-14 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl text-center space-y-3 shadow-2xs">
-      <div className="p-4 rounded-2xl bg-[#E8F7F3] text-[#0F9F83]">
+      <div className="p-4 rounded-xl bg-primary-subtle text-primary">
         <Award className="size-10" />
       </div>
       <h3 className="text-xl font-bold text-[#17324D] dark:text-foreground tracking-tight">

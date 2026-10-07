@@ -5,12 +5,10 @@ import { useInboxUnreadCount } from '@/features/inbox/hooks/use-conversations'
 import { usePermission } from '@/hooks/use-permission'
 import { cn } from '@/lib/cn'
 import { BrandMark } from './BrandMark'
-import { NAV_ITEMS } from './nav-config'
+import { MENTOR_NAV_ITEMS, NAV_ITEMS } from './nav-config'
 import { SidebarNavItem } from './SidebarNavItem'
 import { STUDENT_NAV_ITEMS } from './student-nav-config'
 import { WorkspaceSwitcher } from './WorkspaceSwitcher'
-
-import { MentorSidebar } from '@/components/mentor/MentorSidebar'
 
 export interface SidebarProps {
   collapsed: boolean
@@ -26,21 +24,12 @@ export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }:
   const summary = useFollowUpSummary()
   const inboxUnread = useInboxUnreadCount()
 
-  if (role === 'mentor') {
-    return (
-      <MentorSidebar
-        collapsed={collapsed}
-        onNavigate={onNavigate}
-        className={className}
-      />
-    )
-  }
-
-  const isStudent = role === 'student'
-
-  const visibleItems = isStudent
-    ? STUDENT_NAV_ITEMS
-    : NAV_ITEMS.filter((item) => can(item.resource, 'view'))
+  const visibleItems =
+    role === 'mentor'
+      ? MENTOR_NAV_ITEMS
+      : role === 'student'
+        ? STUDENT_NAV_ITEMS
+        : NAV_ITEMS.filter((item) => can(item.resource, 'view'))
 
   const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose
   const toggleLabel = collapsed ? 'Expand sidebar' : 'Collapse sidebar'
@@ -55,39 +44,39 @@ export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }:
       <div className={cn('shrink-0 px-3 pb-3', collapsed && 'px-2')}>
         <WorkspaceSwitcher collapsed={collapsed} />
       </div>
-     <nav aria-label="Main" className="flex-1 overflow-y-auto px-3 py-2">
-  <ul className="space-y-1">
-    {visibleItems.map((item, idx) => {
-      const showSectionHeader =
-        !collapsed &&
-        item.section &&
-        (idx === 0 || visibleItems[idx - 1]?.section !== item.section)
+      <nav aria-label="Main" className="flex-1 overflow-y-auto px-3 py-2">
+        <ul className="space-y-1">
+          {visibleItems.map((item, idx) => {
+            const showSectionHeader =
+              !collapsed &&
+              item.section &&
+              (idx === 0 || visibleItems[idx - 1]?.section !== item.section)
 
-      return (
-        <li key={`${item.path}-${idx}`}>
-          {showSectionHeader ? (
-            <div className="mt-4 mb-1.5 px-2.5 text-[10px] font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
-              {item.section}
-            </div>
-          ) : null}
+            return (
+              <li key={`${item.path}-${idx}`}>
+                {showSectionHeader ? (
+                  <div className="mt-4 mb-1.5 px-2.5 text-[10px] font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
+                    {item.section}
+                  </div>
+                ) : null}
 
-          <SidebarNavItem
-            item={item}
-            collapsed={collapsed}
-            badge={
-              'resource' in item && item.resource === 'followups'
-                ? summary.dueNow
-                : 'resource' in item && item.resource === 'inbox'
-                  ? inboxUnread
-                  : 0
-            }
-            onNavigate={onNavigate}
-          />
-        </li>
-      )
-    })}
-  </ul>
-</nav>
+                <SidebarNavItem
+                  item={item}
+                  collapsed={collapsed}
+                  badge={
+                    'resource' in item && item.resource === 'followups'
+                      ? summary.dueNow
+                      : 'resource' in item && item.resource === 'inbox'
+                        ? inboxUnread
+                        : 0
+                  }
+                  onNavigate={onNavigate}
+                />
+              </li>
+            )
+          })}
+        </ul>
+      </nav>
       {onToggleCollapsed ? (
         <div
           className={cn('shrink-0 border-t border-border p-3', collapsed && 'flex justify-center')}

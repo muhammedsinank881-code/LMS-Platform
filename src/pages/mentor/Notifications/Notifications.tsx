@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Bell, CheckCheck, Clock, FileText, UserCheck } from 'lucide-react'
+import { Button, Card } from '@/components/ui'
+import { PageHeader } from '@/components/layout/PageHeader'
 
 interface NotificationItem {
   id: string
@@ -45,38 +47,35 @@ export function Notifications() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 text-[#17324D] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Notifications</h1>
-          <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
-            System updates, student submission alerts and attendance warnings
-          </p>
-        </div>
-
-        <button
-          type="button"
-          onClick={handleMarkAllRead}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#0F9F83] hover:bg-[#E8F7F3] rounded-lg transition-colors cursor-pointer"
-        >
-          <CheckCheck className="size-4" />
-          <span>Mark all as read</span>
-        </button>
-      </div>
+      <PageHeader
+        title="Notifications"
+        description="System updates, student submission alerts and attendance warnings"
+        breadcrumbs={[
+          { label: 'Dashboard', to: '/mentor/dashboard' },
+          { label: 'Notifications' },
+        ]}
+        actions={
+          <Button type="button" variant="outline" size="sm" onClick={handleMarkAllRead}>
+            <CheckCheck className="size-4 mr-1.5" />
+            <span>Mark all as read</span>
+          </Button>
+        }
+      />
 
       {/* Notifications List */}
       <div className="space-y-3">
         {notifs.map((n) => (
-          <div
+          <Card
             key={n.id}
-            className={`p-4 rounded-xl border transition-all flex items-start gap-3.5 ${
+            className={`p-4 flex items-start gap-3.5 transition-all ${
               n.read
-                ? 'bg-white dark:bg-card border-[#E2E8F0] dark:border-border'
-                : 'bg-[#E8F7F3]/30 dark:bg-[#0F9F83]/10 border-[#0F9F83]/40'
+                ? 'bg-surface border-border'
+                : 'bg-primary-subtle/50 border-primary/30'
             }`}
           >
-            <div className="w-9 h-9 rounded-full bg-[#0F9F83]/10 text-[#0F9F83] flex items-center justify-center shrink-0 mt-0.5 font-bold">
+            <div className="w-9 h-9 rounded-full bg-primary-subtle text-primary flex items-center justify-center shrink-0 mt-0.5 font-bold">
               {n.type === 'attendance' ? (
                 <UserCheck className="size-4" />
               ) : n.type === 'assignment' ? (
@@ -88,18 +87,18 @@ export function Notifications() {
 
             <div className="min-w-0 flex-1 space-y-1">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-bold text-[#17324D] dark:text-foreground truncate">
+                <h3 className="text-sm font-bold text-foreground truncate">
                   {n.title}
                 </h3>
-                <span className="text-[11px] text-[#64748B] flex items-center gap-1">
+                <span className="text-[11px] text-muted-foreground flex items-center gap-1">
                   <Clock className="size-3" /> {n.time}
                 </span>
               </div>
-              <p className="text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
+              <p className="text-xs text-muted-foreground leading-relaxed">
                 {n.description}
               </p>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>

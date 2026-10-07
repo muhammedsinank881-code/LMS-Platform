@@ -11,7 +11,7 @@ import {
   Users,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Tooltip } from '@/components/ui'
+import { Card, Tooltip } from '@/components/ui'
 import type { MentorClass } from '../types'
 
 interface ClassCardProps {
@@ -26,9 +26,9 @@ export function ClassCard({ cls }: ClassCardProps) {
     switch (type) {
       case 'algo':
       case 'code':
-        return { icon: Code2, bg: 'bg-[#E8F7F3] text-[#0F9F83] dark:bg-[#0F9F83]/20 dark:text-[#0F9F83]' }
+        return { icon: Code2, bg: 'bg-primary-subtle text-primary' }
       case 'web':
-        return { icon: Globe, bg: 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400' }
+        return { icon: Globe, bg: 'bg-primary-subtle text-primary' }
       case 'database':
         return { icon: Database, bg: 'bg-indigo-500/10 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-400' }
       case 'mobile':
@@ -36,7 +36,7 @@ export function ClassCard({ cls }: ClassCardProps) {
       case 'cloud':
         return { icon: BookOpen, bg: 'bg-sky-500/10 text-sky-600 dark:bg-sky-500/20 dark:text-sky-400' }
       default:
-        return { icon: Code2, bg: 'bg-[#E8F7F3] text-[#0F9F83] dark:bg-[#0F9F83]/20 dark:text-[#0F9F83]' }
+        return { icon: Code2, bg: 'bg-primary-subtle text-primary' }
     }
   }
 
@@ -49,7 +49,8 @@ export function ClassCard({ cls }: ClassCardProps) {
   }
 
   return (
-    <div
+    <Card
+      variant="interactive"
       onClick={handleClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -59,52 +60,52 @@ export function ClassCard({ cls }: ClassCardProps) {
       }}
       role="button"
       tabIndex={0}
-      className="group relative flex flex-col justify-between bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-[#0F9F83]/50 transition-all duration-200 cursor-pointer select-none"
+      className="group relative flex flex-col justify-between p-5 cursor-pointer select-none"
     >
       {/* Top Header Row: Icon + Title/Program + Code Badge */}
       <div className="space-y-3">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className={`p-2.5 rounded-xl ${iconConfig.bg} shrink-0 transition-transform group-hover:scale-105`}>
+            <div className={`p-2.5 rounded-lg ${iconConfig.bg} shrink-0 transition-transform group-hover:scale-105`}>
               <Icon className="size-5" />
             </div>
             <div className="min-w-0 flex-1">
               <Tooltip content={cls.title} side="top">
-                <h3 className="text-base font-bold text-[#17324D] dark:text-foreground tracking-tight truncate leading-snug group-hover:text-[#0F9F83] transition-colors">
+                <h3 className="text-base font-semibold text-foreground tracking-tight truncate leading-snug group-hover:text-primary transition-colors">
                   {cls.title}
                 </h3>
               </Tooltip>
-              <p className="text-xs text-[#64748B] dark:text-slate-400 font-medium mt-0.5 truncate">
+              <p className="text-xs text-muted-foreground font-medium mt-0.5 truncate">
                 {cls.program} · {cls.year}
               </p>
             </div>
           </div>
 
           {/* Course Code Badge */}
-          <span className="shrink-0 px-2.5 py-1 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-800 text-[#17324D] dark:text-slate-200 border border-[#E2E8F0] dark:border-border font-mono">
+          <span className="shrink-0 px-2.5 py-1 text-xs font-semibold rounded-md bg-muted text-foreground border border-border font-mono">
             {cls.courseCode}
           </span>
         </div>
 
         {/* Student Count & Room Info Row */}
-        <div className="pt-2 flex items-center justify-between text-xs text-[#64748B] dark:text-slate-400 font-medium border-t border-[#E2E8F0]/60 dark:border-border/50">
+        <div className="pt-2 flex items-center justify-between text-xs text-muted-foreground font-medium border-t border-border">
           <div className="flex items-center gap-1.5">
-            <Users className="size-4 text-[#0F9F83]" />
-            <span className="text-[#17324D] dark:text-slate-200 font-semibold">{cls.studentsCount} Students</span>
+            <Users className="size-4 text-primary" />
+            <span className="text-foreground font-semibold">{cls.studentsCount} Students</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <MapPin className="size-4 text-slate-400" />
+            <MapPin className="size-4 text-muted-foreground" />
             <span>{cls.room}</span>
           </div>
         </div>
       </div>
 
       {/* Card Footer: Semester + Status Indicator + Details Arrow */}
-      <div className="mt-4 pt-3 border-t border-[#E2E8F0] dark:border-border flex items-center justify-between gap-2 text-xs">
+      <div className="mt-4 pt-3 border-t border-border flex items-center justify-between gap-2 text-xs">
         {/* Semester & Status details */}
-        <div className="flex items-center gap-2 text-[#64748B] dark:text-slate-400 font-medium truncate">
-          <Clock className="size-3.5 shrink-0 text-slate-400" />
+        <div className="flex items-center gap-2 text-muted-foreground font-medium truncate">
+          <Clock className="size-3.5 shrink-0 text-muted-foreground" />
           <span className="truncate">{cls.semester}</span>
         </div>
 
@@ -112,23 +113,23 @@ export function ClassCard({ cls }: ClassCardProps) {
         <div className="flex items-center gap-2 shrink-0">
           <div className="flex items-center gap-1.5 font-semibold text-xs">
             {isActive ? (
-              <span className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
-                <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="flex items-center gap-1.5 text-success">
+                <span className="size-2 rounded-full bg-success animate-pulse" />
                 Active
               </span>
             ) : (
-              <span className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
-                <CheckCircle2 className="size-3.5 text-slate-400" />
+              <span className="flex items-center gap-1.5 text-muted-foreground">
+                <CheckCircle2 className="size-3.5 text-muted-foreground" />
                 Completed
               </span>
             )}
           </div>
 
-          <div className="p-1 rounded-lg text-[#64748B] group-hover:text-[#0F9F83] group-hover:translate-x-0.5 transition-all">
+          <div className="p-1 rounded-md text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all">
             <ArrowRight className="size-4" />
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

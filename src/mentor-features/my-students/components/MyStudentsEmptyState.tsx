@@ -29,7 +29,7 @@ export function MyStudentsEmptyState({
           <button
             type="button"
             onClick={onResetFilters}
-            className="px-4 py-2 text-xs font-semibold text-[#0F9F83] hover:bg-[#0F9F83]/10 rounded-lg transition-colors cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold text-primary hover:bg-primary-subtle rounded-md transition-colors cursor-pointer"
           >
             Clear all filters
           </button>
@@ -39,8 +39,8 @@ export function MyStudentsEmptyState({
   }
 
   return (
-    <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-8 sm:p-12 text-center space-y-3 shadow-2xs">
-      <div className="w-14 h-14 rounded-full bg-[#0F9F83]/10 text-[#0F9F83] flex items-center justify-center mx-auto border border-[#0F9F83]/20">
+    <div className="bg-surface border border-border rounded-md p-8 sm:p-12 text-center space-y-3">
+      <div className="w-14 h-14 rounded-full bg-primary-subtle text-primary flex items-center justify-center mx-auto border border-primary/20">
         <GraduationCap className="size-7" />
       </div>
       <div className="space-y-1">

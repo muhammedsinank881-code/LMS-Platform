@@ -35,7 +35,7 @@ export function MyStudentsFilters({
             placeholder="Search by name, student ID, class, or email..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-3.5 py-2 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl text-xs sm:text-sm text-[#17324D] dark:text-foreground placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#0F9F83]/20 focus:border-[#0F9F83] h-10 transition-colors"
+            className="w-full pl-10 pr-3.5 py-2 bg-surface border border-input rounded-md text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 transition-colors"
           />
         </div>
 
@@ -46,7 +46,7 @@ export function MyStudentsFilters({
             <select
               value={selectedClass}
               onChange={(e) => onClassChange(e.target.value)}
-              className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-lg pl-3 pr-8 py-2 text-xs font-medium text-[#17324D] dark:text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0F9F83]/20 focus:border-[#0F9F83] h-10"
+              className="bg-surface border border-input rounded-md pl-3 pr-8 py-2 text-xs font-medium text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring h-10"
               aria-label="Filter by class"
             >
               <option value="all">All Classes</option>
@@ -56,7 +56,7 @@ export function MyStudentsFilters({
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-[#64748B] pointer-events-none" />
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
           </div>
 
           {/* Attendance Filter */}
@@ -64,7 +64,7 @@ export function MyStudentsFilters({
             <select
               value={selectedAttendanceRange}
               onChange={(e) => onAttendanceRangeChange(e.target.value)}
-              className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-lg pl-3 pr-8 py-2 text-xs font-medium text-[#17324D] dark:text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0F9F83]/20 focus:border-[#0F9F83] h-10"
+              className="bg-surface border border-input rounded-md pl-3 pr-8 py-2 text-xs font-medium text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring h-10"
               aria-label="Filter by attendance"
             >
               <option value="all">All Attendance</option>
@@ -72,7 +72,7 @@ export function MyStudentsFilters({
               <option value="medium">Medium (75% - 89%)</option>
               <option value="low">Low (&lt;75%)</option>
             </select>
-            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-[#64748B] pointer-events-none" />
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
           </div>
 
           {/* Status Filter */}
@@ -80,7 +80,7 @@ export function MyStudentsFilters({
             <select
               value={selectedStatus}
               onChange={(e) => onStatusChange(e.target.value)}
-              className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-lg pl-3 pr-8 py-2 text-xs font-medium text-[#17324D] dark:text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#0F9F83]/20 focus:border-[#0F9F83] h-10"
+              className="bg-surface border border-input rounded-md pl-3 pr-8 py-2 text-xs font-medium text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring h-10"
               aria-label="Filter by status"
             >
               <option value="all">All Statuses</option>
@@ -88,7 +88,7 @@ export function MyStudentsFilters({
               <option value="late">Late</option>
               <option value="absent">Absent</option>
             </select>
-            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-[#64748B] pointer-events-none" />
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
           </div>
         </div>
       </div>
@@ -100,8 +100,8 @@ export function MyStudentsFilters({
           onClick={() => onClassChange('all')}
           className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
             selectedClass === 'all'
-              ? 'bg-[#0F9F83] text-white shadow-2xs'
-              : 'bg-white dark:bg-card border border-[#E2E8F0] dark:border-border text-[#64748B]'
+              ? 'bg-primary text-primary-foreground shadow-2xs'
+              : 'bg-surface border border-border text-muted-foreground'
           }`}
         >
           All Classes
@@ -113,8 +113,8 @@ export function MyStudentsFilters({
             onClick={() => onClassChange(cls)}
             className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
               selectedClass === cls
-                ? 'bg-[#0F9F83] text-white shadow-2xs'
-                : 'bg-white dark:bg-card border border-[#E2E8F0] dark:border-border text-[#64748B]'
+                ? 'bg-primary text-primary-foreground shadow-2xs'
+                : 'bg-surface border border-border text-muted-foreground'
             }`}
           >
             {cls}

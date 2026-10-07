@@ -11,7 +11,7 @@ import {
   Users,
 } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button, Input } from '@/components/ui'
+import { Button, Card, Input } from '@/components/ui'
 import { ExamStatusBadge } from './components/ExamStatusBadge'
 import { MOCK_MENTOR_EXAMS } from './mockData'
 import type { StudentGradeItem } from './types'
@@ -68,13 +68,13 @@ export function ExamDetails() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 py-2 px-2 sm:px-4 pb-16 text-[#17324D] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* Back Navigation */}
       <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={() => navigate('/mentor/exams')}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-[#64748B] hover:text-[#17324D] dark:hover:text-foreground transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           <ArrowLeft className="size-4" />
           <span>Back to Exams</span>
@@ -84,17 +84,17 @@ export function ExamDetails() {
       </div>
 
       {/* Main Exam Header Banner */}
-      <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl p-6 shadow-2xs space-y-4">
+      <Card className="p-6 space-y-4">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-2xl bg-[#E8F7F3] text-[#0F9F83] shrink-0">
+            <div className="p-3.5 rounded-lg bg-primary-subtle text-primary shrink-0">
               <Award className="size-8" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#17324D] dark:text-foreground">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
                 {exam.title}
               </h1>
-              <p className="text-sm text-[#64748B] dark:text-slate-400 mt-1 font-medium">
+              <p className="text-sm text-muted-foreground mt-1 font-medium">
                 {exam.classBatch} · {exam.subject} ({exam.courseName})
               </p>
             </div>
@@ -104,14 +104,13 @@ export function ExamDetails() {
             <Button
               type="button"
               variant="outline"
-              className="rounded-xl border-[#E2E8F0] text-[#64748B] hover:text-[#17324D]"
             >
               <Edit3 className="size-4 mr-1.5" />
               <span>Edit Exam</span>
             </Button>
             <Button
               type="button"
-              className="bg-[#0F9F83] hover:bg-[#0C826B] text-white font-semibold rounded-xl"
+              variant="primary"
             >
               <FileCheck className="size-4 mr-1.5" />
               <span>Enter Marks / Results</span>
@@ -120,43 +119,43 @@ export function ExamDetails() {
         </div>
 
         {/* Quick Details Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#E2E8F0] dark:border-border">
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-1.5 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <Calendar className="size-3.5 text-[#0F9F83]" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-border">
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+              <Calendar className="size-3.5 text-primary" />
               <span>Date & Time</span>
             </div>
-            <p className="text-sm font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-sm font-bold text-foreground mt-1">
               {exam.formattedDate} · {exam.time}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-1.5 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <Clock className="size-3.5 text-[#0F9F83]" />
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+              <Clock className="size-3.5 text-primary" />
               <span>Duration</span>
             </div>
-            <p className="text-sm font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-sm font-bold text-foreground mt-1">
               {exam.duration}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-1.5 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <MapPin className="size-3.5 text-[#0F9F83]" />
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+              <MapPin className="size-3.5 text-primary" />
               <span>Room / Venue</span>
             </div>
-            <p className="text-sm font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-sm font-bold text-foreground mt-1">
               {exam.room}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-1.5 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <Users className="size-3.5 text-[#0F9F83]" />
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+              <Users className="size-3.5 text-primary" />
               <span>Students Registered</span>
             </div>
-            <p className="text-sm font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-sm font-bold text-foreground mt-1">
               {exam.studentsCount} Students
             </p>
           </div>
@@ -164,69 +163,69 @@ export function ExamDetails() {
 
         {/* Instructions */}
         {exam.instructions ? (
-          <div className="p-4 rounded-xl bg-[#E8F7F3]/60 dark:bg-[#0F9F83]/10 border border-[#0F9F83]/20 space-y-1">
-            <h4 className="text-xs font-bold text-[#0F9F83] uppercase tracking-wider">
+          <div className="p-4 rounded-md bg-primary-subtle border border-primary/20 space-y-1">
+            <h4 className="text-xs font-semibold text-primary uppercase tracking-wider">
               Exam Instructions & Guidelines
             </h4>
-            <p className="text-xs sm:text-sm text-[#17324D] dark:text-slate-200">
+            <p className="text-xs sm:text-sm text-foreground">
               {exam.instructions}
             </p>
           </div>
         ) : null}
-      </div>
+      </Card>
 
       {/* Student Results / Grade Entry Table Section */}
-      <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl p-5 shadow-2xs space-y-4">
+      <Card className="p-5 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-lg font-bold text-[#17324D] dark:text-foreground">
+            <h3 className="text-lg font-semibold text-foreground">
               Student Marks & Grades
             </h3>
-            <p className="text-xs text-[#64748B] dark:text-slate-400">
+            <p className="text-xs text-muted-foreground">
               Total Marks: {exam.totalMarks} · Passing Marks: {exam.passingMarks}
             </p>
           </div>
 
           {/* Roster Search */}
           <div className="relative w-full sm:w-64">
-            <Search className="absolute left-3 top-2.5 size-4 text-[#64748B]" />
+            <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
             <input
               type="text"
               value={studentSearch}
               onChange={(e) => setStudentSearch(e.target.value)}
               placeholder="Search student or roll no..."
-              className="w-full h-9 pl-9 pr-3 bg-slate-50 dark:bg-slate-800 border border-[#E2E8F0] dark:border-border rounded-xl text-xs text-[#17324D] dark:text-foreground placeholder:text-[#64748B] focus:outline-none focus:ring-2 focus:ring-[#0F9F83]"
+              className="w-full h-9 pl-9 pr-3 bg-surface border border-input rounded-md text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto rounded-xl border border-[#E2E8F0] dark:border-border">
+        <div className="overflow-x-auto rounded-md border border-border">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-800/80 text-xs uppercase font-bold text-[#64748B] dark:text-slate-300 border-b border-[#E2E8F0] dark:border-border">
+            <thead className="bg-muted/50 text-xs uppercase font-medium text-muted-foreground border-b border-border">
               <tr>
-                <th className="p-3.5">Roll Number</th>
-                <th className="p-3.5">Student Name</th>
-                <th className="p-3.5">Email</th>
-                <th className="p-3.5">Marks Obtained</th>
-                <th className="p-3.5">Grade</th>
-                <th className="p-3.5 text-right">Action</th>
+                <th className="p-3">Roll Number</th>
+                <th className="p-3">Student Name</th>
+                <th className="p-3">Email</th>
+                <th className="p-3">Marks Obtained</th>
+                <th className="p-3">Grade</th>
+                <th className="p-3 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E2E8F0] dark:divide-border font-medium">
+            <tbody className="divide-y divide-border font-medium">
               {filteredGrades.length > 0 ? (
                 filteredGrades.map((st) => (
-                  <tr key={st.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors">
-                    <td className="p-3.5 font-mono text-xs text-[#17324D] dark:text-slate-200 font-bold">
+                  <tr key={st.id} className="hover:bg-muted/50 transition-colors">
+                    <td className="p-3 font-mono text-xs text-foreground font-semibold">
                       {st.rollNumber}
                     </td>
-                    <td className="p-3.5 text-[#17324D] dark:text-foreground font-semibold">
+                    <td className="p-3 text-foreground font-semibold">
                       {st.name}
                     </td>
-                    <td className="p-3.5 text-[#64748B] dark:text-slate-400 text-xs">
+                    <td className="p-3 text-muted-foreground text-xs">
                       {st.email}
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3">
                       {editingGradeId === st.id ? (
                         <div className="flex items-center gap-2">
                           <Input
@@ -235,32 +234,33 @@ export function ExamDetails() {
                             min={0}
                             value={inputMarks}
                             onChange={(e) => setInputMarks(e.target.value ? Number(e.target.value) : '')}
-                            className="h-8 w-20 text-xs rounded-lg"
+                            className="h-8 w-20 text-xs"
                             placeholder="Marks"
                           />
-                          <span className="text-xs text-[#64748B]">/ {exam.totalMarks}</span>
+                          <span className="text-xs text-muted-foreground">/ {exam.totalMarks}</span>
                         </div>
                       ) : (
-                        <span className="font-bold text-sm">
+                        <span className="font-semibold text-sm">
                           {st.marksObtained !== null ? `${st.marksObtained} / ${exam.totalMarks}` : '—'}
                         </span>
                       )}
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3">
                       {st.grade ? (
-                        <span className="px-2.5 py-0.5 text-xs font-bold rounded-md bg-[#E8F7F3] text-[#0F9F83]">
+                        <span className="px-2.5 py-0.5 text-xs font-bold rounded-md bg-primary-subtle text-primary">
                           {st.grade}
                         </span>
                       ) : (
-                        <span className="text-xs text-[#64748B]">Pending</span>
+                        <span className="text-xs text-muted-foreground">Pending</span>
                       )}
                     </td>
-                    <td className="p-3.5 text-right">
+                    <td className="p-3 text-right">
                       {editingGradeId === st.id ? (
                         <Button
                           type="button"
+                          variant="primary"
+                          size="sm"
                           onClick={() => handleSaveGrade(st.id)}
-                          className="h-8 px-3 text-xs bg-[#0F9F83] hover:bg-[#0C826B] text-white rounded-lg"
                         >
                           Save
                         </Button>
@@ -268,11 +268,11 @@ export function ExamDetails() {
                         <Button
                           type="button"
                           variant="outline"
+                          size="sm"
                           onClick={() => {
                             setEditingGradeId(st.id)
                             setInputMarks(st.marksObtained ?? '')
                           }}
-                          className="h-8 px-3 text-xs border-[#E2E8F0] text-[#17324D] rounded-lg"
                         >
                           Grade
                         </Button>
@@ -282,7 +282,7 @@ export function ExamDetails() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="p-6 text-center text-[#64748B]">
+                  <td colSpan={6} className="p-6 text-center text-muted-foreground">
                     No student records found.
                   </td>
                 </tr>
@@ -290,7 +290,7 @@ export function ExamDetails() {
             </tbody>
           </table>
         </div>
-      </div>
+      </Card>
     </div>
   )
 }

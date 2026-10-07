@@ -79,17 +79,17 @@ export function CreateExamModal({
 
   return (
     <Modal open={open} onOpenChange={onOpenChange}>
-      <ModalContent size="lg" className="rounded-2xl border-[#E2E8F0] dark:border-border">
+      <ModalContent size="lg" className="rounded-lg border-border">
         <form onSubmit={handleSubmit}>
           <ModalHeader>
-            <ModalTitle className="text-xl font-bold text-[#17324D] dark:text-foreground">
+            <ModalTitle className="text-lg font-semibold text-foreground">
               Create New Exam
             </ModalTitle>
           </ModalHeader>
 
           <ModalBody className="space-y-4">
             <div className="space-y-1.5">
-              <Label htmlFor="exam-title" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+              <Label htmlFor="exam-title" className="text-xs font-semibold text-foreground">
                 Exam Title *
               </Label>
               <Input
@@ -98,13 +98,12 @@ export function CreateExamModal({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Flutter Development Practical Exam"
-                className="h-10 rounded-xl"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="exam-subject" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="exam-subject" className="text-xs font-semibold text-foreground">
                   Subject *
                 </Label>
                 <Input
@@ -113,19 +112,18 @@ export function CreateExamModal({
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   placeholder="e.g. Mobile App Development"
-                  className="h-10 rounded-xl"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="exam-class" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="exam-class" className="text-xs font-semibold text-foreground">
                   Class / Batch *
                 </Label>
                 <select
                   id="exam-class"
                   value={classBatch}
                   onChange={(e) => setClassBatch(e.target.value)}
-                  className="w-full h-10 px-3 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl text-sm text-[#17324D] dark:text-foreground focus:ring-2 focus:ring-[#0F9F83] focus:outline-none"
+                  className="w-full h-10 px-3 bg-surface border border-input rounded-md text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
                 >
                   {availableClasses.map((cls) => (
                     <option key={cls} value={cls}>
@@ -142,7 +140,7 @@ export function CreateExamModal({
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="exam-date" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="exam-date" className="text-xs font-semibold text-foreground">
                   Date *
                 </Label>
                 <Input
@@ -151,12 +149,11 @@ export function CreateExamModal({
                   required
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="h-10 rounded-xl"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="exam-time" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="exam-time" className="text-xs font-semibold text-foreground">
                   Start Time
                 </Label>
                 <Input
@@ -164,12 +161,11 @@ export function CreateExamModal({
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                   placeholder="e.g. 02:00 PM"
-                  className="h-10 rounded-xl"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="exam-duration" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="exam-duration" className="text-xs font-semibold text-foreground">
                   Duration
                 </Label>
                 <Input
@@ -177,14 +173,13 @@ export function CreateExamModal({
                   value={duration}
                   onChange={(e) => setDuration(e.target.value)}
                   placeholder="e.g. 3 Hours"
-                  className="h-10 rounded-xl"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="exam-room" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="exam-room" className="text-xs font-semibold text-foreground">
                   Room / Venue
                 </Label>
                 <Input
@@ -192,12 +187,11 @@ export function CreateExamModal({
                   value={room}
                   onChange={(e) => setRoom(e.target.value)}
                   placeholder="e.g. Lab 4"
-                  className="h-10 rounded-xl"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="total-marks" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="total-marks" className="text-xs font-semibold text-foreground">
                   Total Marks
                 </Label>
                 <Input
@@ -206,13 +200,12 @@ export function CreateExamModal({
                   min={10}
                   value={totalMarks}
                   onChange={(e) => setTotalMarks(Number(e.target.value))}
-                  className="h-10 rounded-xl"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="instructions" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+              <Label htmlFor="instructions" className="text-xs font-semibold text-foreground">
                 Instructions / Notes
               </Label>
               <Textarea
@@ -221,7 +214,6 @@ export function CreateExamModal({
                 value={instructions}
                 onChange={(e) => setInstructions(e.target.value)}
                 placeholder="Add exam guidelines, permitted materials, or lab prerequisites..."
-                className="rounded-xl"
               />
             </div>
           </ModalBody>
@@ -231,13 +223,12 @@ export function CreateExamModal({
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="rounded-xl border-[#E2E8F0] text-[#64748B]"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="bg-[#0F9F83] hover:bg-[#0C826B] text-white font-semibold rounded-xl"
+              variant="primary"
             >
               Create Exam
             </Button>

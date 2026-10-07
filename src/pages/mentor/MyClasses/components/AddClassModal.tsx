@@ -57,17 +57,17 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
 
   return (
     <Modal open={open} onOpenChange={onOpenChange}>
-      <ModalContent size="lg" className="rounded-2xl border-[#E2E8F0] dark:border-border">
+      <ModalContent size="lg" className="rounded-lg border-border">
         <form onSubmit={handleSubmit}>
           <ModalHeader>
-            <ModalTitle className="text-xl font-bold text-[#17324D] dark:text-foreground">
+            <ModalTitle className="text-lg font-semibold text-foreground">
               Add New Class
             </ModalTitle>
           </ModalHeader>
 
           <ModalBody className="space-y-4">
             <div className="space-y-1.5">
-              <Label htmlFor="class-title" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+              <Label htmlFor="class-title" className="text-xs font-semibold text-foreground">
                 Class / Course Name *
               </Label>
               <Input
@@ -76,13 +76,12 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Data Structures & Algorithms"
-                className="h-10 rounded-xl"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="course-code" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="course-code" className="text-xs font-semibold text-foreground">
                   Course Code *
                 </Label>
                 <Input
@@ -91,12 +90,12 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                   value={courseCode}
                   onChange={(e) => setCourseCode(e.target.value)}
                   placeholder="e.g. BCA-103"
-                  className="h-10 rounded-xl uppercase"
+                  className="uppercase"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="program" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="program" className="text-xs font-semibold text-foreground">
                   Program / Degree
                 </Label>
                 <Input
@@ -104,21 +103,20 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                   value={program}
                   onChange={(e) => setProgram(e.target.value)}
                   placeholder="e.g. BCA"
-                  className="h-10 rounded-xl"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="year" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="year" className="text-xs font-semibold text-foreground">
                   Year
                 </Label>
                 <select
                   id="year"
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
-                  className="w-full h-10 px-3 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl text-sm text-[#17324D] dark:text-foreground focus:ring-2 focus:ring-[#0F9F83] focus:outline-none"
+                  className="w-full h-10 px-3 bg-surface border border-input rounded-md text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
                 >
                   <option value="1st Year">1st Year</option>
                   <option value="2nd Year">2nd Year</option>
@@ -128,14 +126,14 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="semester" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="semester" className="text-xs font-semibold text-foreground">
                   Semester
                 </Label>
                 <select
                   id="semester"
                   value={semester}
                   onChange={(e) => setSemester(e.target.value)}
-                  className="w-full h-10 px-3 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl text-sm text-[#17324D] dark:text-foreground focus:ring-2 focus:ring-[#0F9F83] focus:outline-none"
+                  className="w-full h-10 px-3 bg-surface border border-input rounded-md text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
                 >
                   <option value="Semester 1">Semester 1</option>
                   <option value="Semester 2">Semester 2</option>
@@ -147,7 +145,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="room" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="room" className="text-xs font-semibold text-foreground">
                   Room / Lab
                 </Label>
                 <Input
@@ -155,14 +153,13 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                   value={room}
                   onChange={(e) => setRoom(e.target.value)}
                   placeholder="e.g. Room 101"
-                  className="h-10 rounded-xl"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <Label htmlFor="students-count" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="students-count" className="text-xs font-semibold text-foreground">
                   Estimated Students
                 </Label>
                 <Input
@@ -171,19 +168,18 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                   min={1}
                   value={studentsCount}
                   onChange={(e) => setStudentsCount(Number(e.target.value))}
-                  className="h-10 rounded-xl"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="class-status" className="text-xs font-bold text-[#17324D] dark:text-slate-200">
+                <Label htmlFor="class-status" className="text-xs font-semibold text-foreground">
                   Class Status
                 </Label>
                 <select
                   id="class-status"
                   value={status}
                   onChange={(e) => setStatus(e.target.value as 'active' | 'completed')}
-                  className="w-full h-10 px-3 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl text-sm text-[#17324D] dark:text-foreground focus:ring-2 focus:ring-[#0F9F83] focus:outline-none"
+                  className="w-full h-10 px-3 bg-surface border border-input rounded-md text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
                 >
                   <option value="active">Active</option>
                   <option value="completed">Completed</option>
@@ -197,13 +193,12 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
               type="button"
               variant="outline"
               onClick={() => onOpenChange(false)}
-              className="rounded-xl border-[#E2E8F0] text-[#64748B]"
             >
               Cancel
             </Button>
             <Button
               type="submit"
-              className="bg-[#0F9F83] hover:bg-[#0C826B] text-white font-semibold rounded-xl"
+              variant="primary"
             >
               Create Class
             </Button>

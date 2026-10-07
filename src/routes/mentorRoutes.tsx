@@ -1,11 +1,11 @@
 import type { RouteObject } from 'react-router-dom'
 import { lazyPage } from '@/app/lazy-route'
-import { MentorLayout } from '@/components/mentor/MentorLayout'
+import { AppShell } from '@/components/layout/AppShell'
 
 export const mentorRoutes: RouteObject[] = [
   {
     path: 'mentor',
-    element: <MentorLayout />,
+    element: <AppShell />,
     children: [
       {
         index: true,

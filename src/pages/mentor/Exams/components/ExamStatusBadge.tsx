@@ -24,7 +24,7 @@ export function ExamStatusBadge({ status, className }: ExamStatusBadgeProps) {
       return (
         <span
           className={cn(
-            'inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-lg bg-[#E8F7F3] dark:bg-[#0F9F83]/20 text-[#0F9F83] dark:text-[#0F9F83] border border-[#0F9F83]/30',
+            'inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-md bg-primary-subtle text-primary border border-primary/30',
             className,
           )}
         >

@@ -52,7 +52,7 @@ export function MyStudentsPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-5 py-2 px-2 sm:px-4 pb-12 text-[#17324D] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* Page Header */}
       <MyStudentsHeader />
 

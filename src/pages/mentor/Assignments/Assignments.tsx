@@ -9,6 +9,8 @@ import {
   Plus,
   Search,
 } from 'lucide-react'
+import { Badge, Button, Card } from '@/components/ui'
+import { PageHeader } from '@/components/layout/PageHeader'
 
 interface AssignmentItem {
   id: string
@@ -72,68 +74,66 @@ export function Assignments() {
   })
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 text-[#17324D] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Assignments</h1>
-          <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
-            Create, manage and grade student assignments across your classes
-          </p>
-        </div>
-
-        <button
-          type="button"
-          className="bg-[#0F9F83] hover:bg-[#0b7e67] text-white font-semibold h-10 px-4 text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer shrink-0 self-start sm:self-auto"
-        >
-          <Plus className="size-4" />
-          <span>Create Assignment</span>
-        </button>
-      </div>
+      <PageHeader
+        title="Assignments"
+        description="Create, manage and grade student assignments across your classes"
+        breadcrumbs={[
+          { label: 'Dashboard', to: '/mentor/dashboard' },
+          { label: 'Assignments' },
+        ]}
+        actions={
+          <Button type="button" variant="primary">
+            <Plus className="size-4 mr-1.5" />
+            <span>Create Assignment</span>
+          </Button>
+        }
+      />
 
       {/* Quick Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-4 flex items-center gap-3.5 shadow-2xs">
-          <div className="w-10 h-10 rounded-lg bg-emerald-50 text-[#059669] flex items-center justify-center shrink-0">
+        <Card className="p-4 flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-primary-subtle text-primary flex items-center justify-center shrink-0">
             <Clock className="size-5" />
           </div>
           <div>
-            <div className="text-xl font-bold text-[#17324D] dark:text-foreground">2 Active</div>
-            <div className="text-xs text-[#64748B] dark:text-slate-400">Pending submissions</div>
+            <div className="text-xl font-bold text-foreground">2 Active</div>
+            <div className="text-xs text-muted-foreground">Pending submissions</div>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-4 flex items-center gap-3.5 shadow-2xs">
-          <div className="w-10 h-10 rounded-lg bg-indigo-50 text-[#4F46E5] flex items-center justify-center shrink-0">
+        <Card className="p-4 flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-primary-subtle text-primary flex items-center justify-center shrink-0">
             <FileCheck className="size-5" />
           </div>
           <div>
-            <div className="text-xl font-bold text-[#17324D] dark:text-foreground">30 Submissions</div>
-            <div className="text-xs text-[#64748B] dark:text-slate-400">Ready for review</div>
+            <div className="text-xl font-bold text-foreground">30 Submissions</div>
+            <div className="text-xs text-muted-foreground">Ready for review</div>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-4 flex items-center gap-3.5 shadow-2xs">
-          <div className="w-10 h-10 rounded-lg bg-amber-50 text-[#D97706] flex items-center justify-center shrink-0">
+        <Card className="p-4 flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
             <CheckCircle2 className="size-5" />
           </div>
           <div>
-            <div className="text-xl font-bold text-[#17324D] dark:text-foreground">1 Graded</div>
-            <div className="text-xs text-[#64748B] dark:text-slate-400">Feedback released</div>
+            <div className="text-xl font-bold text-foreground">1 Graded</div>
+            <div className="text-xs text-muted-foreground">Feedback released</div>
           </div>
-        </div>
+        </Card>
       </div>
 
       {/* Search & Filter Toolbar */}
       <div className="flex flex-col sm:flex-row gap-3 justify-between items-center">
         <div className="relative w-full sm:w-80">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-[#94A3B8]" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search assignments or classes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-3.5 py-2 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl text-xs sm:text-sm text-[#17324D] dark:text-foreground placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-[#0F9F83]/20 focus:border-[#0F9F83] h-10"
+            className="w-full pl-10 pr-3.5 py-2 bg-surface border border-input rounded-md text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10"
           />
         </div>
 
@@ -143,10 +143,10 @@ export function Assignments() {
               key={st}
               type="button"
               onClick={() => setSelectedStatus(st)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold capitalize transition-colors cursor-pointer shrink-0 ${
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold capitalize transition-colors cursor-pointer shrink-0 ${
                 selectedStatus === st
-                  ? 'bg-[#0F9F83] text-white shadow-2xs'
-                  : 'bg-white dark:bg-card border border-[#E2E8F0] dark:border-border text-[#64748B]'
+                  ? 'bg-primary text-primary-foreground shadow-2xs'
+                  : 'bg-surface border border-border text-muted-foreground hover:text-foreground'
               }`}
             >
               {st}
@@ -158,21 +158,21 @@ export function Assignments() {
       {/* Assignments List Cards */}
       <div className="space-y-3">
         {filteredAssignments.map((asg) => (
-          <div
+          <Card
             key={asg.id}
-            className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xs hover:border-[#0F9F83]/40 transition-colors"
+            className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
           >
             <div className="flex items-start gap-3.5 min-w-0">
-              <div className="w-10 h-10 rounded-xl bg-[#E8F7F3] text-[#0F9F83] flex items-center justify-center shrink-0 mt-0.5 font-bold">
+              <div className="w-10 h-10 rounded-lg bg-primary-subtle text-primary flex items-center justify-center shrink-0 mt-0.5 font-bold">
                 <FileText className="size-5" />
               </div>
               <div className="min-w-0 space-y-1">
-                <h3 className="text-base font-bold text-[#17324D] dark:text-foreground truncate leading-tight">
+                <h3 className="text-base font-bold text-foreground truncate leading-tight">
                   {asg.title}
                 </h3>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-[#64748B] dark:text-slate-400">
-                  <span className="font-semibold text-[#17324D] dark:text-foreground flex items-center gap-1">
-                    <BookOpen className="size-3.5 text-[#0F9F83]" />
+                <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                  <span className="font-semibold text-foreground flex items-center gap-1">
+                    <BookOpen className="size-3.5 text-primary" />
                     {asg.classBatch}
                   </span>
                   <span>•</span>
@@ -184,27 +184,27 @@ export function Assignments() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between sm:justify-end gap-4 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#E2E8F0] dark:border-border">
+            <div className="flex items-center justify-between sm:justify-end gap-4 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
               <div className="text-right sm:text-center">
-                <div className="text-xs text-[#64748B] dark:text-slate-400 font-medium">Submissions</div>
-                <div className="text-sm font-bold text-[#17324D] dark:text-foreground">
+                <div className="text-xs text-muted-foreground font-medium">Submissions</div>
+                <div className="text-sm font-bold text-foreground">
                   {asg.submissionsCount} / {asg.totalStudents}
                 </div>
               </div>
 
-              <span
-                className={`px-3 py-1 rounded-md text-xs font-semibold capitalize ${
+              <Badge
+                tone={
                   asg.status === 'active'
-                    ? 'bg-emerald-50 text-[#059669] border border-emerald-200/60'
+                    ? 'success'
                     : asg.status === 'graded'
-                    ? 'bg-indigo-50 text-[#4F46E5] border border-indigo-200/60'
-                    : 'bg-slate-100 text-[#64748B] border border-slate-200'
-                }`}
+                    ? 'primary'
+                    : 'neutral'
+                }
               >
                 {asg.status}
-              </span>
+              </Badge>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>

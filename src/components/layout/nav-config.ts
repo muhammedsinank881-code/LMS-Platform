@@ -9,12 +9,10 @@ import {
   CheckSquare,
   FileText,
   Handshake,
-  Home,
   Inbox,
   KanbanSquare,
   LayoutDashboard,
   Megaphone,
-  MessageSquare,
   ScrollText,
   Settings,
   User,
@@ -144,10 +142,11 @@ export const NAV_ITEMS: NavItem[] = [
 export const MENTOR_NAV_ITEMS: NavItem[] = [
   {
     resource: 'dashboard',
-    label: 'Home',
-    path: '/mentor/home',
-    icon: Home,
-    description: 'Mentor overview, today schedule and quick actions.',
+    label: 'Mentor Dashboard',
+    path: '/mentor/dashboard',
+    icon: LayoutDashboard,
+    description: 'Mentor overview, schedule and key metrics.',
+    section: 'OVERVIEW',
   },
   {
     resource: 'reports',
@@ -155,6 +154,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/classes',
     icon: BookOpen,
     description: 'Batch performance & module timeline.',
+    section: 'ACADEMICS',
   },
   {
     resource: 'team',
@@ -162,6 +162,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/students',
     icon: Users,
     description: 'Track assigned student progress.',
+    section: 'ACADEMICS',
   },
   {
     resource: 'tasks',
@@ -169,6 +170,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/attendance',
     icon: UserCheck,
     description: 'Log and track student attendance.',
+    section: 'ACADEMICS',
   },
   {
     resource: 'tasks',
@@ -176,6 +178,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/assignments',
     icon: FileText,
     description: 'Create and review student assignments.',
+    section: 'ACADEMICS',
   },
   {
     resource: 'reports',
@@ -183,6 +186,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/exams',
     icon: Award,
     description: 'Schedule exams and manage grades.',
+    section: 'ACADEMICS',
   },
   {
     resource: 'reports',
@@ -190,6 +194,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/results',
     icon: BarChart3,
     description: 'Student grade and progress analytics.',
+    section: 'ACADEMICS',
   },
   {
     resource: 'followups',
@@ -197,13 +202,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/timetable',
     icon: Calendar,
     description: 'Weekly teaching timetable.',
-  },
-  {
-    resource: 'inbox',
-    label: 'Messages',
-    path: '/mentor/messages',
-    icon: MessageSquare,
-    description: 'Direct student communications.',
+    section: 'ACADEMICS',
   },
   {
     resource: 'inbox',
@@ -211,6 +210,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/notifications',
     icon: Bell,
     description: 'System alerts and updates.',
+    section: 'COMMUNICATION',
   },
   {
     resource: 'team',
@@ -218,6 +218,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/profile',
     icon: User,
     description: 'Mentor profile and credentials.',
+    section: 'ACCOUNT',
   },
   {
     resource: 'settings',
@@ -225,6 +226,7 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/settings',
     icon: Settings,
     description: 'Preferences and configuration.',
+    section: 'ACCOUNT',
   },
 ]
 
