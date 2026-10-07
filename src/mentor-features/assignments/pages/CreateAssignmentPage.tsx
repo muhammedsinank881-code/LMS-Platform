@@ -182,10 +182,11 @@ export function CreateAssignmentPage() {
             <div className="space-y-4">
               {/* Assignment Title */}
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground flex items-center justify-between">
+                <label htmlFor="asg-title" className="text-xs font-semibold text-foreground flex items-center justify-between">
                   <span>Assignment Title <span className="text-destructive">*</span></span>
                 </label>
                 <Input
+                  id="asg-title"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -203,10 +204,11 @@ export function CreateAssignmentPage() {
               {/* Class/Batch & Subject Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-foreground">
+                  <label htmlFor="asg-class-batch" className="text-xs font-semibold text-foreground">
                     Class / Batch <span className="text-destructive">*</span>
                   </label>
                   <Select
+                    id="asg-class-batch"
                     value={classBatch}
                     onValueChange={setClassBatch}
                     options={CLASS_OPTIONS}
@@ -214,10 +216,11 @@ export function CreateAssignmentPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-foreground">
+                  <label htmlFor="asg-subject" className="text-xs font-semibold text-foreground">
                     Subject / Module <span className="text-destructive">*</span>
                   </label>
                   <Input
+                    id="asg-subject"
                     type="text"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
@@ -236,10 +239,11 @@ export function CreateAssignmentPage() {
               {/* Assignment Type & Difficulty */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-foreground">
+                  <label htmlFor="asg-type" className="text-xs font-semibold text-foreground">
                     Assignment Type
                   </label>
                   <Select
+                    id="asg-type"
                     value={assignmentType}
                     onValueChange={setAssignmentType}
                     options={TYPE_OPTIONS}
@@ -247,9 +251,9 @@ export function CreateAssignmentPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-foreground">
+                  <div className="text-xs font-semibold text-foreground">
                     Difficulty Level
-                  </label>
+                  </div>
                   <div className="flex items-center gap-2 pt-0.5">
                     {(['Easy', 'Medium', 'Hard'] as const).map((lvl) => (
                       <button
@@ -271,10 +275,11 @@ export function CreateAssignmentPage() {
 
               {/* Instructions / Description */}
               <div className="space-y-1.5 pt-2">
-                <label className="text-xs font-semibold text-foreground">
+                <label htmlFor="asg-description" className="text-xs font-semibold text-foreground">
                   Instructions & Problem Statement <span className="text-destructive">*</span>
                 </label>
                 <textarea
+                  id="asg-description"
                   rows={6}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -304,10 +309,11 @@ export function CreateAssignmentPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground">
+                <label htmlFor="asg-submission-type" className="text-xs font-semibold text-foreground">
                   Submission Mode
                 </label>
                 <Select
+                  id="asg-submission-type"
                   value={submissionType}
                   onValueChange={setSubmissionType}
                   options={SUBMISSION_TYPE_OPTIONS}
@@ -315,10 +321,11 @@ export function CreateAssignmentPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground">
+                <label htmlFor="asg-max-file-size" className="text-xs font-semibold text-foreground">
                   Maximum File Size
                 </label>
                 <Select
+                  id="asg-max-file-size"
                   value={maxFileSize}
                   onValueChange={setMaxFileSize}
                   options={MAX_FILE_SIZE_OPTIONS}
@@ -327,10 +334,11 @@ export function CreateAssignmentPage() {
             </div>
 
             <div className="space-y-1.5 pt-1">
-              <label className="text-xs font-semibold text-foreground">
+              <label htmlFor="asg-allowed-file-types" className="text-xs font-semibold text-foreground">
                 Allowed Extensions / Formats
               </label>
               <Input
+                id="asg-allowed-file-types"
                 type="text"
                 value={allowedFileTypes}
                 onChange={(e) => setAllowedFileTypes(e.target.value)}
@@ -351,10 +359,11 @@ export function CreateAssignmentPage() {
 
             <div className="space-y-3.5">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground">
+                <label htmlFor="asg-start-date" className="text-xs font-semibold text-foreground">
                   Start Date <span className="text-destructive">*</span>
                 </label>
                 <Input
+                  id="asg-start-date"
                   type="date"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
@@ -363,10 +372,11 @@ export function CreateAssignmentPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground">
+                <label htmlFor="asg-due-date" className="text-xs font-semibold text-foreground">
                   Due Date <span className="text-destructive">*</span>
                 </label>
                 <Input
+                  id="asg-due-date"
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
@@ -381,28 +391,30 @@ export function CreateAssignmentPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-foreground">
+                <label htmlFor="asg-due-time" className="text-xs font-semibold text-foreground">
                   Due Time
                 </label>
                 <Input
+                  id="asg-due-time"
                   type="time"
                   value={dueTime}
                   onChange={(e) => setDueTime(e.target.value)}
                 />
               </div>
 
-              <div className="pt-2 border-t border-border flex items-center justify-between">
+              <label htmlFor="asg-allow-late" className="pt-2 border-t border-border flex items-center justify-between cursor-pointer">
                 <div>
                   <div className="text-xs font-semibold text-foreground">Allow Late Submissions</div>
                   <div className="text-[11px] text-muted-foreground">Accept submissions after due date</div>
                 </div>
                 <input
+                  id="asg-allow-late"
                   type="checkbox"
                   checked={allowLateSubmission}
                   onChange={(e) => setAllowLateSubmission(e.target.checked)}
                   className="size-4 accent-primary cursor-pointer"
                 />
-              </div>
+              </label>
             </div>
           </Card>
 
@@ -416,10 +428,11 @@ export function CreateAssignmentPage() {
             <div className="space-y-3.5">
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-foreground">
+                  <label htmlFor="asg-total-marks" className="text-xs font-semibold text-foreground">
                     Total Marks <span className="text-destructive">*</span>
                   </label>
                   <Input
+                    id="asg-total-marks"
                     type="number"
                     min={1}
                     value={totalMarks}
@@ -430,10 +443,11 @@ export function CreateAssignmentPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-foreground">
+                  <label htmlFor="asg-passing-marks" className="text-xs font-semibold text-foreground">
                     Passing Marks
                   </label>
                   <Input
+                    id="asg-passing-marks"
                     type="number"
                     min={0}
                     value={passingMarks}
@@ -457,10 +471,11 @@ export function CreateAssignmentPage() {
               ) : null}
 
               <div className="space-y-1.5 pt-1">
-                <label className="text-xs font-semibold text-foreground">
+                <label htmlFor="asg-grading-instructions" className="text-xs font-semibold text-foreground">
                   Evaluation Notes (Optional)
                 </label>
                 <textarea
+                  id="asg-grading-instructions"
                   rows={3}
                   value={gradingInstructions}
                   onChange={(e) => setGradingInstructions(e.target.value)}
