@@ -14,15 +14,18 @@ export function ProtectedRoute() {
   const isAuthenticated = useAuthStore(selectIsAuthenticated)
   const intentionalSignOut = useAuthStore((state) => state.intentionalSignOut)
   const onboardingCompleted = useAuthStore((state) => state.tenant?.onboardingCompleted ?? false)
+  const user = useAuthStore((state) => state.user)
 
   if (!isAuthenticated) {
     const returnTo = intentionalSignOut ? undefined : `${location.pathname}${location.search}`
     return <Navigate to={buildLoginUrl(returnTo)} replace />
   }
 
+  const defaultPath = user?.role === 'student' ? '/student/dashboard' : DEFAULT_PATH
+
   const onOnboarding = location.pathname === ONBOARDING_PATH
   if (!onboardingCompleted && !onOnboarding) return <Navigate to={ONBOARDING_PATH} replace />
-  if (onboardingCompleted && onOnboarding) return <Navigate to={DEFAULT_PATH} replace />
+  if (onboardingCompleted && onOnboarding) return <Navigate to={defaultPath} replace />
 
   return <Outlet />
 }
