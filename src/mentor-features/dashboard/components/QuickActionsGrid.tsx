@@ -24,7 +24,7 @@ export function QuickActionsGrid({ actions }: QuickActionsGridProps) {
           icon: FilePlus,
           bg: 'bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400',
           hoverBorder: 'hover:border-blue-500/40',
-          path: '/mentor/student-submissions-code-reviews',
+          path: '/mentor/assignments/create',
         }
       case 'upload':
         return {
