@@ -16,17 +16,7 @@ export function ClassHeader({ onOpenAddModal }: ClassHeaderProps) {
         { label: 'Mentor', to: '/mentor' },
         { label: 'My Classes' },
       ]}
-      actions={
-        <Button
-          type="button"
-          variant="primary"
-          onClick={onOpenAddModal}
-          className="flex items-center gap-2"
-        >
-          <Plus className="size-4" />
-          <span>Add Class</span>
-        </Button>
-      }
+      
     />
   )
 }

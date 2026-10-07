@@ -77,7 +77,7 @@ export function ClassDetailsPage() {
               <Code2 className="size-8" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 {cls.title}
               </h1>
               <p className="text-sm text-muted-foreground mt-1 font-medium">
@@ -110,7 +110,7 @@ export function ClassDetailsPage() {
               <Users className="size-3.5 text-primary" />
               <span>Enrolled Students</span>
             </div>
-            <p className="text-lg font-bold text-foreground mt-1">
+            <p className="text-xl font-bold text-foreground mt-1">
               {cls.studentsCount}
             </p>
           </div>
@@ -120,7 +120,7 @@ export function ClassDetailsPage() {
               <MapPin className="size-3.5 text-primary" />
               <span>Room Location</span>
             </div>
-            <p className="text-lg font-bold text-foreground mt-1">
+            <p className="text-xl font-bold text-foreground mt-1">
               {cls.room}
             </p>
           </div>
@@ -130,7 +130,7 @@ export function ClassDetailsPage() {
               <GraduationCap className="size-3.5 text-primary" />
               <span>Attendance Rate</span>
             </div>
-            <p className="text-lg font-bold text-foreground mt-1">
+            <p className="text-xl font-bold text-foreground mt-1">
               {cls.attendanceRate}%
             </p>
           </div>
@@ -140,7 +140,7 @@ export function ClassDetailsPage() {
               <Clock className="size-3.5 text-primary" />
               <span>Syllabus Progress</span>
             </div>
-            <p className="text-lg font-bold text-foreground mt-1">
+            <p className="text-xl font-bold text-foreground mt-1">
               {cls.syllabusProgress}%
             </p>
           </div>

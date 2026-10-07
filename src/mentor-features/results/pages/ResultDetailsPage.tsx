@@ -54,7 +54,7 @@ export function ResultDetailsPage() {
               <BarChart3 className="size-8" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 {result.studentName}
               </h1>
               <p className="text-sm text-muted-foreground mt-1 font-mono font-medium">
@@ -91,7 +91,7 @@ export function ResultDetailsPage() {
               <Award className="size-3.5 text-primary" />
               <span>Marks Obtained</span>
             </div>
-            <p className="text-xl font-extrabold text-primary mt-1">
+            <p className="text-xl font-bold tracking-tight text-primary mt-1">
               {result.marksObtained} / {result.totalMarks}
             </p>
           </div>
@@ -101,7 +101,7 @@ export function ResultDetailsPage() {
               <GraduationCap className="size-3.5 text-primary" />
               <span>Percentage</span>
             </div>
-            <p className="text-xl font-extrabold text-foreground mt-1">
+            <p className="text-xl font-bold tracking-tight text-foreground mt-1">
               {result.percentage}%
             </p>
           </div>
@@ -111,7 +111,7 @@ export function ResultDetailsPage() {
               <FileCheck className="size-3.5 text-primary" />
               <span>Official Grade</span>
             </div>
-            <p className="text-xl font-extrabold text-foreground mt-1">
+            <p className="text-xl font-bold tracking-tight text-foreground mt-1">
               {result.grade}
             </p>
           </div>

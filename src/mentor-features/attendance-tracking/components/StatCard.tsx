@@ -17,7 +17,7 @@ export function StatCard({
     <div
       className={`rounded-xl ${bgClass} border ${borderClass} p-4 sm:p-5 text-center flex flex-col justify-center space-y-1 transition-all`}
     >
-      <div className={`text-2xl sm:text-3xl font-extrabold ${colorClass} leading-tight`}>
+      <div className={`text-xl sm:text-2xl font-bold tracking-tight ${colorClass} leading-tight`}>
         {value}
       </div>
       <div className="text-xs font-medium text-[#64748B] dark:text-slate-400">

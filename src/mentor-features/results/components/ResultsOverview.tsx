@@ -21,7 +21,7 @@ export function ResultsOverview({ stats }: ResultsOverviewProps) {
         <div className="p-3.5 rounded-lg bg-primary-subtle border border-primary/20 flex flex-col justify-between">
           <span className="text-xs font-semibold text-muted-foreground">Total Results</span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl sm:text-3xl font-extrabold text-primary">{total}</span>
+            <span className="text-xl sm:text-2xl font-bold tracking-tight text-primary">{total}</span>
             <span className="text-[11px] font-medium text-primary bg-surface/80 px-2 py-0.5 rounded-md">
               Total
             </span>
@@ -32,7 +32,7 @@ export function ResultsOverview({ stats }: ResultsOverviewProps) {
         <div className="p-3.5 rounded-lg bg-success/10 border border-success/20 flex flex-col justify-between">
           <span className="text-xs font-semibold text-muted-foreground">Published</span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl sm:text-3xl font-extrabold text-success">{published}</span>
+            <span className="text-xl sm:text-2xl font-bold tracking-tight text-success">{published}</span>
             <span className="text-[11px] font-medium text-success bg-surface/80 px-2 py-0.5 rounded-md">
               Published
             </span>
@@ -43,7 +43,7 @@ export function ResultsOverview({ stats }: ResultsOverviewProps) {
         <div className="p-3.5 rounded-lg bg-warning/15 border border-warning/20 flex flex-col justify-between">
           <span className="text-xs font-semibold text-muted-foreground">Pending</span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl sm:text-3xl font-extrabold text-warning">{pending}</span>
+            <span className="text-xl sm:text-2xl font-bold tracking-tight text-warning">{pending}</span>
             <span className="text-[11px] font-medium text-warning bg-surface/80 px-2 py-0.5 rounded-md">
               Pending
             </span>
@@ -54,7 +54,7 @@ export function ResultsOverview({ stats }: ResultsOverviewProps) {
         <div className="p-3.5 rounded-lg bg-info/10 border border-info/20 flex flex-col justify-between">
           <span className="text-xs font-semibold text-muted-foreground">Average Score</span>
           <div className="flex items-baseline justify-between mt-1">
-            <span className="text-2xl sm:text-3xl font-extrabold text-foreground">{averageScore}%</span>
+            <span className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">{averageScore}%</span>
             <span className="text-[11px] font-medium text-info bg-surface/80 px-2 py-0.5 rounded-md">
               Average
             </span>

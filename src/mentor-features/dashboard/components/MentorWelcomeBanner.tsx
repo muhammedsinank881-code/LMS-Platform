@@ -29,7 +29,7 @@ export function MentorWelcomeBanner({ name, title, activeBatch }: MentorWelcomeB
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          {/* <div className="flex items-center gap-2 shrink-0">
             <Button variant="outline" size="icon-sm" className="relative" aria-label="Notifications">
               <Bell className="size-3.5" />
               <span className="absolute top-1 right-1 size-1.5 rounded-full bg-destructive" />
@@ -38,7 +38,7 @@ export function MentorWelcomeBanner({ name, title, activeBatch }: MentorWelcomeB
               <Calendar className="size-3.5" />
               Schedule Class
             </Button>
-          </div>
+          </div> */}
         </div>
       </CardContent>
     </Card>

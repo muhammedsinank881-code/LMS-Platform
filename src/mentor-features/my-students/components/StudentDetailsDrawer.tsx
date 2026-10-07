@@ -53,11 +53,11 @@ export function StudentDetailsDrawer({
         <div className="p-5 space-y-6 flex-1 text-[#17324D] dark:text-foreground">
           {/* Main Info Box */}
           <div className="flex items-start gap-4 pb-4 border-b border-border">
-            <div className="w-14 h-14 rounded-full bg-primary-subtle text-primary font-extrabold text-lg flex items-center justify-center shrink-0 border border-primary/20">
+            <div className="w-14 h-14 rounded-full bg-primary-subtle text-primary font-bold text-base flex items-center justify-center shrink-0 border border-primary/20">
               {student.avatarInitials}
             </div>
             <div className="min-w-0 space-y-1">
-              <h2 className="text-lg font-bold text-foreground truncate">
+              <h2 className="text-base font-bold text-foreground truncate">
                 {student.name}
               </h2>
               <p className="text-xs font-semibold text-muted-foreground">
@@ -79,7 +79,7 @@ export function StudentDetailsDrawer({
               <div className="text-xs text-muted-foreground font-medium">
                 Attendance Rate
               </div>
-              <div className="text-xl font-extrabold text-emerald-600 dark:text-emerald-400">
+              <div className="text-xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400">
                 {student.attendancePercentage}%
               </div>
             </div>
@@ -88,7 +88,7 @@ export function StudentDetailsDrawer({
               <div className="text-xs text-muted-foreground font-medium">
                 GPA Score
               </div>
-              <div className="text-xl font-extrabold text-primary">
+              <div className="text-xl font-bold tracking-tight text-primary">
                 {student.academicSummary.gpa}
               </div>
             </div>

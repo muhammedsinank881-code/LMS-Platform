@@ -15,17 +15,7 @@ export function ExamHeader({ onOpenCreateModal }: ExamHeaderProps) {
         { label: 'Mentor', to: '/mentor' },
         { label: 'Exams' },
       ]}
-      actions={
-        <Button
-          type="button"
-          variant="primary"
-          onClick={onOpenCreateModal}
-          className="flex items-center gap-2"
-        >
-          <Plus className="size-4" />
-          <span>Create Exam</span>
-        </Button>
-      }
+      
     />
   )
 }

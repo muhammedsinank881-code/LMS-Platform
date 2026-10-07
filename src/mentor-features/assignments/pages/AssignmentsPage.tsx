@@ -39,16 +39,7 @@ export function AssignmentsPage() {
           { label: 'Dashboard', to: '/mentor/dashboard' },
           { label: 'Assignments' },
         ]}
-        actions={
-          <Button
-            type="button"
-            variant="primary"
-            onClick={() => navigate('/mentor/assignments/create')}
-          >
-            <Plus className="size-4 mr-1.5" />
-            <span>Create Assignment</span>
-          </Button>
-        }
+      
       />
 
       {/* Quick Summary Cards */}
