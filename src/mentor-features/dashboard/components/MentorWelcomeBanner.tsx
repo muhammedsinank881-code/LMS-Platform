@@ -3,11 +3,11 @@ import { Avatar, Badge, Button, Card, CardContent } from '@/components/ui'
 
 interface MentorWelcomeBannerProps {
   name: string
-  role: string
+  title: string
   activeBatch: string
 }
 
-export function MentorWelcomeBanner({ name, role, activeBatch }: MentorWelcomeBannerProps) {
+export function MentorWelcomeBanner({ name, title, activeBatch }: MentorWelcomeBannerProps) {
   return (
     <Card className="border-border bg-gradient-to-r from-surface via-surface to-primary/5 shadow-2xs">
       <CardContent className="p-3.5 sm:p-4">
@@ -20,7 +20,7 @@ export function MentorWelcomeBanner({ name, role, activeBatch }: MentorWelcomeBa
                   Welcome back, {name} 👋
                 </h1>
                 <Badge tone="primary" appearance="soft" size="sm">
-                  {role}
+                  {title}
                 </Badge>
               </div>
               <p className="text-xs text-muted-foreground mt-0.5">

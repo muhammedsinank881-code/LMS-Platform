@@ -141,7 +141,7 @@ export function MentorDashboardPage() {
       {/* 1. Mentor Welcome Header */}
       <MentorWelcomeBanner
         name="Prof. Alex Morgan"
-        role="Lead Mentor"
+        title="Lead Mentor"
         activeBatch="BCA Department - 2026"
       />
 

@@ -46,13 +46,18 @@ export function EnterResultModal({
     const max = Number(totalMarks) || 100
     const pct = Math.round((obtained / max) * 100)
 
-    let calculatedGrade = 'B'
-    if (pct >= 90) calculatedGrade = 'A+'
-    else if (pct >= 80) calculatedGrade = 'A'
-    else if (pct >= 70) calculatedGrade = 'B+'
-    else if (pct >= 60) calculatedGrade = 'B'
-    else if (pct >= 50) calculatedGrade = 'C'
-    else calculatedGrade = 'F'
+    const calculatedGrade =
+      pct >= 90
+        ? 'A+'
+        : pct >= 80
+          ? 'A'
+          : pct >= 70
+            ? 'B+'
+            : pct >= 60
+              ? 'B'
+              : pct >= 50
+                ? 'C'
+                : 'F'
 
     onSaveResult({
       studentName: studentName.trim(),
