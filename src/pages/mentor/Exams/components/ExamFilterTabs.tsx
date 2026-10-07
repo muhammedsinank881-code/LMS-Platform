@@ -27,19 +27,19 @@ export function ExamFilterTabs({ activeTab, onTabChange, stats }: ExamFilterTabs
             type="button"
             onClick={() => onTabChange(tab.id)}
             className={cn(
-              'flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition-all cursor-pointer border select-none shrink-0',
+              'flex items-center gap-2 px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-all cursor-pointer border select-none shrink-0',
               isActive
-                ? 'bg-[#0F9F83] text-white border-[#0F9F83] shadow-2xs'
-                : 'bg-white dark:bg-card text-[#64748B] dark:text-slate-400 border-[#E2E8F0] dark:border-border hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-[#17324D] dark:hover:text-foreground',
+                ? 'bg-primary text-primary-foreground border-primary shadow-xs'
+                : 'bg-surface text-muted-foreground border-border hover:bg-muted hover:text-foreground',
             )}
           >
             <span>{tab.label}</span>
             <span
               className={cn(
-                'px-1.5 py-0.5 text-[11px] font-bold rounded-md transition-colors',
+                'px-1.5 py-0.5 text-[11px] font-semibold rounded-md transition-colors',
                 isActive
-                  ? 'bg-white/20 text-white'
-                  : 'bg-slate-100 dark:bg-slate-800 text-[#17324D] dark:text-foreground',
+                  ? 'bg-primary-foreground/20 text-primary-foreground'
+                  : 'bg-muted text-muted-foreground',
               )}
             >
               {tab.count}

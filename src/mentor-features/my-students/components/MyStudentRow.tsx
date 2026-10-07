@@ -95,7 +95,7 @@ export function MyStudentRow({ student, onSelectStudent }: MyStudentRowProps) {
         <button
           type="button"
           onClick={() => onSelectStudent(student)}
-          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-[#0F9F83] hover:text-[#0b7e67] hover:bg-[#0F9F83]/10 dark:hover:bg-[#0F9F83]/20 rounded-md transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary-subtle rounded-md transition-colors cursor-pointer"
         >
           <span>View</span>
           <ArrowRight className="size-3.5" />

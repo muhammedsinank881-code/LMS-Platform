@@ -31,7 +31,7 @@ export function ResultDetails() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 py-2 px-2 sm:px-4 pb-16 text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* Back Link */}
       <div className="flex items-center justify-between">
         <button

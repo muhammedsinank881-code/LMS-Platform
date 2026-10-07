@@ -15,8 +15,8 @@ export function QuickActionsGrid({ actions }: QuickActionsGridProps) {
       case 'attendance':
         return {
           icon: UserCheck,
-          bg: 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400',
-          hoverBorder: 'hover:border-emerald-500/40',
+          bg: 'bg-primary-subtle text-primary',
+          hoverBorder: 'hover:border-primary/40',
           path: '/mentor/attendance-tracking',
         }
       case 'assignment':

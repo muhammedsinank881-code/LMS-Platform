@@ -12,7 +12,7 @@ export function RecentClassesGrid({ classes }: RecentClassesGridProps) {
       case 'code':
         return { icon: Code2, bg: 'bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400' }
       case 'web':
-        return { icon: Globe, bg: 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400' }
+        return { icon: Globe, bg: 'bg-primary-subtle text-primary' }
       case 'list':
         return { icon: ListTodo, bg: 'bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400' }
     }

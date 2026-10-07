@@ -22,7 +22,7 @@ export function ExamClassFilter({
           id="exam-class-select"
           value={selectedClass}
           onChange={(e) => onClassChange(e.target.value)}
-          className="h-9 px-3 bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl text-xs sm:text-sm font-semibold text-[#17324D] dark:text-foreground focus:ring-2 focus:ring-[#0F9F83] focus:outline-none cursor-pointer shadow-2xs"
+          className="h-9 px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-xs"
         >
           <option value="all">All Classes</option>
           {availableClasses.map((cls) => (
@@ -34,8 +34,8 @@ export function ExamClassFilter({
       </div>
 
       {/* Dynamic Count Summary */}
-      <div className="text-xs sm:text-sm font-bold text-[#64748B] dark:text-slate-400 shrink-0">
-        <span className="text-[#17324D] dark:text-foreground">{totalExamsCount}</span> {totalExamsCount === 1 ? 'Exam' : 'Exams'}
+      <div className="text-xs sm:text-sm font-medium text-muted-foreground shrink-0">
+        <span className="font-bold text-foreground">{totalExamsCount}</span> {totalExamsCount === 1 ? 'Exam' : 'Exams'}
       </div>
     </div>
   )

@@ -13,7 +13,7 @@ import {
   Users,
 } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button } from '@/components/ui'
+import { Button, Card } from '@/components/ui'
 import { useAuthStore } from '@/store/auth-store'
 import { MOCK_MENTOR_CLASSES } from './mockData'
 
@@ -40,47 +40,47 @@ export function ClassDetails() {
   })
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 py-2 px-2 sm:px-4 pb-16 text-[#17324D] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* Back Navigation Bar */}
       <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={() => navigate('/mentor/classes')}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-[#64748B] hover:text-[#17324D] dark:hover:text-foreground transition-colors cursor-pointer"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           <ArrowLeft className="size-4" />
           <span>Back to My Classes</span>
         </button>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 text-xs font-bold rounded-lg bg-slate-100 dark:bg-slate-800 font-mono text-[#17324D] dark:text-foreground border border-[#E2E8F0] dark:border-border">
+          <span className="px-3 py-1 text-xs font-semibold rounded-md bg-muted font-mono text-foreground border border-border">
             {cls.courseCode}
           </span>
           <span
-            className={`px-3 py-1 text-xs font-bold rounded-full flex items-center gap-1.5 ${
+            className={`px-3 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 ${
               isActive
-                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'
+                ? 'bg-success/10 text-success'
+                : 'bg-muted text-muted-foreground'
             }`}
           >
-            <span className={`size-2 rounded-full ${isActive ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`} />
+            <span className={`size-2 rounded-full ${isActive ? 'bg-success animate-pulse' : 'bg-muted-foreground'}`} />
             {isActive ? 'Active Class' : 'Completed Class'}
           </span>
         </div>
       </div>
 
       {/* Main Class Banner Header */}
-      <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl p-6 shadow-2xs space-y-4">
+      <Card className="p-6 space-y-4">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-2xl bg-[#E8F7F3] text-[#0F9F83] shrink-0">
+            <div className="p-3.5 rounded-lg bg-primary-subtle text-primary shrink-0">
               <Code2 className="size-8" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#17324D] dark:text-foreground">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
                 {cls.title}
               </h1>
-              <p className="text-sm text-[#64748B] dark:text-slate-400 mt-1 font-medium">
+              <p className="text-sm text-muted-foreground mt-1 font-medium">
                 {cls.courseName} ({cls.program}) · {cls.year} · {cls.semester}
               </p>
             </div>
@@ -89,8 +89,9 @@ export function ClassDetails() {
           <div className="flex items-center gap-3 shrink-0">
             <Button
               type="button"
+              variant="primary"
               onClick={() => navigate('/mentor/attendance')}
-              className="bg-[#0F9F83] hover:bg-[#0C826B] text-white font-semibold rounded-xl flex items-center gap-2"
+              className="flex items-center gap-2"
             >
               <UserCheck className="size-4" />
               <span>Take Attendance</span>
@@ -98,159 +99,159 @@ export function ClassDetails() {
           </div>
         </div>
 
-        <p className="text-sm text-[#64748B] dark:text-slate-300 border-t border-[#E2E8F0] dark:border-border pt-4">
+        <p className="text-sm text-muted-foreground border-t border-border pt-4">
           {cls.description}
         </p>
 
         {/* Quick Details Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-2 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <Users className="size-3.5 text-[#0F9F83]" />
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+              <Users className="size-3.5 text-primary" />
               <span>Enrolled Students</span>
             </div>
-            <p className="text-lg font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-lg font-bold text-foreground mt-1">
               {cls.studentsCount}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-2 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <MapPin className="size-3.5 text-[#0F9F83]" />
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+              <MapPin className="size-3.5 text-primary" />
               <span>Room Location</span>
             </div>
-            <p className="text-lg font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-lg font-bold text-foreground mt-1">
               {cls.room}
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-2 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <GraduationCap className="size-3.5 text-[#0F9F83]" />
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+              <GraduationCap className="size-3.5 text-primary" />
               <span>Attendance Rate</span>
             </div>
-            <p className="text-lg font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-lg font-bold text-foreground mt-1">
               {cls.attendanceRate}%
             </p>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E2E8F0] dark:border-border/50">
-            <div className="flex items-center gap-2 text-xs text-[#64748B] dark:text-slate-400 font-medium">
-              <Clock className="size-3.5 text-[#0F9F83]" />
+          <div className="p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+              <Clock className="size-3.5 text-primary" />
               <span>Syllabus Progress</span>
             </div>
-            <p className="text-lg font-bold text-[#17324D] dark:text-foreground mt-1">
+            <p className="text-lg font-bold text-foreground mt-1">
               {cls.syllabusProgress}%
             </p>
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* Schedule & Mentor Information Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl p-5 shadow-2xs space-y-3">
-          <div className="flex items-center gap-2 font-bold text-[#17324D] dark:text-foreground">
-            <Calendar className="size-4 text-[#0F9F83]" />
+        <Card className="p-5 space-y-3">
+          <div className="flex items-center gap-2 font-semibold text-foreground">
+            <Calendar className="size-4 text-primary" />
             <span>Class Schedule</span>
           </div>
-          <p className="text-sm font-semibold text-[#17324D] dark:text-foreground bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-[#E2E8F0] dark:border-border">
+          <p className="text-sm font-semibold text-foreground bg-muted p-3 rounded-md border border-border">
             {cls.schedule}
           </p>
-        </div>
+        </Card>
 
-        <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl p-5 shadow-2xs space-y-3">
-          <div className="flex items-center gap-2 font-bold text-[#17324D] dark:text-foreground">
-            <BookOpen className="size-4 text-[#0F9F83]" />
+        <Card className="p-5 space-y-3">
+          <div className="flex items-center gap-2 font-semibold text-foreground">
+            <BookOpen className="size-4 text-primary" />
             <span>Assigned Instructor / Mentor</span>
           </div>
-          <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-3 rounded-xl border border-[#E2E8F0] dark:border-border">
-            <div className="size-9 rounded-full bg-[#0F9F83] text-white flex items-center justify-center font-bold text-sm">
+          <div className="flex items-center gap-3 bg-muted p-3 rounded-md border border-border">
+            <div className="size-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
               {(user?.name || 'Ms. Husna').slice(0, 2).toUpperCase()}
             </div>
             <div>
-              <p className="text-sm font-bold text-[#17324D] dark:text-foreground">
+              <p className="text-sm font-semibold text-foreground">
                 {user?.name || 'Ms. Husna'}
               </p>
-              <p className="text-xs text-[#64748B] dark:text-slate-400">
+              <p className="text-xs text-muted-foreground">
                 {user?.email || 'mentor@leadflow.test'} · Assigned Mentor
               </p>
             </div>
           </div>
-        </div>
+        </Card>
       </div>
 
       {/* Student Roster Section */}
-      <div className="bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-2xl p-5 shadow-2xs space-y-4">
+      <Card className="p-5 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-lg font-bold text-[#17324D] dark:text-foreground">
+            <h3 className="text-lg font-semibold text-foreground">
               Enrolled Student Roster
             </h3>
-            <p className="text-xs text-[#64748B] dark:text-slate-400">
+            <p className="text-xs text-muted-foreground">
               Showing students registered in {cls.courseCode}
             </p>
           </div>
 
           {/* Student Search */}
           <div className="relative w-full sm:w-64">
-            <Search className="absolute left-3 top-2.5 size-4 text-[#64748B]" />
+            <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
             <input
               type="text"
               value={studentSearch}
               onChange={(e) => setStudentSearch(e.target.value)}
               placeholder="Search roster..."
-              className="w-full h-9 pl-9 pr-3 bg-slate-50 dark:bg-slate-800 border border-[#E2E8F0] dark:border-border rounded-xl text-xs text-[#17324D] dark:text-foreground placeholder:text-[#64748B] focus:outline-none focus:ring-2 focus:ring-[#0F9F83]"
+              className="w-full h-9 pl-9 pr-3 bg-surface border border-input rounded-md text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
         </div>
 
         {/* Student Table */}
-        <div className="overflow-x-auto rounded-xl border border-[#E2E8F0] dark:border-border">
+        <div className="overflow-x-auto rounded-md border border-border">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-800/80 text-xs uppercase font-bold text-[#64748B] dark:text-slate-300 border-b border-[#E2E8F0] dark:border-border">
+            <thead className="bg-muted/50 text-xs uppercase font-medium text-muted-foreground border-b border-border">
               <tr>
-                <th className="p-3.5">Roll Number</th>
-                <th className="p-3.5">Student Name</th>
-                <th className="p-3.5">Email</th>
-                <th className="p-3.5">Attendance</th>
-                <th className="p-3.5 text-right">Today&apos;s Status</th>
+                <th className="p-3">Roll Number</th>
+                <th className="p-3">Student Name</th>
+                <th className="p-3">Email</th>
+                <th className="p-3">Attendance</th>
+                <th className="p-3 text-right">Today&apos;s Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E2E8F0] dark:divide-border font-medium">
+            <tbody className="divide-y divide-border font-medium">
               {filteredStudents.length > 0 ? (
                 filteredStudents.map((st) => (
-                  <tr key={st.id} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition-colors">
-                    <td className="p-3.5 font-mono text-xs text-[#17324D] dark:text-slate-200 font-bold">
+                  <tr key={st.id} className="hover:bg-muted/50 transition-colors">
+                    <td className="p-3 font-mono text-xs text-foreground font-semibold">
                       {st.rollNumber}
                     </td>
-                    <td className="p-3.5 text-[#17324D] dark:text-foreground font-semibold">
+                    <td className="p-3 text-foreground font-semibold">
                       {st.name}
                     </td>
-                    <td className="p-3.5 text-[#64748B] dark:text-slate-400 text-xs">
+                    <td className="p-3 text-muted-foreground text-xs">
                       {st.email}
                     </td>
-                    <td className="p-3.5">
+                    <td className="p-3">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-xs">{st.attendancePercentage}%</span>
-                        <div className="w-16 h-1.5 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                        <span className="font-semibold text-xs">{st.attendancePercentage}%</span>
+                        <div className="w-16 h-1.5 rounded-full bg-muted overflow-hidden">
                           <div
-                            className="h-full bg-[#0F9F83]"
+                            className="h-full bg-primary"
                             style={{ width: `${st.attendancePercentage}%` }}
                           />
                         </div>
                       </div>
                     </td>
-                    <td className="p-3.5 text-right">
+                    <td className="p-3 text-right">
                       {st.statusToday === 'present' ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded-full">
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-success bg-success/10 px-2.5 py-0.5 rounded-full">
                           <CheckCircle2 className="size-3" /> Present
                         </span>
                       ) : st.statusToday === 'late' ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-2.5 py-1 rounded-full">
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-warning bg-warning/15 px-2.5 py-0.5 rounded-full">
                           Late
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-xs font-bold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 px-2.5 py-1 rounded-full">
+                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-destructive bg-destructive/10 px-2.5 py-0.5 rounded-full">
                           Absent
                         </span>
                       )}
@@ -259,7 +260,7 @@ export function ClassDetails() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="p-6 text-center text-[#64748B]">
+                  <td colSpan={5} className="p-6 text-center text-muted-foreground">
                     No students found matching current query.
                   </td>
                 </tr>
@@ -267,7 +268,7 @@ export function ClassDetails() {
             </tbody>
           </table>
         </div>
-      </div>
+      </Card>
     </div>
   )
 }

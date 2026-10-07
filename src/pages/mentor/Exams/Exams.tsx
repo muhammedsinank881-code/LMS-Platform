@@ -46,7 +46,7 @@ export function Exams() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-5 py-2 px-2 sm:px-4 pb-16 text-[#17324D] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* 1. Header Section */}
       <ExamHeader onOpenCreateModal={() => setCreateModalOpen(true)} />
 

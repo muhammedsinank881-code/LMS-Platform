@@ -19,10 +19,11 @@ export function ExamErrorState({ onRetry }: ExamErrorStateProps) {
       </p>
       <Button
         type="button"
+        variant="primary"
         onClick={onRetry}
-        className="mt-2 bg-[#0F9F83] hover:bg-[#0C826B] text-white font-semibold rounded-xl px-4 py-2 flex items-center gap-2 cursor-pointer"
+        className="mt-2"
       >
-        <RefreshCw className="size-4" />
+        <RefreshCw className="size-4 mr-1.5" />
         <span>Try Again</span>
       </Button>
     </div>
