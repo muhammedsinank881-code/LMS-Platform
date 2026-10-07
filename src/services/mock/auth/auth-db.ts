@@ -56,18 +56,58 @@ function isMockAuthDb(value: unknown): value is MockAuthDb {
 }
 
 export function readDb(): MockAuthDb {
+  let db: MockAuthDb | null = null
   try {
     const raw = localStorage.getItem(DB_KEY)
     if (raw) {
       const parsed: unknown = JSON.parse(raw)
-      if (isMockAuthDb(parsed)) return parsed
+      if (isMockAuthDb(parsed)) {
+        db = parsed
+      }
     }
   } catch {
     // Corrupt storage: fall through and reseed.
   }
+
   const seeded = createSeedAuthDb()
-  writeDb(seeded)
-  return seeded
+  if (!db) {
+    db = seeded
+    writeDb(db)
+    return db
+  }
+
+  let modified = false
+
+  for (const seedTenant of seeded.tenants) {
+    if (!db.tenants.some((t) => t.id === seedTenant.id)) {
+      db.tenants.push(seedTenant)
+      modified = true
+    }
+  }
+
+  for (const seedUser of seeded.users) {
+    const existing = db.users.find((u) => normalizeEmail(u.email) === normalizeEmail(seedUser.email))
+    if (!existing) {
+      db.users.push(seedUser)
+      modified = true
+    } else if (existing.password !== seedUser.password) {
+      existing.password = seedUser.password
+      modified = true
+    }
+  }
+
+  for (const seedMem of seeded.memberships) {
+    if (!db.memberships.some((m) => m.userId === seedMem.userId && m.tenantId === seedMem.tenantId)) {
+      db.memberships.push(seedMem)
+      modified = true
+    }
+  }
+
+  if (modified) {
+    writeDb(db)
+  }
+
+  return db
 }
 
 export function writeDb(db: MockAuthDb): void {

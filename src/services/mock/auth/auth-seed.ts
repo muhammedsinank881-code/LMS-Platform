@@ -1,4 +1,5 @@
 import type { MockAuthDb, MockMembership, MockUserRecord } from './auth-db'
+import { normalizeEmail } from './auth-db'
 
 export const DEMO_PASSWORD = 'password123'
 export const DEMO_INVITE_TOKEN = 'demo-invite'
@@ -45,14 +46,14 @@ const demoUsers: Array<Omit<MockUserRecord, 'password'> & { role: MockMembership
     teamId: 'team-north',
   },
   {
-    id: 'user-Hasna',
+    id: 'user-mentor',
     name: 'Hasna PK',
-    email: 'Mentor@leadflow.test',
+    email: 'mentor@leadflow.test',
     role: 'mentor',
     teamId: 'team-north',
   },
   {
-    id: 'user-sinan',
+    id: 'user-student',
     name: 'Sinan',
     email: 'student@leadflow.test',
     role: 'student',
@@ -88,7 +89,7 @@ export function createSeedAuthDb(): MockAuthDb {
     users: demoUsers.map((user) => ({
       id: user.id,
       name: user.name,
-      email: user.email,
+      email: normalizeEmail(user.email),
       teamId: user.teamId,
       password: DEMO_PASSWORD,
     })),

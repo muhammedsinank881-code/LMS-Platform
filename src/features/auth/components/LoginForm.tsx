@@ -54,9 +54,9 @@ export function LoginForm() {
 
       {import.meta.env.DEV ? (
         <p className="rounded-md bg-muted p-3 text-xs text-muted-foreground">
-          Demo accounts, password <code>password123</code>: <code>super@leadflow.test</code>,{' '}
-          <code>admin@leadflow.test</code>, <code>manager@leadflow.test</code>,{' '}
-          <code>teamlead@leadflow.test</code>, <code>sales@leadflow.test</code>
+          Demo accounts, password <code>password123</code>: <code>mentor@leadflow.test</code>,{' '}
+          <code>super@leadflow.test</code>, <code>admin@leadflow.test</code>,{' '}
+          <code>manager@leadflow.test</code>, <code>sales@leadflow.test</code>
         </p>
       ) : null}
     </form>

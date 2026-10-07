@@ -4,10 +4,13 @@ import { useFollowUpSummary } from '@/features/followups/hooks/use-followup-summ
 import { useInboxUnreadCount } from '@/features/inbox/hooks/use-conversations'
 import { usePermission } from '@/hooks/use-permission'
 import { cn } from '@/lib/cn'
+import { useAuthStore } from '@/store/auth-store'
 import { BrandMark } from './BrandMark'
 import { NAV_ITEMS } from './nav-config'
 import { SidebarNavItem } from './SidebarNavItem'
 import { WorkspaceSwitcher } from './WorkspaceSwitcher'
+
+import { MentorSidebar } from '@/components/mentor/MentorSidebar'
 
 export interface SidebarProps {
   collapsed: boolean
@@ -20,9 +23,22 @@ export interface SidebarProps {
 
 export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }: SidebarProps) {
   const { can } = usePermission()
+  const userRole = useAuthStore((state) => state.user?.role)
   const summary = useFollowUpSummary()
   const inboxUnread = useInboxUnreadCount()
-  const visibleItems = NAV_ITEMS.filter((item) => can(item.resource, 'view'))
+
+  if (userRole === 'mentor') {
+    return (
+      <MentorSidebar
+        collapsed={collapsed}
+        onNavigate={onNavigate}
+        className={className}
+      />
+    )
+  }
+
+  const rawItems = NAV_ITEMS
+  const visibleItems = rawItems.filter((item) => can(item.resource, 'view'))
   const ToggleIcon = collapsed ? PanelLeftOpen : PanelLeftClose
   const toggleLabel = collapsed ? 'Expand sidebar' : 'Collapse sidebar'
 
@@ -38,22 +54,34 @@ export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }:
       </div>
       <nav aria-label="Main" className="flex-1 overflow-y-auto px-3 py-2">
         <ul className="space-y-1">
-          {visibleItems.map((item) => (
-            <li key={item.resource}>
-              <SidebarNavItem
-                item={item}
-                collapsed={collapsed}
-                badge={
-                  item.resource === 'followups'
-                    ? summary.dueNow
-                    : item.resource === 'inbox'
-                      ? inboxUnread
-                      : 0
-                }
-                onNavigate={onNavigate}
-              />
-            </li>
-          ))}
+          {visibleItems.map((item, idx) => {
+            const showSectionHeader =
+              !collapsed &&
+              item.section &&
+              (idx === 0 || visibleItems[idx - 1]?.section !== item.section)
+
+            return (
+              <li key={`${item.resource}-${item.path}-${idx}`}>
+                {showSectionHeader ? (
+                  <div className="mt-4 mb-1.5 px-2.5 text-[10px] font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
+                    {item.section}
+                  </div>
+                ) : null}
+                <SidebarNavItem
+                  item={item}
+                  collapsed={collapsed}
+                  badge={
+                    item.resource === 'followups'
+                      ? summary.dueNow
+                      : item.resource === 'inbox'
+                        ? inboxUnread
+                        : 0
+                  }
+                  onNavigate={onNavigate}
+                />
+              </li>
+            )
+          })}
         </ul>
       </nav>
       {onToggleCollapsed ? (

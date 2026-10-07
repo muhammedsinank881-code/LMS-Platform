@@ -89,7 +89,7 @@ const ACME_PEOPLE: PersonSpec[] = [
 
   {
     id: 'user-mentor',
-    name: 'Demo Mentor',
+    name: 'Hasna PK',
     email: 'mentor@leadflow.test',
     role: 'mentor',
     team: null,
@@ -98,7 +98,7 @@ const ACME_PEOPLE: PersonSpec[] = [
   },
   {
     id: 'user-student',
-    name: 'Demo Student',
+    name: 'Sinan',
     email: 'student@leadflow.test',
     role: 'student',
     team: null,

@@ -1,16 +1,26 @@
 import {
+  Award,
   BarChart3,
+  Bell,
+  BookOpen,
   Building2,
+  Calendar,
   CalendarClock,
   CheckSquare,
+  FileText,
   Handshake,
+  Home,
   Inbox,
   KanbanSquare,
   LayoutDashboard,
   Megaphone,
+  MessageSquare,
   ScrollText,
   Settings,
+  User,
+  UserCheck,
   UserRound,
+  Users,
   UsersRound,
   Workflow,
   type LucideIcon,
@@ -24,6 +34,8 @@ export interface NavItem {
   icon: LucideIcon
   /** Used by the placeholder pages until the real module ships. */
   description: string
+  /** Logical sidebar section header */
+  section?: string
 }
 
 /** Sidebar order from the product spec. Each item is shown only if the role can `view` its resource. */
@@ -125,6 +137,94 @@ export const NAV_ITEMS: NavItem[] = [
     path: '/settings',
     icon: Settings,
     description: 'Workspace, profile and configuration.',
+  },
+]
+
+/** Specific sidebar items for Mentor role matching the unified navigation */
+export const MENTOR_NAV_ITEMS: NavItem[] = [
+  {
+    resource: 'dashboard',
+    label: 'Home',
+    path: '/mentor/home',
+    icon: Home,
+    description: 'Mentor overview, today schedule and quick actions.',
+  },
+  {
+    resource: 'reports',
+    label: 'My Classes',
+    path: '/mentor/classes',
+    icon: BookOpen,
+    description: 'Batch performance & module timeline.',
+  },
+  {
+    resource: 'team',
+    label: 'Students',
+    path: '/mentor/students',
+    icon: Users,
+    description: 'Track assigned student progress.',
+  },
+  {
+    resource: 'tasks',
+    label: 'Attendance',
+    path: '/mentor/attendance',
+    icon: UserCheck,
+    description: 'Log and track student attendance.',
+  },
+  {
+    resource: 'tasks',
+    label: 'Assignments',
+    path: '/mentor/assignments',
+    icon: FileText,
+    description: 'Create and review student assignments.',
+  },
+  {
+    resource: 'reports',
+    label: 'Exams',
+    path: '/mentor/exams',
+    icon: Award,
+    description: 'Schedule exams and manage grades.',
+  },
+  {
+    resource: 'reports',
+    label: 'Results',
+    path: '/mentor/results',
+    icon: BarChart3,
+    description: 'Student grade and progress analytics.',
+  },
+  {
+    resource: 'followups',
+    label: 'Timetable',
+    path: '/mentor/timetable',
+    icon: Calendar,
+    description: 'Weekly teaching timetable.',
+  },
+  {
+    resource: 'inbox',
+    label: 'Messages',
+    path: '/mentor/messages',
+    icon: MessageSquare,
+    description: 'Direct student communications.',
+  },
+  {
+    resource: 'inbox',
+    label: 'Notifications',
+    path: '/mentor/notifications',
+    icon: Bell,
+    description: 'System alerts and updates.',
+  },
+  {
+    resource: 'team',
+    label: 'Profile',
+    path: '/mentor/profile',
+    icon: User,
+    description: 'Mentor profile and credentials.',
+  },
+  {
+    resource: 'settings',
+    label: 'Settings',
+    path: '/mentor/settings',
+    icon: Settings,
+    description: 'Preferences and configuration.',
   },
 ]
 

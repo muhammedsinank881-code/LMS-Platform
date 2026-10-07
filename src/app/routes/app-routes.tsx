@@ -4,6 +4,8 @@ import { ProtectedRoute } from '../guards/ProtectedRoute'
 import { lazyPage } from '../lazy-route'
 import { RouteErrorBoundary } from '../RouteErrorBoundary'
 
+import { mentorRoutes } from '@/routes/mentorRoutes'
+
 /** Pages inside the AppShell. Each is a placeholder until its module is built. */
 const shellPages: RouteObject[] = [
   {
@@ -154,6 +156,7 @@ export const protectedRoutes: RouteObject[] = [
           'OnboardingPage',
         ),
       },
+      ...mentorRoutes,
       {
         element: <AppShell />,
         children: [
