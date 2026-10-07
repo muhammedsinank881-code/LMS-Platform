@@ -4,7 +4,6 @@ import { useFollowUpSummary } from '@/features/followups/hooks/use-followup-summ
 import { useInboxUnreadCount } from '@/features/inbox/hooks/use-conversations'
 import { usePermission } from '@/hooks/use-permission'
 import { cn } from '@/lib/cn'
-import { useAuthStore } from '@/store/auth-store'
 import { BrandMark } from './BrandMark'
 import { NAV_ITEMS } from './nav-config'
 import { SidebarNavItem } from './SidebarNavItem'
@@ -65,7 +64,7 @@ export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }:
         (idx === 0 || visibleItems[idx - 1]?.section !== item.section)
 
       return (
-        <li key={`${item.resource}-${item.path}-${idx}`}>
+        <li key={`${item.path}-${idx}`}>
           {showSectionHeader ? (
             <div className="mt-4 mb-1.5 px-2.5 text-[10px] font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
               {item.section}

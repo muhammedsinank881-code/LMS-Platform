@@ -4,6 +4,7 @@ export const REDIRECT_PARAM = 'redirect'
 
 export function getDefaultPathForRole(role?: string | null): string {
   if (role === 'mentor') return '/mentor/dashboard'
+  if (role === 'student') return '/student/dashboard'
   return DEFAULT_AUTHENTICATED_PATH
 }
 
