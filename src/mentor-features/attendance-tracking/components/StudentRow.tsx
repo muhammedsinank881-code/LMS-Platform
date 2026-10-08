@@ -85,6 +85,7 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
         >
           L
         </button>
+      </div>
     </Card>
   )
 }

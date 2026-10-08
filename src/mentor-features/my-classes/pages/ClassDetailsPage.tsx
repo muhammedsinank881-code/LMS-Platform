@@ -3,7 +3,6 @@ import {
   ArrowLeft,
   BookOpen,
   Calendar,
-  CheckCircle2,
   Clock,
   Code2,
   GraduationCap,

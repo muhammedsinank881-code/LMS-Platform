@@ -1,5 +1,4 @@
-import { Bell, Calendar } from 'lucide-react'
-import { Avatar, Badge, Button, Card, CardContent } from '@/components/ui'
+import { Avatar, Badge, Card, CardContent } from '@/components/ui'
 
 interface MentorWelcomeBannerProps {
   name: string

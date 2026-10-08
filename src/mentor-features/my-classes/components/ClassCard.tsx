@@ -1,7 +1,6 @@
 import {
   ArrowRight,
   BookOpen,
-  CheckCircle2,
   Clock,
   Code2,
   Database,

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CheckCircle2, FileText, Upload, X } from 'lucide-react'
+import { FileText, Upload, X } from 'lucide-react'
 import { Button, Input, Label, Textarea } from '@/components/ui'
 import type { LearningMaterial, MaterialStatus } from '../types'
 

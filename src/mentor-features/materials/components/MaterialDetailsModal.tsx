@@ -1,15 +1,11 @@
 import { useState } from 'react'
 import {
-  Calendar,
   CheckCircle2,
   Copy,
   Download,
   FileText,
-  Globe,
   PlayCircle,
   Trash2,
-  User,
-  Video,
 } from 'lucide-react'
 import {
   Badge,

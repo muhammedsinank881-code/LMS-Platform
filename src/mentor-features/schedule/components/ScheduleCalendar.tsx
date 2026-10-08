@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { ChevronLeft, ChevronRight, MapPin, Video } from 'lucide-react'
 import { Badge, Card } from '@/components/ui'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -8,7 +7,7 @@ interface ScheduleCalendarProps {
   classes: ScheduledClass[]
   viewMode: CalendarViewMode
   onViewModeChange: (mode: CalendarViewMode) => void
-  currentDate: string
+  currentDate?: string
   onDateChange: (date: string) => void
   onSelectClass: (c: ScheduledClass) => void
 }
@@ -17,7 +16,6 @@ export function ScheduleCalendar({
   classes,
   viewMode,
   onViewModeChange,
-  currentDate,
   onDateChange,
   onSelectClass,
 }: ScheduleCalendarProps) {
@@ -31,9 +29,6 @@ export function ScheduleCalendar({
     { dayName: 'Sat', dateNum: '10', fullDate: '2026-10-10' },
     { dayName: 'Sun', dateNum: '11', fullDate: '2026-10-11' },
   ]
-
-  // Time slots for Day/Week view grid
-  const timeSlots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM']
 
   const getStatusBadgeTone = (status: ScheduledClass['status']) => {
     switch (status) {
