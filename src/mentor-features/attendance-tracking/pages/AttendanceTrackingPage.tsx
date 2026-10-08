@@ -195,7 +195,7 @@ export function AttendanceTrackingPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 py-2 px-2 sm:px-4 pb-12 text-[#172033] dark:text-foreground">
+    <div className="space-y-6 text-foreground">
       {/* 1. Page Header */}
       <AttendanceHeader
         onBack={() => navigate('/mentor/dashboard')}

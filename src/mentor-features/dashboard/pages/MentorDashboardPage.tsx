@@ -137,7 +137,7 @@ const MOCK_ANNOUNCEMENTS: AnnouncementItem[] = [
 
 export function MentorDashboardPage() {
   return (
-    <div className="space-y-4 p-4 sm:p-5 max-w-[1500px] mx-auto min-h-screen">
+    <div className="space-y-6">
       {/* 1. Mentor Welcome Header */}
       <MentorWelcomeBanner
         name="Prof. Alex Morgan"

@@ -27,7 +27,7 @@ export function AnnouncementsCard({ announcements }: AnnouncementsCardProps) {
           >
             <CardContent className="p-3 flex items-center justify-between gap-2.5">
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400 shrink-0">
+                <div className="p-2 rounded-lg bg-primary-subtle text-primary shrink-0">
                   <Megaphone className="size-4" />
                 </div>
                 <div className="space-y-0.5 min-w-0">

@@ -3,6 +3,7 @@ import { Menu, Plus, Search } from 'lucide-react'
 import { Button, Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from '@/components/ui'
 import { usePermission } from '@/hooks/use-permission'
 import { getModifierKeyLabel } from '@/lib/platform'
+import { useAuthStore } from '@/store/auth-store'
 import { useUiStore } from '@/store/ui-store'
 import { BrandMark } from './BrandMark'
 import { NotificationBell } from './NotificationBell'
@@ -15,6 +16,7 @@ export interface TopbarProps {
 export function Topbar({ onOpenNav }: TopbarProps) {
   const setCommandPaletteOpen = useUiStore((state) => state.setCommandPaletteOpen)
   const openFollowUp = useUiStore((state) => state.openFollowUp)
+  const userRole = useAuthStore((state) => state.user?.role)
   const { can } = usePermission()
   const navigate = useNavigate()
   const shortcut = `${getModifierKeyLabel()} K`
@@ -57,7 +59,21 @@ export function Topbar({ onOpenNav }: TopbarProps) {
         >
           <Search aria-hidden="true" />
         </Button>
-        {can('leads', 'create') || can('followups', 'create') ? (
+        {userRole === 'mentor' ? (
+          <Dropdown>
+            <DropdownTrigger asChild>
+              <Button aria-label="Add">
+                <Plus aria-hidden="true" />
+                <span className="max-sm:hidden">Add</span>
+              </Button>
+            </DropdownTrigger>
+            <DropdownContent align="end">
+              <DropdownItem onSelect={() => navigate('/mentor/classes')}>Add class</DropdownItem>
+              <DropdownItem onSelect={() => navigate('/mentor/assignments')}>Create assignment</DropdownItem>
+              <DropdownItem onSelect={() => navigate('/mentor/exams')}>Create exam</DropdownItem>
+            </DropdownContent>
+          </Dropdown>
+        ) : can('leads', 'create') || can('followups', 'create') ? (
           <Dropdown>
             <DropdownTrigger asChild>
               <Button aria-label="Add">

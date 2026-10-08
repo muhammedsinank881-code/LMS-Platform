@@ -1,4 +1,5 @@
 import { Calendar as CalendarIcon, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Card } from '@/components/ui/card'
 import type { ClassCohortOption } from '../types'
 
 interface ClassDateSelectorProps {
@@ -23,13 +24,13 @@ export function ClassDateSelector({
   formatDateDisplay,
 }: ClassDateSelectorProps) {
   return (
-    <div className="bg-white dark:bg-card border border-[#E5E7EB] dark:border-border rounded-xl p-4 sm:p-5">
+    <Card className="p-4 sm:p-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 items-center">
         {/* Class Selector */}
         <div className="space-y-1.5">
           <label
             htmlFor="class-select"
-            className="text-xs font-semibold text-[#64748B] dark:text-slate-400 block"
+            className="text-xs font-semibold text-muted-foreground block"
           >
             Class
           </label>
@@ -38,7 +39,7 @@ export function ClassDateSelector({
               id="class-select"
               value={selectedClass}
               onChange={(e) => onClassChange(e.target.value)}
-              className="w-full bg-[#F8FAFC] dark:bg-slate-900 border border-[#E5E7EB] dark:border-border rounded-lg px-3.5 py-2 text-xs sm:text-sm font-medium text-[#172033] dark:text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] pr-9 transition-colors h-10"
+              className="w-full bg-surface border border-input rounded-md px-3.5 py-2 text-sm font-medium text-foreground appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring pr-9 transition-colors h-10"
             >
               {classes.map((cls) => (
                 <option key={cls.id} value={cls.id}>
@@ -46,39 +47,40 @@ export function ClassDateSelector({
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 size-4 text-[#64748B] pointer-events-none" />
+            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
           </div>
         </div>
 
         {/* Date Navigator */}
         <div className="space-y-1.5">
-          <span className="text-xs font-semibold text-[#64748B] dark:text-slate-400 block">
+          <span className="text-xs font-semibold text-muted-foreground block">
             Date
           </span>
-          <div className="flex items-center justify-between bg-[#F8FAFC] dark:bg-slate-900 border border-[#E5E7EB] dark:border-border rounded-lg px-2.5 py-1.5 text-xs sm:text-sm h-10">
+          <div className="flex items-center justify-between bg-surface border border-input rounded-md px-2.5 py-1.5 text-sm h-10">
             <button
               type="button"
               onClick={onPrevDay}
-              className="p-1 rounded-md text-[#64748B] hover:text-[#172033] dark:hover:text-foreground hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
               aria-label="Previous day"
             >
-              <ChevronLeft className="size-4" />
+              <ChevronLeft className="h-4 w-4" />
             </button>
-            <div className="flex items-center gap-2 font-semibold text-[#172033] dark:text-foreground text-xs sm:text-sm">
-              <CalendarIcon className="size-4 text-[#4F46E5]" />
+            <div className="flex items-center gap-2 font-semibold text-foreground text-sm">
+              <CalendarIcon className="h-4 w-4 text-primary" />
               <span>{formatDateDisplay(currentDate)}</span>
             </div>
             <button
               type="button"
               onClick={onNextDay}
-              className="p-1 rounded-md text-[#64748B] hover:text-[#172033] dark:hover:text-foreground hover:bg-slate-200/50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
               aria-label="Next day"
             >
-              <ChevronRight className="size-4" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
+

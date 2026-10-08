@@ -15,8 +15,8 @@ export function QuickActionsGrid({ actions }: QuickActionsGridProps) {
       case 'attendance':
         return {
           icon: UserCheck,
-          bg: 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400',
-          hoverBorder: 'hover:border-emerald-500/40',
+          bg: 'bg-primary-subtle text-primary',
+          hoverBorder: 'hover:border-primary/40',
           path: '/mentor/attendance-tracking',
         }
       case 'assignment':
@@ -24,21 +24,21 @@ export function QuickActionsGrid({ actions }: QuickActionsGridProps) {
           icon: FilePlus,
           bg: 'bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400',
           hoverBorder: 'hover:border-blue-500/40',
-          path: '/mentor/student-submissions-code-reviews',
+          path: '/mentor/assignments/create',
         }
       case 'upload':
         return {
           icon: UploadCloud,
           bg: 'bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400',
           hoverBorder: 'hover:border-amber-500/40',
-          path: '/mentor/helpdesk-resource-hub',
+          path: '/mentor/materials?upload=true',
         }
       case 'schedule':
         return {
           icon: CalendarPlus,
           bg: 'bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400',
           hoverBorder: 'hover:border-purple-500/40',
-          path: '/mentor/schedule-1-on-1-sessions',
+          path: '/mentor/schedule?open=true',
         }
     }
   }
