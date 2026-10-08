@@ -7,16 +7,20 @@ interface ClassHeaderProps {
 }
 
 export function ClassHeader({ onOpenAddModal }: ClassHeaderProps) {
-
   return (
     <PageHeader
       title="My Classes"
       description="View and manage the classes assigned to you"
       breadcrumbs={[
-        { label: 'Mentor', to: '/mentor' },
+        { label: 'Mentor', to: '/mentor/dashboard' },
         { label: 'My Classes' },
       ]}
-      
+      actions={
+        <Button variant="primary" onClick={onOpenAddModal}>
+          <Plus className="h-4 w-4" /> Add Class
+        </Button>
+      }
     />
   )
 }
+

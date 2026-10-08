@@ -31,14 +31,14 @@ export function QuickActionsGrid({ actions }: QuickActionsGridProps) {
           icon: UploadCloud,
           bg: 'bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400',
           hoverBorder: 'hover:border-amber-500/40',
-          path: '/mentor/helpdesk-resource-hub',
+          path: '/mentor/materials?upload=true',
         }
       case 'schedule':
         return {
           icon: CalendarPlus,
           bg: 'bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400',
           hoverBorder: 'hover:border-purple-500/40',
-          path: '/mentor/schedule-1-on-1-sessions',
+          path: '/mentor/schedule?open=true',
         }
     }
   }

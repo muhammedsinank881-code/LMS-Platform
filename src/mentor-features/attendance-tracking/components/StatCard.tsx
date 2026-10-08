@@ -1,7 +1,10 @@
+import { Card } from '@/components/ui/card'
+
 interface StatCardProps {
   label: string
   value: number
-  colorClass: string
+  tone?: 'success' | 'destructive' | 'warning' | 'neutral'
+  colorClass?: string
   bgClass?: string
   borderClass?: string
 }
@@ -9,20 +12,26 @@ interface StatCardProps {
 export function StatCard({
   label,
   value,
-  colorClass,
-  bgClass = 'bg-white dark:bg-card',
-  borderClass = 'border-[#E5E7EB] dark:border-border',
+  tone = 'neutral',
 }: StatCardProps) {
+  const textColor =
+    tone === 'success'
+      ? 'text-success'
+      : tone === 'destructive'
+      ? 'text-destructive'
+      : tone === 'warning'
+      ? 'text-warning'
+      : 'text-foreground'
+
   return (
-    <div
-      className={`rounded-xl ${bgClass} border ${borderClass} p-4 sm:p-5 text-center flex flex-col justify-center space-y-1 transition-all`}
-    >
-      <div className={`text-xl sm:text-2xl font-bold tracking-tight ${colorClass} leading-tight`}>
+    <Card className="p-4 sm:p-5 text-center flex flex-col justify-center space-y-1">
+      <div className={`text-xl sm:text-2xl font-semibold tracking-tight leading-tight ${textColor}`}>
         {value}
       </div>
-      <div className="text-xs font-medium text-[#64748B] dark:text-slate-400">
+      <div className="text-xs font-medium text-muted-foreground">
         {label}
       </div>
-    </div>
+    </Card>
   )
 }
+

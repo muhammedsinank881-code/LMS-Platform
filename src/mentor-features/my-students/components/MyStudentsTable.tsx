@@ -14,21 +14,21 @@ export function MyStudentsTable({
   return (
     <>
       {/* Desktop Table View */}
-      <div className="hidden sm:block bg-white dark:bg-card border border-[#E2E8F0] dark:border-border rounded-xl overflow-hidden shadow-2xs">
+      <div className="hidden sm:block bg-surface border border-border rounded-md overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left border-collapse text-sm">
             <thead>
-              <tr className="bg-[#F8FAFC] dark:bg-slate-900/60 border-b border-[#E2E8F0] dark:border-border text-[11px] font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
-                <th className="py-3 px-4">STUDENT</th>
+              <tr className="bg-muted/50 border-b border-border text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <th className="py-3 px-4">Student</th>
                 <th className="py-3 px-4">ID</th>
-                <th className="py-3 px-4">CLASS</th>
-                <th className="py-3 px-4">EMAIL</th>
-                <th className="py-3 px-4">ATTENDANCE</th>
-                <th className="py-3 px-4">STATUS</th>
-                <th className="py-3 px-4 text-right">ACTION</th>
+                <th className="py-3 px-4">Class</th>
+                <th className="py-3 px-4">Email</th>
+                <th className="py-3 px-4">Attendance</th>
+                <th className="py-3 px-4">Status</th>
+                <th className="py-3 px-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-border font-medium">
               {students.map((student) => (
                 <MyStudentRow
                   key={student.id}
@@ -54,3 +54,4 @@ export function MyStudentsTable({
     </>
   )
 }
+

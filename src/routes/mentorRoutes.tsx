@@ -52,6 +52,14 @@ export const mentorRoutes: RouteObject[] = [
         lazy: lazyPage(() => import('@/mentor-features/attendance-tracking/pages/AttendanceTrackingPage'), 'AttendanceTrackingPage'),
       },
       {
+        path: 'materials',
+        lazy: lazyPage(() => import('@/mentor-features/materials/pages/MaterialsPage'), 'MaterialsPage'),
+      },
+      {
+        path: 'materials/upload',
+        lazy: lazyPage(() => import('@/mentor-features/materials/pages/MaterialsPage'), 'MaterialsPage'),
+      },
+      {
         path: 'assignments',
         lazy: lazyPage(() => import('@/mentor-features/assignments/pages/AssignmentsPage'), 'AssignmentsPage'),
       },
@@ -121,12 +129,12 @@ export const mentorRoutes: RouteObject[] = [
         ),
       },
       {
+        path: 'schedule',
+        lazy: lazyPage(() => import('@/mentor-features/schedule/pages/SchedulePage'), 'SchedulePage'),
+      },
+      {
         path: 'schedule-1-on-1-sessions',
-        lazy: lazyPage(
-          () =>
-            import('@/mentor-features/schedule-1-on-1-sessions/pages/Schedule1On1SessionsPage'),
-          'Schedule1On1SessionsPage',
-        ),
+        lazy: lazyPage(() => import('@/mentor-features/schedule/pages/SchedulePage'), 'SchedulePage'),
       },
       {
         path: 'helpdesk-resource-hub',

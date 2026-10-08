@@ -13,7 +13,7 @@ import {
   Users,
 } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button, Card } from '@/components/ui'
+import { Badge, Button, Card, Input } from '@/components/ui'
 import { useAuthStore } from '@/store/auth-store'
 import { MOCK_MENTOR_CLASSES } from '../mockData'
 
@@ -24,9 +24,7 @@ export function ClassDetailsPage() {
 
   const [studentSearch, setStudentSearch] = useState('')
 
-  // Find class by route param or fallback to first class
   const cls = MOCK_MENTOR_CLASSES.find((c) => c.id === classId) || MOCK_MENTOR_CLASSES[0]
-
   const isActive = cls.status === 'active'
 
   const filteredStudents = cls.enrolledStudents.filter((st) => {
@@ -48,24 +46,15 @@ export function ClassDetailsPage() {
           onClick={() => navigate('/mentor/classes')}
           className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
-          <ArrowLeft className="size-4" />
+          <ArrowLeft className="h-4 w-4" />
           <span>Back to My Classes</span>
         </button>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 text-xs font-semibold rounded-md bg-muted font-mono text-foreground border border-border">
-            {cls.courseCode}
-          </span>
-          <span
-            className={`px-3 py-1 text-xs font-semibold rounded-full flex items-center gap-1.5 ${
-              isActive
-                ? 'bg-success/10 text-success'
-                : 'bg-muted text-muted-foreground'
-            }`}
-          >
-            <span className={`size-2 rounded-full ${isActive ? 'bg-success animate-pulse' : 'bg-muted-foreground'}`} />
+          <Badge tone="neutral" className="font-mono">{cls.courseCode}</Badge>
+          <Badge tone={isActive ? 'success' : 'neutral'} dot={isActive}>
             {isActive ? 'Active Class' : 'Completed Class'}
-          </span>
+          </Badge>
         </div>
       </div>
 
@@ -73,11 +62,11 @@ export function ClassDetailsPage() {
       <Card className="p-6 space-y-4">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-lg bg-primary-subtle text-primary shrink-0">
-              <Code2 className="size-8" />
+            <div className="p-3 rounded-md bg-primary-subtle text-primary shrink-0">
+              <Code2 className="h-7 w-7" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              <h1 className="text-2xl font-semibold tracking-tight text-foreground">
                 {cls.title}
               </h1>
               <p className="text-sm text-muted-foreground mt-1 font-medium">
@@ -91,9 +80,8 @@ export function ClassDetailsPage() {
               type="button"
               variant="primary"
               onClick={() => navigate('/mentor/attendance')}
-              className="flex items-center gap-2"
             >
-              <UserCheck className="size-4" />
+              <UserCheck className="h-4 w-4" />
               <span>Take Attendance</span>
             </Button>
           </div>
@@ -107,40 +95,40 @@ export function ClassDetailsPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
           <div className="p-3 rounded-md bg-muted border border-border">
             <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-              <Users className="size-3.5 text-primary" />
+              <Users className="h-3.5 w-3.5 text-primary" />
               <span>Enrolled Students</span>
             </div>
-            <p className="text-xl font-bold text-foreground mt-1">
+            <p className="text-xl font-semibold text-foreground mt-1">
               {cls.studentsCount}
             </p>
           </div>
 
           <div className="p-3 rounded-md bg-muted border border-border">
             <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-              <MapPin className="size-3.5 text-primary" />
+              <MapPin className="h-3.5 w-3.5 text-primary" />
               <span>Room Location</span>
             </div>
-            <p className="text-xl font-bold text-foreground mt-1">
+            <p className="text-xl font-semibold text-foreground mt-1">
               {cls.room}
             </p>
           </div>
 
           <div className="p-3 rounded-md bg-muted border border-border">
             <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-              <GraduationCap className="size-3.5 text-primary" />
+              <GraduationCap className="h-3.5 w-3.5 text-primary" />
               <span>Attendance Rate</span>
             </div>
-            <p className="text-xl font-bold text-foreground mt-1">
+            <p className="text-xl font-semibold text-foreground mt-1">
               {cls.attendanceRate}%
             </p>
           </div>
 
           <div className="p-3 rounded-md bg-muted border border-border">
             <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-              <Clock className="size-3.5 text-primary" />
+              <Clock className="h-3.5 w-3.5 text-primary" />
               <span>Syllabus Progress</span>
             </div>
-            <p className="text-xl font-bold text-foreground mt-1">
+            <p className="text-xl font-semibold text-foreground mt-1">
               {cls.syllabusProgress}%
             </p>
           </div>
@@ -150,22 +138,22 @@ export function ClassDetailsPage() {
       {/* Schedule & Mentor Information Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Card className="p-5 space-y-3">
-          <div className="flex items-center gap-2 font-semibold text-foreground">
-            <Calendar className="size-4 text-primary" />
+          <div className="flex items-center gap-2 font-semibold text-foreground text-sm">
+            <Calendar className="h-4 w-4 text-primary" />
             <span>Class Schedule</span>
           </div>
-          <p className="text-sm font-semibold text-foreground bg-muted p-3 rounded-md border border-border">
+          <p className="text-sm font-medium text-foreground bg-muted p-3 rounded-md border border-border">
             {cls.schedule}
           </p>
         </Card>
 
         <Card className="p-5 space-y-3">
-          <div className="flex items-center gap-2 font-semibold text-foreground">
-            <BookOpen className="size-4 text-primary" />
+          <div className="flex items-center gap-2 font-semibold text-foreground text-sm">
+            <BookOpen className="h-4 w-4 text-primary" />
             <span>Assigned Instructor / Mentor</span>
           </div>
           <div className="flex items-center gap-3 bg-muted p-3 rounded-md border border-border">
-            <div className="size-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
+            <div className="h-9 w-9 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
               {(user?.name || 'Ms. Husna').slice(0, 2).toUpperCase()}
             </div>
             <div>
@@ -184,7 +172,7 @@ export function ClassDetailsPage() {
       <Card className="p-5 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h3 className="text-lg font-semibold text-foreground">
+            <h3 className="text-base font-semibold text-foreground">
               Enrolled Student Roster
             </h3>
             <p className="text-xs text-muted-foreground">
@@ -192,23 +180,22 @@ export function ClassDetailsPage() {
             </p>
           </div>
 
-          {/* Student Search */}
-          <div className="relative w-full sm:w-64">
-            <Search className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
-            <input
-              type="text"
+          <div className="w-full sm:w-64">
+            <Input
+              type="search"
+              size="sm"
+              leftAdornment={<Search className="h-4 w-4" />}
               value={studentSearch}
               onChange={(e) => setStudentSearch(e.target.value)}
               placeholder="Search roster..."
-              className="w-full h-9 pl-9 pr-3 bg-surface border border-input rounded-md text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
         </div>
 
         {/* Student Table */}
-        <div className="overflow-x-auto rounded-md border border-border">
+        <div className="overflow-x-auto rounded-md border border-border bg-surface">
           <table className="w-full text-left text-sm">
-            <thead className="bg-muted/50 text-xs uppercase font-medium text-muted-foreground border-b border-border">
+            <thead className="bg-muted/50 text-xs uppercase font-semibold text-muted-foreground border-b border-border">
               <tr>
                 <th className="p-3">Roll Number</th>
                 <th className="p-3">Student Name</th>
@@ -243,17 +230,17 @@ export function ClassDetailsPage() {
                     </td>
                     <td className="p-3 text-right">
                       {st.statusToday === 'present' ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-success bg-success/10 px-2.5 py-0.5 rounded-full">
-                          <CheckCircle2 className="size-3" /> Present
-                        </span>
+                        <Badge tone="success" size="sm" dot>
+                          Present
+                        </Badge>
                       ) : st.statusToday === 'late' ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-warning bg-warning/15 px-2.5 py-0.5 rounded-full">
+                        <Badge tone="warning" size="sm">
                           Late
-                        </span>
+                        </Badge>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-destructive bg-destructive/10 px-2.5 py-0.5 rounded-full">
+                        <Badge tone="destructive" size="sm">
                           Absent
-                        </span>
+                        </Badge>
                       )}
                     </td>
                   </tr>
@@ -275,3 +262,4 @@ export function ClassDetailsPage() {
 
 export const ClassDetails = ClassDetailsPage
 export default ClassDetailsPage
+
