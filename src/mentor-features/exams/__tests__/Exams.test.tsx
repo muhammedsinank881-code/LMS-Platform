@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { ExamsPage as Exams } from '../pages/ExamsPage'
@@ -27,7 +28,7 @@ describe('Mentor Exams Page', () => {
     expect(screen.getByRole('heading', { name: /Python Programming Basics/i })).toBeInTheDocument()
   })
 
-  it('filters exams by tab', () => {
+  it('filters exams by tab', async () => {
     render(
       <MemoryRouter>
         <Exams />
@@ -35,8 +36,8 @@ describe('Mentor Exams Page', () => {
     )
 
     // Click 'Upcoming' tab
-    const upcomingTab = screen.getByRole('button', { name: /^Upcoming/i })
-    fireEvent.click(upcomingTab)
+    const upcomingTab = screen.getByRole('tab', { name: /^Upcoming/i })
+    await userEvent.click(upcomingTab)
 
     // Web Technologies is upcoming
     expect(screen.getByRole('heading', { name: /Web Technologies/i })).toBeInTheDocument()

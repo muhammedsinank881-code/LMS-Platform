@@ -91,7 +91,7 @@ export function ExamDetailsPage() {
               <Award className="size-8" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground">
                 {exam.title}
               </h1>
               <p className="text-sm text-muted-foreground mt-1 font-medium">

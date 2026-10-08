@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { MyClassesPage as MyClasses } from '../pages/MyClassesPage'
@@ -26,7 +27,7 @@ describe('MyClasses Page', () => {
     expect(screen.getByText(/Web Development Fundamentals/i)).toBeInTheDocument()
   })
 
-  it('filters classes by active tab', () => {
+  it('filters classes by active tab', async () => {
     render(
       <MemoryRouter>
         <MyClasses />
@@ -34,8 +35,8 @@ describe('MyClasses Page', () => {
     )
 
     // Click 'Active' filter tab
-    const activeTab = screen.getByRole('button', { name: /^Active/i })
-    fireEvent.click(activeTab)
+    const activeTab = screen.getByRole('tab', { name: /^Active/i })
+    await userEvent.click(activeTab)
 
     // Active class should be visible
     expect(screen.getByText(/Web Development Fundamentals/i)).toBeInTheDocument()

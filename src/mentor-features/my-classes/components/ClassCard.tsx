@@ -1,7 +1,6 @@
 import {
   ArrowRight,
   BookOpen,
-  CheckCircle2,
   Clock,
   Code2,
   Database,
@@ -11,7 +10,7 @@ import {
   Users,
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
-import { Card, Tooltip } from '@/components/ui'
+import { Badge, Card, Tooltip } from '@/components/ui'
 import type { MentorClass } from '../types'
 
 interface ClassCardProps {
@@ -21,7 +20,6 @@ interface ClassCardProps {
 export function ClassCard({ cls }: ClassCardProps) {
   const navigate = useNavigate()
 
-  // Helper to get category icon and styled accent
   const getIconConfig = (type: MentorClass['iconType']) => {
     switch (type) {
       case 'algo':
@@ -62,12 +60,12 @@ export function ClassCard({ cls }: ClassCardProps) {
       tabIndex={0}
       className="group relative flex flex-col justify-between p-5 cursor-pointer select-none"
     >
-      {/* Top Header Row: Icon + Title/Program + Code Badge */}
+      {/* Header Row: Icon + Title/Program + Code Badge */}
       <div className="space-y-3">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className={`p-2.5 rounded-lg ${iconConfig.bg} shrink-0 transition-transform group-hover:scale-105`}>
-              <Icon className="size-5" />
+            <div className={`p-2.5 rounded-md ${iconConfig.bg} shrink-0 transition-transform group-hover:scale-105`}>
+              <Icon className="h-5 w-5" />
             </div>
             <div className="min-w-0 flex-1">
               <Tooltip content={cls.title} side="top">
@@ -81,55 +79,43 @@ export function ClassCard({ cls }: ClassCardProps) {
             </div>
           </div>
 
-          {/* Course Code Badge */}
-          <span className="shrink-0 px-2.5 py-1 text-xs font-semibold rounded-md bg-muted text-foreground border border-border font-mono">
+          <Badge tone="neutral" size="sm" className="font-mono shrink-0">
             {cls.courseCode}
-          </span>
+          </Badge>
         </div>
 
         {/* Student Count & Room Info Row */}
         <div className="pt-2 flex items-center justify-between text-xs text-muted-foreground font-medium border-t border-border">
           <div className="flex items-center gap-1.5">
-            <Users className="size-4 text-primary" />
+            <Users className="h-4 w-4 text-primary" />
             <span className="text-foreground font-semibold">{cls.studentsCount} Students</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <MapPin className="size-4 text-muted-foreground" />
+            <MapPin className="h-4 w-4 text-muted-foreground" />
             <span>{cls.room}</span>
           </div>
         </div>
       </div>
 
-      {/* Card Footer: Semester + Status Indicator + Details Arrow */}
+      {/* Card Footer: Semester + Status Indicator + Arrow */}
       <div className="mt-4 pt-3 border-t border-border flex items-center justify-between gap-2 text-xs">
-        {/* Semester & Status details */}
         <div className="flex items-center gap-2 text-muted-foreground font-medium truncate">
-          <Clock className="size-3.5 shrink-0 text-muted-foreground" />
+          <Clock className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
           <span className="truncate">{cls.semester}</span>
         </div>
 
-        {/* Right Status Dot & Navigation Action */}
         <div className="flex items-center gap-2 shrink-0">
-          <div className="flex items-center gap-1.5 font-semibold text-xs">
-            {isActive ? (
-              <span className="flex items-center gap-1.5 text-success">
-                <span className="size-2 rounded-full bg-success animate-pulse" />
-                Active
-              </span>
-            ) : (
-              <span className="flex items-center gap-1.5 text-muted-foreground">
-                <CheckCircle2 className="size-3.5 text-muted-foreground" />
-                Completed
-              </span>
-            )}
-          </div>
+          <Badge tone={isActive ? 'success' : 'neutral'} size="sm" dot={isActive}>
+            {isActive ? 'Active' : 'Completed'}
+          </Badge>
 
           <div className="p-1 rounded-md text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all">
-            <ArrowRight className="size-4" />
+            <ArrowRight className="h-4 w-4" />
           </div>
         </div>
       </div>
     </Card>
   )
 }
+

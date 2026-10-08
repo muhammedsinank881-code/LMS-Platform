@@ -1,8 +1,16 @@
+import { PageHeader } from '@/components/layout/PageHeader'
+
 export function Schedule1On1SessionsPage() {
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">1-on-1 Sessions</h1>
-      <p className="text-gray-600">Schedule, manage, and conduct 1-on-1 mentoring sessions with students.</p>
+    <div className="space-y-6 text-foreground">
+      <PageHeader
+        title="1-on-1 Sessions"
+        description="Schedule, manage, and conduct 1-on-1 mentoring sessions with students."
+        breadcrumbs={[
+          { label: 'Dashboard', to: '/mentor/dashboard' },
+          { label: '1-on-1 Sessions' },
+        ]}
+      />
     </div>
   )
 }

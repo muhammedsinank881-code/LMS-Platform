@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Search, Send } from 'lucide-react'
 import { Button, Card } from '@/components/ui'
+import { Input } from '@/components/ui/input'
 import { PageHeader } from '@/components/layout/PageHeader'
 
 interface MessageThread {
@@ -65,12 +66,11 @@ export function MessagesPage() {
       <Card className="p-0 overflow-hidden grid grid-cols-1 md:grid-cols-3 min-h-[500px]">
         {/* Threads List */}
         <div className="border-r border-border p-3 space-y-2">
-          <div className="relative mb-2">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
-            <input
-              type="text"
+          <div className="mb-2">
+            <Input
+              type="search"
               placeholder="Search conversations..."
-              className="w-full pl-9 pr-3 py-1.5 bg-surface border border-input rounded-md text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              leftAdornment={<Search className="size-3.5" />}
             />
           </div>
 
@@ -132,18 +132,18 @@ export function MessagesPage() {
 
           {/* Composer */}
           <div className="p-3 bg-surface border-t border-border flex items-center gap-2">
-            <input
+            <Input
               type="text"
               placeholder="Type your message reply..."
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
-              className="flex-1 px-3 py-2 bg-surface border border-input rounded-md text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10"
+              className="flex-1"
             />
             <Button
               type="button"
               variant="primary"
               onClick={() => setReplyText('')}
-              className="h-10"
+              className="h-10 shrink-0"
             >
               <Send className="size-3.5 mr-1.5" />
               <span>Send</span>

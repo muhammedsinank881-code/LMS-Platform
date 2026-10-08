@@ -12,20 +12,15 @@ export function ExamHeader({ onOpenCreateModal }: ExamHeaderProps) {
       title="Exams"
       description="View and manage exams for your assigned classes"
       breadcrumbs={[
-        { label: 'Mentor', to: '/mentor' },
+        { label: 'Mentor', to: '/mentor/dashboard' },
         { label: 'Exams' },
       ]}
       actions={
-        <Button
-          type="button"
-          variant="primary"
-          onClick={onOpenCreateModal}
-          className="flex items-center gap-2"
-        >
-          <Plus className="size-4" />
-          <span>Create Exam</span>
+        <Button variant="primary" onClick={onOpenCreateModal}>
+          <Plus className="h-4 w-4" /> Create Exam
         </Button>
       }
     />
   )
 }
+

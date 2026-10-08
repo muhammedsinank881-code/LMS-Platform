@@ -20,14 +20,14 @@ export function ProfilePage() {
 
       {/* Header Profile Card */}
       <Card className="p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5">
-        <div className="w-20 h-20 rounded-full bg-primary-subtle text-primary text-2xl font-extrabold flex items-center justify-center border-2 border-primary/30 shrink-0">
+        <div className="w-20 h-20 rounded-full bg-primary-subtle text-primary text-xl font-bold flex items-center justify-center border-2 border-primary/30 shrink-0">
           {name.split(' ').map((n) => n[0]).join('').substring(0, 2).toUpperCase()}
         </div>
 
         <div className="min-w-0 flex-1 text-center sm:text-left space-y-1">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight">{name}</h1>
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">{name}</h2>
               <p className="text-xs sm:text-sm font-semibold text-primary">
                 Senior Teacher • Computer Science Department
               </p>

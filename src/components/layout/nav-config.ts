@@ -174,6 +174,14 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
   },
   {
     resource: 'tasks',
+    label: 'Learning Materials',
+    path: '/mentor/materials',
+    icon: FileText,
+    description: 'Upload and manage notes, PDFs, and video classes.',
+    section: 'ACADEMICS',
+  },
+  {
+    resource: 'tasks',
     label: 'Assignments',
     path: '/mentor/assignments',
     icon: FileText,
@@ -202,6 +210,14 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/timetable',
     icon: Calendar,
     description: 'Weekly teaching timetable.',
+    section: 'ACADEMICS',
+  },
+  {
+    resource: 'followups',
+    label: 'Schedule & Classes',
+    path: '/mentor/schedule',
+    icon: CalendarClock,
+    description: 'Schedule, manage, and track upcoming classes.',
     section: 'ACADEMICS',
   },
   {

@@ -1,4 +1,5 @@
 import { ChevronDown, Search } from 'lucide-react'
+import { Input } from '@/components/ui'
 
 interface MyStudentsFiltersProps {
   searchQuery: string
@@ -25,21 +26,20 @@ export function MyStudentsFilters({
 }: MyStudentsFiltersProps) {
   return (
     <div className="space-y-3">
-      {/* Search Input & Desktop Dropdowns */}
+      {/* Search Input & Dropdowns */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Prominent Search Input */}
-        <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-[#94A3B8]" />
-          <input
-            type="text"
+        <div className="flex-1">
+          <Input
+            type="search"
+            leftAdornment={<Search className="h-4 w-4" />}
             placeholder="Search by name, student ID, class, or email..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-10 pr-3.5 py-2 bg-surface border border-input rounded-md text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring h-10 transition-colors"
           />
         </div>
 
-        {/* Desktop Dropdown Filters */}
+        {/* Dropdown Filters */}
         <div className="hidden sm:flex items-center gap-2 shrink-0">
           {/* Class Filter */}
           <div className="relative">
@@ -56,7 +56,7 @@ export function MyStudentsFilters({
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
           </div>
 
           {/* Attendance Filter */}
@@ -72,7 +72,7 @@ export function MyStudentsFilters({
               <option value="medium">Medium (75% - 89%)</option>
               <option value="low">Low (&lt;75%)</option>
             </select>
-            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
           </div>
 
           {/* Status Filter */}
@@ -88,7 +88,7 @@ export function MyStudentsFilters({
               <option value="late">Late</option>
               <option value="absent">Absent</option>
             </select>
-            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ export function MyStudentsFilters({
           onClick={() => onClassChange('all')}
           className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
             selectedClass === 'all'
-              ? 'bg-primary text-primary-foreground shadow-2xs'
+              ? 'bg-primary text-primary-foreground'
               : 'bg-surface border border-border text-muted-foreground'
           }`}
         >
@@ -113,7 +113,7 @@ export function MyStudentsFilters({
             onClick={() => onClassChange(cls)}
             className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors ${
               selectedClass === cls
-                ? 'bg-primary text-primary-foreground shadow-2xs'
+                ? 'bg-primary text-primary-foreground'
                 : 'bg-surface border border-border text-muted-foreground'
             }`}
           >
@@ -124,3 +124,4 @@ export function MyStudentsFilters({
     </div>
   )
 }
+

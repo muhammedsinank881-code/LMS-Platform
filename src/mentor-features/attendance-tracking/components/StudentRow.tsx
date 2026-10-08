@@ -1,3 +1,4 @@
+import { Card } from '@/components/ui/card'
 import type { AttendanceStatus, StudentAttendanceRecord } from '../types'
 
 interface StudentRowProps {
@@ -14,27 +15,27 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
     student.status.charAt(0).toUpperCase() + student.status.slice(1)
 
   return (
-    <div className="bg-white dark:bg-card border border-[#E5E7EB] dark:border-border rounded-xl px-4 py-3 h-[64px] min-h-[64px] flex items-center justify-between gap-3 transition-colors">
+    <Card className="px-4 py-3 h-[64px] min-h-[64px] flex items-center justify-between gap-3">
       {/* Left: Avatar + Details */}
       <div className="flex items-center gap-3.5 min-w-0">
-        <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 text-[#172033] dark:text-slate-200 font-bold text-xs flex items-center justify-center shrink-0 border border-slate-200/60 dark:border-slate-700">
+        <div className="h-10 w-10 rounded-full bg-primary-subtle text-primary font-bold text-xs flex items-center justify-center shrink-0 border border-primary/20">
           {student.avatarInitials ||
             student.name.substring(0, 2).toUpperCase()}
         </div>
         <div className="min-w-0 space-y-0.5">
-          <h4 className="text-sm font-semibold text-[#172033] dark:text-foreground truncate leading-tight">
+          <h4 className="text-sm font-semibold text-foreground truncate leading-tight">
             {student.name}
           </h4>
-          <p className="text-xs text-[#64748B] dark:text-slate-400 truncate flex items-center gap-1.5">
+          <p className="text-xs text-muted-foreground truncate flex items-center gap-1.5">
             <span>{student.rollNumber}</span>
             <span>·</span>
             <span
               className={
                 isPresent
-                  ? 'text-[#059669] font-medium'
+                  ? 'text-success font-medium'
                   : isAbsent
-                  ? 'text-[#DC2626] font-medium'
-                  : 'text-[#D97706] font-medium'
+                  ? 'text-destructive font-medium'
+                  : 'text-warning font-medium'
               }
             >
               {statusLabel}
@@ -44,14 +45,14 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
       </div>
 
       {/* Right: P / A / L Segmented Control */}
-      <div className="flex items-center bg-[#F1F5F9] dark:bg-slate-800 p-1 rounded-lg border border-[#E5E7EB] dark:border-slate-700 shrink-0">
+      <div className="flex items-center bg-muted p-1 rounded-md border border-border shrink-0">
         <button
           type="button"
           onClick={() => onStatusChange(student.id, 'present')}
-          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
+          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
             isPresent
-              ? 'bg-[#059669] text-white shadow-xs'
-              : 'text-[#64748B] dark:text-slate-400 hover:text-[#172033] dark:hover:text-foreground hover:bg-slate-200/60 dark:hover:bg-slate-700'
+              ? 'bg-success text-success-foreground'
+              : 'text-muted-foreground hover:text-foreground hover:bg-surface'
           }`}
           title="Mark Present"
           aria-label={`Mark ${student.name} as Present`}
@@ -61,10 +62,10 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
         <button
           type="button"
           onClick={() => onStatusChange(student.id, 'absent')}
-          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
+          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
             isAbsent
-              ? 'bg-[#DC2626] text-white shadow-xs'
-              : 'text-[#64748B] dark:text-slate-400 hover:text-[#172033] dark:hover:text-foreground hover:bg-slate-200/60 dark:hover:bg-slate-700'
+              ? 'bg-destructive text-destructive-foreground'
+              : 'text-muted-foreground hover:text-foreground hover:bg-surface'
           }`}
           title="Mark Absent"
           aria-label={`Mark ${student.name} as Absent`}
@@ -74,10 +75,10 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
         <button
           type="button"
           onClick={() => onStatusChange(student.id, 'late')}
-          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
+          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
             isLate
-              ? 'bg-[#D97706] text-white shadow-xs'
-              : 'text-[#64748B] dark:text-slate-400 hover:text-[#172033] dark:hover:text-foreground hover:bg-slate-200/60 dark:hover:bg-slate-700'
+              ? 'bg-warning text-warning-foreground'
+              : 'text-muted-foreground hover:text-foreground hover:bg-surface'
           }`}
           title="Mark Late"
           aria-label={`Mark ${student.name} as Late`}
@@ -85,6 +86,6 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
           L
         </button>
       </div>
-    </div>
+    </Card>
   )
 }

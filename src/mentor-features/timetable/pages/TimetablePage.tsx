@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BookOpen, Clock, MapPin } from 'lucide-react'
 import { Card } from '@/components/ui'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/layout/PageHeader'
 
 interface TimetableSlot {
@@ -82,22 +83,15 @@ export function TimetablePage() {
       />
 
       {/* Days Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 border-b border-border">
-        {days.map((day) => (
-          <button
-            key={day}
-            type="button"
-            onClick={() => setSelectedDay(day)}
-            className={`px-4 py-2.5 rounded-t-md text-xs sm:text-sm font-semibold transition-colors cursor-pointer shrink-0 border-b-2 ${
-              selectedDay === day
-                ? 'border-primary text-primary bg-primary-subtle'
-                : 'border-transparent text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            {day}
-          </button>
-        ))}
-      </div>
+      <Tabs value={selectedDay} onValueChange={setSelectedDay} variant="pill">
+        <TabsList>
+          {days.map((day) => (
+            <TabsTrigger key={day} value={day}>
+              {day}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
 
       {/* Schedule Slots List */}
       <div className="space-y-3">

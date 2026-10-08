@@ -1,3 +1,5 @@
+import { Card } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { StatCard } from './StatCard'
 
 interface AttendanceSummaryCardProps {
@@ -18,56 +20,51 @@ export function AttendanceSummaryCard({
   return (
     <div className="space-y-4">
       {/* Total & Progress Bar Card */}
-      <div className="bg-white dark:bg-card border border-[#E5E7EB] dark:border-border rounded-xl p-4 sm:p-5 space-y-3">
+      <Card className="p-4 sm:p-5 space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-bold text-[#172033] dark:text-foreground">
+          <h2 className="text-base font-semibold text-foreground">
             {totalStudents} Students
           </h2>
-          <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-[#059669] border border-emerald-200/60 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/50">
+          <Badge tone="success" size="md">
             {attendanceRate}% Attendance
-          </span>
+          </Badge>
         </div>
 
         <div className="space-y-1.5">
-          <div className="flex items-center justify-between text-xs text-[#64748B] dark:text-slate-400 font-medium">
+          <div className="flex items-center justify-between text-xs text-muted-foreground font-medium">
             <span>Progress</span>
-            <span className="font-semibold text-[#059669] dark:text-emerald-400">
+            <span className="font-semibold text-success">
               {attendanceRate}%
             </span>
           </div>
-          <div className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#059669] rounded-full transition-all duration-300"
+              className="h-full bg-primary rounded-full transition-all duration-300"
               style={{ width: `${attendanceRate}%` }}
             />
           </div>
         </div>
-      </div>
+      </Card>
 
       {/* 3 Individual Stat Cards */}
       <div className="grid grid-cols-3 gap-3 sm:gap-4">
         <StatCard
           label="Present"
           value={presentCount}
-          colorClass="text-[#059669] dark:text-emerald-400"
-          bgClass="bg-emerald-50/40 dark:bg-emerald-950/20"
-          borderClass="border-emerald-100 dark:border-emerald-900/40"
+          tone="success"
         />
         <StatCard
           label="Absent"
           value={absentCount}
-          colorClass="text-[#DC2626] dark:text-rose-400"
-          bgClass="bg-rose-50/40 dark:bg-rose-950/20"
-          borderClass="border-rose-100 dark:border-rose-900/40"
+          tone="destructive"
         />
         <StatCard
           label="Late"
           value={lateCount}
-          colorClass="text-[#D97706] dark:text-amber-400"
-          bgClass="bg-amber-50/40 dark:bg-amber-950/20"
-          borderClass="border-amber-100 dark:border-amber-900/40"
+          tone="warning"
         />
       </div>
     </div>
   )
 }
+

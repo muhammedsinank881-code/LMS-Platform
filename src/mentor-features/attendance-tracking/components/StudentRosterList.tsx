@@ -14,15 +14,15 @@ export function StudentRosterList({
 }: StudentRosterListProps) {
   return (
     <div className="space-y-2 pt-1">
-      <div className="flex items-center justify-between px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#64748B] dark:text-slate-400">
-        <span>STUDENTS ({roster.length})</span>
-        <span>STATUS</span>
+      <div className="flex items-center justify-between px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <span>Students ({roster.length})</span>
+        <span>Status</span>
       </div>
 
       <div className="space-y-2.5">
         {roster.length === 0 ? (
-          <div className="bg-white dark:bg-card border border-[#E5E7EB] dark:border-border rounded-xl p-8 text-center text-sm text-[#64748B]">
-            No students found matching "{searchQuery}".
+          <div className="bg-surface border border-border rounded-md p-8 text-center text-sm text-muted-foreground">
+            No students found matching &quot;{searchQuery}&quot;.
           </div>
         ) : (
           roster.map((student) => (
@@ -37,3 +37,4 @@ export function StudentRosterList({
     </div>
   )
 }
+
