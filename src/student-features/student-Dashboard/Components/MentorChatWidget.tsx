@@ -43,7 +43,7 @@ export function MentorChatWidget() {
       </div>
 
       {/* Messages Feed (WhatsApp style) */}
-      <div className="my-3 space-y-2 flex-1 overflow-y-auto max-h-52 p-2 rounded-lg bg-muted/40">
+      <div className="my-3 space-y-2 flex-1 overflow-y-auto max-h-62 p-2 rounded-lg bg-muted/40">
         {messages.map((msg) => {
           const isStudent = msg.sender === 'student'
           return (
