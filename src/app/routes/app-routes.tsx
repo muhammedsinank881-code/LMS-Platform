@@ -152,7 +152,20 @@ const shellPages: RouteObject[] = [
       },
       {
         path: 'projects',
-        lazy: lazyPage(() => import('@/student-features/pages/StudentProjectsPage'), 'StudentProjectsPage'),
+        children: [
+          {
+            index: true,
+            lazy: lazyPage(() => import('@/student-features/pages/StudentProjectsPage'), 'StudentProjectsPage'),
+          },
+          {
+            path: 'new',
+            lazy: lazyPage(() => import('@/student-features/project/pages/CreateProjectPage'), 'CreateProjectPage'),
+          },
+          {
+            path: ':projectId',
+            lazy: lazyPage(() => import('@/student-features/pages/StudentProjectsPage'), 'StudentProjectsPage'),
+          },
+        ],
       },
       {
         path: 'certificates',

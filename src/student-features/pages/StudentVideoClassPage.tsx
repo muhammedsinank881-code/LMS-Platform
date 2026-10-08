@@ -17,12 +17,19 @@ export function StudentVideoClassPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3 text-xs font-medium text-muted-foreground">
+        <Link
+          to="/student/courses"
+          className="inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+        >
+          <ArrowLeft className="h-4 w-4" /> Back to My Courses
+        </Link>
+        <span>•</span>
         <Link
           to="/student/dashboard"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
+          className="transition-colors hover:text-primary"
         >
-          <ArrowLeft className="h-4 w-4" /> Back to Student Dashboard
+          Dashboard
         </Link>
       </div>
 
