@@ -55,12 +55,13 @@ export function MaterialCard({
           </div>
 
           <div className="min-w-0 space-y-0.5">
-            <h3
+            <button
+              type="button"
               onClick={() => onViewDetails(material)}
-              className="text-sm font-bold text-foreground hover:text-primary transition-colors cursor-pointer leading-snug line-clamp-2"
+              className="text-left text-sm font-bold text-foreground hover:text-primary transition-colors cursor-pointer leading-snug line-clamp-2"
             >
               {material.title}
-            </h3>
+            </button>
             <p className="text-xs text-muted-foreground font-medium truncate">
               {material.courseClass} · <span className="text-foreground/80">{material.module}</span>
             </p>

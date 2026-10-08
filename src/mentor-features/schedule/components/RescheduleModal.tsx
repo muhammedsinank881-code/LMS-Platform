@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AlertCircle, Calendar, Clock, RefreshCw } from 'lucide-react'
 import {
   Button,
@@ -25,19 +25,19 @@ interface RescheduleModalProps {
 }
 
 export function RescheduleModal({ cls, onClose, onReschedule }: RescheduleModalProps) {
-  const [newDate, setNewDate] = useState('2026-10-09')
-  const [newStartTime, setNewStartTime] = useState('10:00 AM')
-  const [newEndTime, setNewEndTime] = useState('11:30 AM')
+  const [newDate, setNewDate] = useState(cls?.date ?? '2026-10-09')
+  const [newStartTime, setNewStartTime] = useState(cls?.startTime ?? '10:00 AM')
+  const [newEndTime, setNewEndTime] = useState(cls?.endTime ?? '11:30 AM')
   const [errorMsg, setErrorMsg] = useState('')
+  const [prevClsId, setPrevClsId] = useState<string | null>(null)
 
-  useEffect(() => {
-    if (cls) {
-      setNewDate(cls.date)
-      setNewStartTime(cls.startTime)
-      setNewEndTime(cls.endTime)
-    }
+  if (cls && cls.id !== prevClsId) {
+    setPrevClsId(cls.id)
+    setNewDate(cls.date)
+    setNewStartTime(cls.startTime)
+    setNewEndTime(cls.endTime)
     setErrorMsg('')
-  }, [cls])
+  }
 
   if (!cls) return null
 

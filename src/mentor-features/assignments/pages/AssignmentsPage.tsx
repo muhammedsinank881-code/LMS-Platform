@@ -97,7 +97,7 @@ export function AssignmentsPage() {
           />
         </div>
 
-        <Tabs value={selectedStatus} onValueChange={(v) => setSelectedStatus(v as any)} variant="pill">
+        <Tabs value={selectedStatus} onValueChange={(v) => setSelectedStatus(v as 'all' | 'active' | 'graded' | 'draft')} variant="pill">
           <TabsList>
             <TabsTrigger value="all">All</TabsTrigger>
             <TabsTrigger value="active">Active</TabsTrigger>

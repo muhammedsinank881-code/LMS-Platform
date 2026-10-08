@@ -126,10 +126,11 @@ export function ScheduleCalendar({
                       </div>
                     ) : (
                       dayClasses.map((cls) => (
-                        <div
+                        <button
+                          type="button"
                           key={cls.id}
                           onClick={() => onSelectClass(cls)}
-                          className={`p-2 rounded-md border text-xs cursor-pointer transition-all hover:scale-[1.02] space-y-1 ${getEventBgStyle(
+                          className={`w-full text-left p-2 rounded-md border text-xs cursor-pointer transition-all hover:scale-[1.02] space-y-1 ${getEventBgStyle(
                             cls.status,
                           )}`}
                         >
@@ -160,7 +161,7 @@ export function ScheduleCalendar({
                               </>
                             )}
                           </div>
-                        </div>
+                        </button>
                       ))
                     )}
                   </div>
@@ -203,13 +204,14 @@ export function ScheduleCalendar({
 
                 <div className="space-y-0.5">
                   {dateClasses.slice(0, 2).map((c) => (
-                    <div
+                    <button
+                      type="button"
                       key={c.id}
                       onClick={() => onSelectClass(c)}
-                      className="text-[10px] font-semibold text-primary truncate bg-primary-subtle px-1 py-0.5 rounded cursor-pointer"
+                      className="w-full text-left text-[10px] font-semibold text-primary truncate bg-primary-subtle px-1 py-0.5 rounded cursor-pointer"
                     >
                       {c.title}
-                    </div>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -228,10 +230,11 @@ export function ScheduleCalendar({
             {classes
               .filter((c) => c.date === '2026-10-08')
               .map((cls) => (
-                <div
+                <button
+                  type="button"
                   key={cls.id}
                   onClick={() => onSelectClass(cls)}
-                  className={`p-3 rounded-md border flex items-center justify-between gap-3 cursor-pointer ${getEventBgStyle(
+                  className={`w-full text-left p-3 rounded-md border flex items-center justify-between gap-3 cursor-pointer ${getEventBgStyle(
                     cls.status,
                   )}`}
                 >
@@ -247,7 +250,7 @@ export function ScheduleCalendar({
                   <Badge tone={getStatusBadgeTone(cls.status)} size="sm">
                     {cls.status}
                   </Badge>
-                </div>
+                </button>
               ))}
           </div>
         </div>

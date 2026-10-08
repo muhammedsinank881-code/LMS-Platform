@@ -70,12 +70,13 @@ export function UpcomingClassesList({
                       </div>
 
                       <div className="min-w-0 space-y-0.5">
-                        <h3
+                        <button
+                          type="button"
                           onClick={() => onSelectClass(cls)}
-                          className="text-sm font-bold text-foreground hover:text-primary transition-colors cursor-pointer leading-snug truncate"
+                          className="text-left text-sm font-bold text-foreground hover:text-primary transition-colors cursor-pointer leading-snug truncate"
                         >
                           {cls.title}
-                        </h3>
+                        </button>
                         <p className="text-xs text-muted-foreground font-semibold truncate">
                           {cls.courseClass} · <span className="text-foreground/80">{cls.module}</span>
                         </p>

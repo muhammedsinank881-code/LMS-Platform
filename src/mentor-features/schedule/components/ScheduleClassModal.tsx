@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AlertCircle, Check, CheckCircle2, MapPin, Video } from 'lucide-react'
 import {
   Button,
@@ -49,9 +49,12 @@ export function ScheduleClassModal({
 
   const [errorMsg, setErrorMsg] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
+  const [prevInitialId, setPrevInitialId] = useState<string | null>(null)
 
-  // Pre-fill form when editing
-  useEffect(() => {
+  // Sync form values when initialData changes
+  const currentId = initialData?.id ?? null
+  if (currentId !== prevInitialId) {
+    setPrevInitialId(currentId)
     if (initialData) {
       setTitle(initialData.title)
       setCourseClass(initialData.courseClass)
@@ -91,7 +94,7 @@ export function ScheduleClassModal({
     }
     setErrorMsg('')
     setSuccessMsg('')
-  }, [initialData, open])
+  }
 
   const toggleMaterialSelect = (matTitle: string) => {
     setSelectedMaterials((prev) =>
@@ -428,10 +431,11 @@ export function ScheduleClassModal({
                   const isSelected = selectedMaterials.includes(mat.title)
 
                   return (
-                    <div
+                    <button
+                      type="button"
                       key={mat.id}
                       onClick={() => toggleMaterialSelect(mat.title)}
-                      className={`p-2 rounded-md border text-xs flex items-center justify-between gap-2 cursor-pointer transition-colors ${
+                      className={`w-full text-left p-2 rounded-md border text-xs flex items-center justify-between gap-2 cursor-pointer transition-colors ${
                         isSelected
                           ? 'bg-primary-subtle border-primary text-primary font-semibold'
                           : 'bg-surface border-border hover:bg-muted/60 text-foreground'
@@ -441,7 +445,7 @@ export function ScheduleClassModal({
                       <div className={`size-4 rounded border flex items-center justify-center ${isSelected ? 'border-primary bg-primary text-primary-foreground' : 'border-border'}`}>
                         {isSelected ? <Check className="size-3" /> : null}
                       </div>
-                    </div>
+                    </button>
                   )
                 })}
               </div>

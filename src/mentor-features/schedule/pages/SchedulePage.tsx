@@ -10,6 +10,7 @@ import { ScheduleHeader } from '../components/ScheduleHeader'
 import { TodaysScheduleCompact } from '../components/TodaysScheduleCompact'
 import { UpcomingClassesList } from '../components/UpcomingClassesList'
 import { useSchedule } from '../hooks/useSchedule'
+import type { ScheduledClass } from '../types'
 
 export function SchedulePage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -100,9 +101,9 @@ export function SchedulePage() {
         initialData={editingClass}
         onSubmit={(data) => {
           if (editingClass) {
-            return handleUpdateClass(data as any)
+            return handleUpdateClass(data as ScheduledClass)
           }
-          return handleAddClass(data as any)
+          return handleAddClass(data as Omit<ScheduledClass, 'id' | 'status'>)
         }}
       />
 
