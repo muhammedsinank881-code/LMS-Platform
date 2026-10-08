@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { ResultsPage as Results } from '../pages/ResultsPage'
@@ -28,7 +29,7 @@ describe('Mentor Results Page', () => {
     expect(screen.getAllByText(/Fathima Nida/i).length).toBeGreaterThan(0)
   })
 
-  it('filters results by status tab', () => {
+  it('filters results by status tab', async () => {
     render(
       <MemoryRouter>
         <Results />
@@ -36,8 +37,8 @@ describe('Mentor Results Page', () => {
     )
 
     // Click 'Pending' filter tab
-    const pendingTab = screen.getByRole('button', { name: /^Pending/i })
-    fireEvent.click(pendingTab)
+    const pendingTab = screen.getByRole('tab', { name: /^Pending/i })
+    await userEvent.click(pendingTab)
 
     // Alan Shihab is pending
     expect(screen.getAllByText(/Alan Shihab/i).length).toBeGreaterThan(0)
