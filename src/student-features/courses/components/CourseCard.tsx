@@ -15,7 +15,7 @@ export function CourseCard({ course, onToggleBookmark, onOpenSyllabus }: CourseC
 
   const handleStartOrContinue = () => {
     const lessonId = course.nextLessonId || 'class-1'
-    navigate(`/student/video-class?id=${lessonId}`)
+    navigate(`/student/video-class?id=${lessonId}&courseId=${course.id}`)
   }
 
   const isCompleted = course.status === 'completed'

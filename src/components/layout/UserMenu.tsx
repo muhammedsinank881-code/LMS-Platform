@@ -35,17 +35,19 @@ export function UserMenu() {
         </DropdownLabel>
         <DropdownSeparator />
         <DropdownItem asChild>
-          <Link to="/settings">
+          <Link to={user.role === 'student' ? '/student/profile' : '/settings'}>
             <UserRound aria-hidden="true" />
             Profile
           </Link>
         </DropdownItem>
-        <DropdownItem asChild>
-          <Link to="/settings">
-            <Settings aria-hidden="true" />
-            Settings
-          </Link>
-        </DropdownItem>
+        {user.role === 'student' ? null : (
+          <DropdownItem asChild>
+            <Link to="/settings">
+              <Settings aria-hidden="true" />
+              Settings
+            </Link>
+          </DropdownItem>
+        )}
         <DropdownSeparator />
         <DropdownItem destructive onSelect={logout}>
           <LogOut aria-hidden="true" />

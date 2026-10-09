@@ -14,7 +14,7 @@ export function ActiveCourseBanner({ course, onOpenSyllabus }: ActiveCourseBanne
 
   const handleContinueLearning = () => {
     const lessonId = course.nextLessonId || 'class-1'
-    navigate(`/student/video-class?id=${lessonId}`)
+    navigate(`/student/video-class?id=${lessonId}&courseId=${course.id}`)
   }
 
   return (

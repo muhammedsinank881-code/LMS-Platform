@@ -29,6 +29,8 @@ import { mockSavedViewsApi } from './resources/saved-views'
 import { mockSettingsApi } from './resources/settings'
 import { mockTasksApi } from './resources/tasks'
 import { mockTeamApi } from './resources/team'
+import { mockStudentProfileApi } from './resources/student-profile'
+import { mockStudentJobsApi } from './resources/student-jobs'
 
 registerAutomationEngine()
 registerWebhookDispatcher()
@@ -60,6 +62,8 @@ export const mockApi: Api = {
   savedViews: mockSavedViewsApi,
   team: mockTeamApi,
   settings: mockSettingsApi,
+  studentProfile: mockStudentProfileApi,
+  studentJobs: mockStudentJobsApi,
   reports: mockReportsApi,
   integrations: mockIntegrationsApi,
   leadForms: mockLeadFormsApi,

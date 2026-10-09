@@ -47,7 +47,7 @@ export function CertificateProgressBar({
   ]
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+    <div className="rounded-md border border-border bg-surface p-4 shadow-sm">
       <div className="mb-3 flex items-center justify-between">
         <span className="text-sm font-semibold text-foreground">Overall Completion</span>
         <span className="text-sm font-bold tabular-nums text-foreground">{overallProgress}%</span>

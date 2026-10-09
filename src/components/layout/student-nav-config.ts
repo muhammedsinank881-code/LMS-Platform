@@ -5,6 +5,7 @@ import {
     CalendarCheck,
     FolderKanban,
     Award,
+    BriefcaseBusiness,
     type LucideIcon,
 } from 'lucide-react'
 
@@ -45,5 +46,10 @@ export const STUDENT_NAV_ITEMS : StudentNavItem [] =[
         label: 'Certificates',
         path: '/student/certificates',
         icon: Award,
+    },
+    {
+        label: 'Job Search',
+        path: '/student/jobs',
+        icon: BriefcaseBusiness,
     },
 ]

@@ -21,6 +21,8 @@ export type TenantSpec = (typeof SEED_TENANTS)[number]
 export function emptyTables(): MockTables {
   return {
     users: [],
+    studentProfiles: [],
+    studentJobApplications: [],
     teams: [],
     leads: [],
     leadStatuses: [],

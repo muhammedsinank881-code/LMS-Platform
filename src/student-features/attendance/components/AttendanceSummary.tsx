@@ -90,7 +90,7 @@ export function AttendanceSummary({ summary }: AttendanceSummaryProps) {
         </div>
         <ProgressBar
           value={summary.attendancePercentage}
-          tone={summary.attendancePercentage >= 85 ? 'success' : summary.attendancePercentage >= 70 ? 'warning' : 'destructive'}
+          tone={summary.attendancePercentage >= 85 ? 'primary' : summary.attendancePercentage >= 75 ? 'warning' : 'destructive'}
           size="md"
         />
         <div className="mt-2 flex items-center gap-6 text-[11px] text-muted-foreground">
