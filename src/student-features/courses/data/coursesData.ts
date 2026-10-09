@@ -1,6 +1,16 @@
 export type CourseCategory = 'All' | 'Full-Stack' | 'Frontend' | 'Backend' | 'UI/UX' | 'Mobile' | 'DevOps'
 export type CourseStatusFilter = 'all' | 'in_progress' | 'completed' | 'bookmarked'
 
+export type LessonContentBlock =
+  | { id: string; type: 'text' | 'notes'; title: string; body: string }
+  | { id: string; type: 'video'; title: string; url: string; caption?: string }
+  | { id: string; type: 'image' | 'diagram'; title: string; url: string; alt: string; caption?: string }
+  | { id: string; type: 'external-link'; title: string; url: string; description?: string }
+  | { id: string; type: 'live-class'; title: string; scheduledAt?: string; joinUrl?: string }
+  | { id: string; type: 'code'; title: string; code: string; language?: string; caption?: string }
+  | { id: string; type: 'download'; title: string; url: string; description?: string }
+  | { id: string; type: 'assignment' | 'quiz'; taskId: string }
+
 export interface CourseLesson {
   id: string
   title: string
@@ -8,6 +18,7 @@ export interface CourseLesson {
   isCompleted: boolean
   isCurrent?: boolean
   videoUrl?: string
+  content?: LessonContentBlock[]
 }
 
 export interface CourseModule {

@@ -81,7 +81,7 @@ export function MyCoursesPage() {
         </div>
       ) : (
         /* Empty State */
-        <div className="rounded-xl border border-dashed border-border bg-surface p-12 text-center">
+        <div className="rounded-md border border-dashed border-border bg-surface p-12 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-subtle text-primary">
             <BookOpen className="h-6 w-6" />
           </div>

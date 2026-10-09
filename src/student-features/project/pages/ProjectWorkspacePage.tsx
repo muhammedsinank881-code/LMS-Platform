@@ -60,13 +60,14 @@ export function ProjectWorkspacePage() {
         </div>
       </div>
 
-      <div className="border-b border-border pb-3">
+      <div className="border-b border-border pb-4">
         <ProjectStatsOverview stats={stats} />
       </div>
 
       {/* Main Workspace Layout (Sidebar + Right Workspace) */}
-      <div className="flex flex-col items-start gap-3 md:flex-row">
+      <div className="flex flex-col items-start gap-3 md:flex-row" >
         {/* Left Sidebar */}
+        <div className="w-full shrink-0 md:w-auto lg:sticky lg:top-0 lg:self-start">
         <ProjectSidebar
           projects={projectList}
           activeProjectId={activeProjectId}
@@ -77,6 +78,7 @@ export function ProjectWorkspacePage() {
           isCollapsed={isSidebarCollapsed}
           onToggleCollapse={toggleSidebar}
         />
+        </div>
 
         {/* Right Main Workspace */}
         <div className="w-full min-w-0 flex-1 space-y-6">

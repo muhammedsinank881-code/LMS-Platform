@@ -30,7 +30,7 @@ function SectionHeader({
 }) {
   const allDone = done === total
   return (
-    <div className="flex items-center justify-between px-4 py-3 bg-muted/40 border-b border-border">
+    <div className="flex items-center justify-between px-4 py-3 bg-surface border-b border-border">
       <div className="flex items-center gap-2">
         <Icon className="h-4 w-4 text-primary shrink-0" />
         <span className="text-xs font-bold text-foreground">{title}</span>
@@ -51,7 +51,7 @@ export function RequirementsChecklist({
   return (
     <div className="space-y-4">
       {/* ── Courses ─────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+      <div className="rounded-md border border-border bg-surface shadow-sm overflow-hidden">
         <SectionHeader
           icon={BookOpen}
           title="Course Completion"
@@ -91,7 +91,7 @@ export function RequirementsChecklist({
       </div>
 
       {/* ── Assignments & Quizzes ────────────────────────────────── */}
-      <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+      <div className="rounded-md border border-border bg-surface shadow-sm overflow-hidden">
         <SectionHeader
           icon={ClipboardList}
           title="Assignments & Quizzes"
@@ -124,7 +124,7 @@ export function RequirementsChecklist({
       </div>
 
       {/* ── Projects ─────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+      <div className="rounded-md border border-border bg-surface shadow-sm overflow-hidden">
         <SectionHeader
           icon={FolderKanban}
           title="Capstone Projects"
@@ -164,7 +164,7 @@ export function RequirementsChecklist({
       </div>
 
       {/* ── Final Assessment ─────────────────────────────────────── */}
-      <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+      <div className="rounded-md border border-border bg-surface shadow-sm overflow-hidden">
         <SectionHeader
           icon={GraduationCap}
           title="Final Assessment"

@@ -43,13 +43,7 @@ export function CreateProjectPage() {
   const [techStackText, setTechStackText] = useState('React 19, TypeScript, Node.js, Tailwind CSS')
 
   // Selected Mentor State
-  const [selectedMentor, setSelectedMentor] = useState<ProjectMentor>({
-    name: 'John Mathew',
-    role: 'Senior Architect & Lead Mentor',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-    email: 'john.mathew@leadflow.edu',
-    mentorId: 'MTR-1002',
-  })
+  const [selectedMentor, setSelectedMentor] = useState<ProjectMentor | null>(null)
   const [mentorSearchQuery, setMentorSearchQuery] = useState('')
   const [isSearchingMentor, setIsSearchingMentor] = useState(false)
 
@@ -65,7 +59,8 @@ export function CreateProjectPage() {
       studentId: 'STD-1001',
       name: 'Mohammed Sinan',
       email: 'sinan@student.leadflow.io',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+      avatar:
+        'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
       role: 'team_lead',
       specificRole: 'Team Lead & Full-Stack Architect',
     },
@@ -134,9 +129,7 @@ export function CreateProjectPage() {
   }
 
   const handleToggleMemberRole = (studentId: string, role: 'team_lead' | 'member') => {
-    setGroupMembers((prev) =>
-      prev.map((m) => (m.studentId === studentId ? { ...m, role } : m))
-    )
+    setGroupMembers((prev) => prev.map((m) => (m.studentId === studentId ? { ...m, role } : m)))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -153,7 +146,7 @@ export function CreateProjectPage() {
       repositoryUrl,
       liveDemoUrl,
       techStackText,
-      mentor: selectedMentor,
+      mentor: selectedMentor ?? undefined,
       teamName: projectType === 'group' ? teamName || `${title} Team` : undefined,
       teamDescription: projectType === 'group' ? teamDescription : undefined,
       groupMembers: projectType === 'group' ? groupMembers : undefined,
@@ -163,13 +156,13 @@ export function CreateProjectPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16">
+    <div className="mx-auto max-w-4xl space-y-4 pb-16">
       {/* Top Header & Back Navigation */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         <button
           type="button"
           onClick={() => navigate('/student/projects')}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-primary transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary"
         >
           <ArrowLeft className="h-4 w-4" /> Back to Project Workspace
         </button>
@@ -180,15 +173,16 @@ export function CreateProjectPage() {
         />
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Step 1: Project Type Selection (Single vs Group) */}
-        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-4">
+        <div className="space-y-4 rounded-md border border-border bg-surface p-6 shadow-sm">
           <div>
-            <Label className="text-base font-bold text-foreground block mb-1">
+            <Label className="mb-1 block text-base font-bold text-foreground">
               Select Project Type *
             </Label>
             <p className="text-xs text-muted-foreground">
-              Choose whether this is an individual single-student capstone or a collaborative group project.
+              Choose whether this is an individual single-student capstone or a collaborative group
+              project.
             </p>
           </div>
 
@@ -197,7 +191,7 @@ export function CreateProjectPage() {
             <button
               type="button"
               onClick={() => setProjectType('individual')}
-              className={`text-left rounded-xl border p-5 transition-all flex flex-col justify-between space-y-3 ${
+              className={`flex flex-col justify-between space-y-3 rounded-xl border p-5 text-left transition-all ${
                 projectType === 'individual'
                   ? 'border-emerald-500/50 bg-emerald-500/5 ring-2 ring-emerald-500/30'
                   : 'border-border bg-muted/20 hover:border-border/80'
@@ -208,7 +202,7 @@ export function CreateProjectPage() {
                   <User className="h-5 w-5" />
                 </div>
                 {projectType === 'individual' && (
-                  <Badge tone="success" className="font-semibold text-xs">
+                  <Badge tone="success" className="text-xs font-semibold">
                     Selected
                   </Badge>
                 )}
@@ -216,7 +210,7 @@ export function CreateProjectPage() {
 
               <div>
                 <h4 className="text-sm font-bold text-foreground">Single / Individual Project</h4>
-                <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                   Personal capstone managed entirely by you with direct 1-on-1 mentor guidance.
                 </p>
               </div>
@@ -226,7 +220,7 @@ export function CreateProjectPage() {
             <button
               type="button"
               onClick={() => setProjectType('group')}
-              className={`text-left rounded-xl border p-5 transition-all flex flex-col justify-between space-y-3 ${
+              className={`flex flex-col justify-between space-y-3 rounded-xl border p-5 text-left transition-all ${
                 projectType === 'group'
                   ? 'border-primary/50 bg-primary/5 ring-2 ring-primary/30'
                   : 'border-border bg-muted/20 hover:border-border/80'
@@ -237,7 +231,7 @@ export function CreateProjectPage() {
                   <Users className="h-5 w-5" />
                 </div>
                 {projectType === 'group' && (
-                  <Badge tone="primary" className="font-semibold text-xs">
+                  <Badge tone="primary" className="text-xs font-semibold">
                     Selected
                   </Badge>
                 )}
@@ -245,8 +239,9 @@ export function CreateProjectPage() {
 
               <div>
                 <h4 className="text-sm font-bold text-foreground">Group / Team Project</h4>
-                <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                  Collaborative multi-student team workspace with shared milestones & member progress tracking.
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Collaborative multi-student team workspace with shared milestones & member
+                  progress tracking.
                 </p>
               </div>
             </button>
@@ -254,9 +249,9 @@ export function CreateProjectPage() {
         </div>
 
         {/* Step 2: General Project Information */}
-        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-5">
+        <div className="space-y-5 rounded-md border border-border bg-surface p-6 shadow-sm">
           <div className="border-b border-border pb-3">
-            <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+            <h3 className="flex items-center gap-2 text-base font-bold text-foreground">
               <Layers className="h-4 w-4 text-primary" /> General Project Information
             </h3>
             <p className="text-xs text-muted-foreground">
@@ -336,7 +331,7 @@ export function CreateProjectPage() {
                 onChange={(e) => setDescription(e.target.value)}
                 rows={4}
                 required
-                className="text-xs resize-none"
+                className="resize-none text-xs"
               />
             </div>
 
@@ -356,7 +351,10 @@ export function CreateProjectPage() {
 
             {/* GitHub Repo Link */}
             <div className="space-y-1.5">
-              <Label htmlFor="repositoryUrl" className="text-xs font-bold flex items-center gap-1.5">
+              <Label
+                htmlFor="repositoryUrl"
+                className="flex items-center gap-1.5 text-xs font-bold"
+              >
                 <GitBranch className="h-3.5 w-3.5 text-primary" /> Repository Link (Optional)
               </Label>
               <Input
@@ -370,8 +368,9 @@ export function CreateProjectPage() {
 
             {/* Live Demo URL */}
             <div className="space-y-1.5">
-              <Label htmlFor="liveDemoUrl" className="text-xs font-bold flex items-center gap-1.5">
-                <ExternalLink className="h-3.5 w-3.5 text-primary" /> Live Staging Demo URL (Optional)
+              <Label htmlFor="liveDemoUrl" className="flex items-center gap-1.5 text-xs font-bold">
+                <ExternalLink className="h-3.5 w-3.5 text-primary" /> Live Staging Demo URL
+                (Optional)
               </Label>
               <Input
                 id="liveDemoUrl"
@@ -385,18 +384,19 @@ export function CreateProjectPage() {
         </div>
 
         {/* Step 3: Mentor Selection / Search */}
-        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm space-y-4">
-          <div className="border-b border-border pb-3 flex items-center justify-between">
+        <div className="space-y-4 rounded-md border border-border bg-surface p-6 shadow-sm">
+          <div className="flex items-center justify-between border-b border-border pb-3">
             <div>
-              <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+              <h3 className="flex items-center gap-2 text-base font-bold text-foreground">
                 <UserCheck className="h-4 w-4 text-primary" /> Select Senior Mentor
               </h3>
               <p className="text-xs text-muted-foreground">
-                Search and assign a senior lead mentor by <strong>Mentor Name</strong> or <strong>Mentor ID</strong> (e.g. <code>MTR-1002</code>).
+                Search and assign a senior lead mentor by <strong>Mentor Name</strong> or{' '}
+                <strong>Mentor ID</strong> (e.g. <code>MTR-1002</code>).
               </p>
             </div>
             {selectedMentor && (
-              <Badge tone="success" className="font-bold text-xs">
+              <Badge tone="success" className="text-xs font-bold">
                 Mentor Selected
               </Badge>
             )}
@@ -407,32 +407,48 @@ export function CreateProjectPage() {
             <div className="flex items-center justify-between rounded-xl border border-primary/30 bg-primary/5 p-3.5">
               <div className="flex items-center gap-3">
                 <Avatar name={selectedMentor.name} src={selectedMentor.avatar} size="md" />
+
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-sm text-foreground">{selectedMentor.name}</span>
+                    <span className="text-sm font-bold text-foreground">{selectedMentor.name}</span>
+
                     {selectedMentor.mentorId && (
-                      <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-mono font-bold text-primary">
+                      <span className="rounded bg-primary/10 px-1.5 py-0.5 font-mono text-[10px] font-bold text-primary">
                         {selectedMentor.mentorId}
                       </span>
                     )}
                   </div>
+
                   <p className="text-xs text-muted-foreground">{selectedMentor.role}</p>
                 </div>
               </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedMentor(null)
+                  setMentorSearchQuery('')
+                  setIsSearchingMentor(false)
+                }}
+                className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                title="Remove Member"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
           )}
 
           {/* Search Mentor Input */}
-          <div className="space-y-2 relative">
-            <Label className="text-xs font-bold flex items-center justify-between">
+          <div className="relative space-y-2">
+            <Label className="flex items-center justify-between text-xs font-bold">
               <span>Search Mentor by Name or Mentor ID</span>
-              <span className="text-[11px] text-muted-foreground font-normal">
-                Try: <code className="bg-muted px-1 rounded text-primary">MTR-1001</code>, <code className="bg-muted px-1 rounded text-primary">MTR-1002</code>, or name
+              <span className="text-[11px] font-normal text-muted-foreground">
+                Try: <code className="rounded bg-muted px-1 text-primary">MTR-1001</code>,{' '}
+                <code className="rounded bg-muted px-1 text-primary">MTR-1002</code>, or name
               </span>
             </Label>
 
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search mentor name or Mentor ID..."
                 value={mentorSearchQuery}
@@ -459,28 +475,30 @@ export function CreateProjectPage() {
 
             {/* Mentor Search Dropdown */}
             {isSearchingMentor && filteredMentors.length > 0 && (
-              <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-60 overflow-y-auto rounded-xl border border-border bg-card p-2 shadow-xl">
-                <span className="text-[10px] font-bold text-muted-foreground px-2 py-1 block uppercase tracking-wider">
+              <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-60 overflow-y-auto rounded-xl border border-border bg-surface p-2 shadow-xl">
+                <span className="block px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                   Matching Mentors ({filteredMentors.length}):
                 </span>
-                <div className="space-y-1 mt-1">
+                <div className="mt-1 space-y-1">
                   {filteredMentors.map((mentor) => (
                     <button
                       key={mentor.mentorId}
                       type="button"
                       onClick={() => handleSelectMentor(mentor)}
-                      className="w-full text-left flex items-center justify-between rounded-lg p-2.5 hover:bg-primary/10 transition-colors"
+                      className="flex w-full items-center justify-between rounded-lg p-2.5 text-left transition-colors hover:bg-primary/10"
                     >
                       <div className="flex items-center gap-3">
                         <Avatar name={mentor.name} src={mentor.avatar} size="sm" />
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="font-bold text-xs text-foreground">{mentor.name}</span>
-                            <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-mono font-bold text-primary">
+                            <span className="text-xs font-bold text-foreground">{mentor.name}</span>
+                            <span className="rounded bg-muted px-1.5 py-0.5 font-mono text-[10px] font-bold text-primary">
                               {mentor.mentorId}
                             </span>
                           </div>
-                          <p className="text-[11px] text-muted-foreground">{mentor.role} • {mentor.department}</p>
+                          <p className="text-[11px] text-muted-foreground">
+                            {mentor.role} • {mentor.department}
+                          </p>
                         </div>
                       </div>
 
@@ -497,17 +515,18 @@ export function CreateProjectPage() {
 
         {/* Step 4: Group Project Members Section (Rendered ONLY if Group Project) */}
         {projectType === 'group' && (
-          <div className="rounded-2xl border border-primary/30 bg-card p-6 shadow-sm space-y-6 ring-1 ring-primary/10">
-            <div className="border-b border-border pb-3 flex items-center justify-between">
+          <div className="space-y-6 rounded-md border border-border bg-surface p-6 shadow-sm ring-1 ring-primary/10">
+            <div className="flex items-center justify-between border-b border-border pb-3">
               <div>
-                <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+                <h3 className="flex items-center gap-2 text-base font-bold text-foreground">
                   <Users className="h-4 w-4 text-primary" /> Group Team & Member Management
                 </h3>
                 <p className="text-xs text-muted-foreground">
-                  Search students by <strong>Student ID</strong> (e.g. <code>STD-1002</code>) to add team members like GitHub.
+                  Search students by <strong>Student ID</strong> (e.g. <code>STD-1002</code>) to add
+                  team members like GitHub.
                 </p>
               </div>
-              <Badge tone="primary" className="font-bold text-xs">
+              <Badge tone="primary" className="text-xs font-bold">
                 {groupMembers.length} Members Added
               </Badge>
             </div>
@@ -543,18 +562,20 @@ export function CreateProjectPage() {
             </div>
 
             {/* GitHub-style Student ID Search Bar */}
-            <div className="space-y-2 relative">
-              <Label className="text-xs font-bold flex items-center justify-between">
+            <div className="relative space-y-2">
+              <Label className="flex items-center justify-between text-xs font-bold">
                 <span className="flex items-center gap-1.5">
-                  <UserPlus className="h-3.5 w-3.5 text-primary" /> Search & Add Team Members by Student ID
+                  <UserPlus className="h-3.5 w-3.5 text-primary" /> Search & Add Team Members by
+                  Student ID
                 </span>
-                <span className="text-[11px] text-muted-foreground font-normal">
-                  Try typing: <code className="bg-muted px-1 rounded text-primary">STD-1002</code>, <code className="bg-muted px-1 rounded text-primary">STD-1003</code>, or name
+                <span className="text-[11px] font-normal text-muted-foreground">
+                  Try typing: <code className="rounded bg-muted px-1 text-primary">STD-1002</code>,{' '}
+                  <code className="rounded bg-muted px-1 text-primary">STD-1003</code>, or name
                 </span>
               </Label>
 
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   placeholder="Type student ID (STD-xxxx) or student name to add..."
                   value={searchQuery}
@@ -581,28 +602,32 @@ export function CreateProjectPage() {
 
               {/* Autocomplete Dropdown List */}
               {isSearching && filteredStudents.length > 0 && (
-                <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-60 overflow-y-auto rounded-xl border border-border bg-card p-2 shadow-xl">
-                  <span className="text-[10px] font-bold text-muted-foreground px-2 py-1 block uppercase tracking-wider">
+                <div className="absolute left-0 right-0 top-full z-20 mt-1 max-h-60 overflow-y-auto rounded-xl border border-border bg-surface p-2 shadow-xl">
+                  <span className="block px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                     Found {filteredStudents.length} Matching Students:
                   </span>
-                  <div className="space-y-1 mt-1">
+                  <div className="mt-1 space-y-1">
                     {filteredStudents.map((student) => (
                       <button
                         key={student.studentId}
                         type="button"
                         onClick={() => handleAddMember(student)}
-                        className="w-full text-left flex items-center justify-between rounded-lg p-2 hover:bg-primary/10 transition-colors"
+                        className="flex w-full items-center justify-between rounded-lg p-2 text-left transition-colors hover:bg-primary/10"
                       >
                         <div className="flex items-center gap-3">
                           <Avatar name={student.name} src={student.avatar} size="sm" />
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="font-bold text-xs text-foreground">{student.name}</span>
-                              <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] font-mono font-bold text-primary">
+                              <span className="text-xs font-bold text-foreground">
+                                {student.name}
+                              </span>
+                              <span className="rounded bg-muted px-1.5 py-0.5 font-mono text-[10px] font-bold text-primary">
                                 {student.studentId}
                               </span>
                             </div>
-                            <p className="text-[11px] text-muted-foreground">{student.email} • {student.batch}</p>
+                            <p className="text-[11px] text-muted-foreground">
+                              {student.email} • {student.batch}
+                            </p>
                           </div>
                         </div>
 
@@ -616,15 +641,17 @@ export function CreateProjectPage() {
               )}
 
               {isSearching && searchQuery && filteredStudents.length === 0 && (
-                <div className="absolute left-0 right-0 top-full z-20 mt-1 rounded-xl border border-border bg-card p-4 text-center text-xs text-muted-foreground shadow-lg">
-                  No matching active students found for &quot;{searchQuery}&quot;. Try searching with <strong>STD-1002</strong>, <strong>STD-1003</strong>, or <strong>STD-1004</strong>.
+                <div className="absolute left-0 right-0 top-full z-20 mt-1 rounded-xl border border-border bg-surface p-4 text-center text-xs text-muted-foreground shadow-lg">
+                  No matching active students found for &quot;{searchQuery}&quot;. Try searching
+                  with <strong>STD-1002</strong>, <strong>STD-1003</strong>, or{' '}
+                  <strong>STD-1004</strong>.
                 </div>
               )}
             </div>
 
             {/* List of Added Team Members */}
             <div className="space-y-3 pt-2">
-              <span className="text-xs font-bold text-foreground block">
+              <span className="block text-xs font-bold text-foreground">
                 Current Team Members ({groupMembers.length}):
               </span>
 
@@ -634,33 +661,35 @@ export function CreateProjectPage() {
                     key={member.studentId}
                     className="flex items-center justify-between rounded-xl border border-border bg-muted/30 p-3 shadow-sm"
                   >
-                    <div className="flex items-center gap-3 min-w-0">
+                    <div className="flex min-w-0 items-center gap-3">
                       <Avatar name={member.name} src={member.avatar} size="sm" />
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <span className="font-bold text-xs text-foreground truncate">{member.name}</span>
-                          <span className="rounded bg-background px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground border">
+                          <span className="truncate text-xs font-bold text-foreground">
+                            {member.name}
+                          </span>
+                          <span className="rounded border bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
                             {member.studentId}
                           </span>
                         </div>
-                        <span className="text-[11px] text-muted-foreground truncate block">
+                        <span className="block truncate text-[11px] text-muted-foreground">
                           {member.specificRole || 'Team Member'}
                         </span>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex shrink-0 items-center gap-2">
                       <button
                         type="button"
                         onClick={() =>
                           handleToggleMemberRole(
                             member.studentId,
-                            member.role === 'team_lead' ? 'member' : 'team_lead'
+                            member.role === 'team_lead' ? 'member' : 'team_lead',
                           )
                         }
                         className={`rounded-md px-2 py-1 text-[11px] font-bold transition-all ${
                           member.role === 'team_lead'
-                            ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30'
+                            ? 'border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400'
                             : 'bg-muted text-muted-foreground hover:text-foreground'
                         }`}
                       >
@@ -677,7 +706,7 @@ export function CreateProjectPage() {
                         <button
                           type="button"
                           onClick={() => handleRemoveMember(member.studentId)}
-                          className="rounded-md p-1 text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+                          className="rounded-md p-1 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                           title="Remove Member"
                         >
                           <X className="h-4 w-4" />
@@ -702,7 +731,7 @@ export function CreateProjectPage() {
             Cancel
           </Button>
 
-          <Button type="submit" className="text-xs font-bold px-6">
+          <Button type="submit" className="px-6 text-xs font-bold">
             <Sparkles className="mr-1.5 h-4 w-4" /> Create & Launch Project Workspace
           </Button>
         </div>

@@ -17,35 +17,48 @@ export function CertificateHero({
   courseName,
   studentName,
 }: CertificateHeroProps) {
-  const isEarned = status === 'earned'
+  const isEarned = status === 'in_progress'
   const isInProgress = status === 'in_progress'
 
   return (
     <div
       className={cn(
-        'relative rounded-2xl border overflow-hidden p-6 sm:p-8',
+        'relative overflow-hidden rounded-xl border p-6 transition-all duration-300 sm:p-8',
+
+        // Completed course — premium gold finish
         isEarned
-          ? 'border-amber-400/50 bg-gradient-to-br from-amber-500/10 via-amber-400/5 to-card'
-          : 'border-border bg-gradient-to-br from-primary/8 via-primary/4 to-card',
+          ? [
+              'border-amber-400/60',
+              'bg-gradient-to-br from-amber-100/90 via-yellow-500/15 to-amber-700/10',
+              'dark:from-amber-400/15 dark:via-yellow-500/10 dark:to-amber-700/20',
+              'shadow-[0_4px_24px_-8px_rgba(217,119,6,0.30)]',
+              'ring-1 ring-inset ring-amber-400/20',
+            ].join(' ')
+          : [
+              // Incomplete course — subtle premium surface
+              'border-border/80',
+              'to-card bg-gradient-to-br from-primary/[0.06] via-surface',
+              'shadow-sm',
+            ].join(' '),
       )}
     >
       {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className={cn(
-            'absolute -top-8 -right-8 h-40 w-40 rounded-full blur-3xl opacity-20',
+            'absolute -right-8 -top-8 h-40 w-40 rounded-full opacity-20 blur-3xl',
             isEarned ? 'bg-amber-400' : 'bg-primary',
           )}
         />
         <div
           className={cn(
-            'absolute -bottom-10 -left-10 h-32 w-32 rounded-full blur-3xl opacity-10',
+            'absolute -bottom-10 -left-10 h-32 w-32 rounded-full opacity-10 blur-3xl',
             isEarned ? 'bg-amber-500' : 'bg-primary',
           )}
         />
       </div>
 
-      <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-5">
+      <div className="relative flex flex-col items-start gap-5 sm:flex-row sm:items-center">
         {/* Icon */}
         <div
           className={cn(
@@ -65,8 +78,8 @@ export function CertificateHero({
         </div>
 
         {/* Text */}
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 flex flex-wrap items-center gap-2">
             <span
               className={cn(
                 'text-[11px] font-bold uppercase tracking-widest',
@@ -76,19 +89,27 @@ export function CertificateHero({
               {isEarned ? '✓ Certificate Earned' : isInProgress ? 'In Progress' : 'Locked'}
             </span>
           </div>
-          <h2 className="text-lg sm:text-xl font-bold text-foreground leading-snug truncate">
+          <h2 className="truncate text-lg font-bold leading-snug text-foreground sm:text-xl">
             {title}
           </h2>
-          <p className="text-sm text-muted-foreground mt-1">
-            {courseName} &mdash; issued to <span className="font-semibold text-foreground">{studentName}</span>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {courseName} &mdash; issued to{' '}
+            <span className="font-semibold text-foreground">{studentName}</span>
           </p>
         </div>
 
         {/* Progress ring (right side on sm+) */}
-        <div className="flex flex-col items-center gap-1 shrink-0">
+        <div className="flex shrink-0 flex-col items-center gap-1">
           <div className="relative flex h-16 w-16 items-center justify-center">
             <svg viewBox="0 0 36 36" className="h-16 w-16 -rotate-90" aria-hidden="true">
-              <circle cx="18" cy="18" r="15.915" fill="none" className="stroke-muted" strokeWidth="2.5" />
+              <circle
+                cx="18"
+                cy="18"
+                r="15.915"
+                fill="none"
+                className="stroke-muted"
+                strokeWidth="2.5"
+              />
               <circle
                 cx="18"
                 cy="18"

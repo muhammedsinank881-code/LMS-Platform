@@ -20,7 +20,7 @@ export function AttendancePage() {
   } = useAttendanceHistory()
 
   return (
-    <div className="space-y-4 pb-12">
+    <div className="space-y-4 pb-6">
       {/* Page Header */}
       <PageHeader
         title="Attendance History"
@@ -42,12 +42,14 @@ export function AttendancePage() {
       {/* Main Content — Two Column Layout on large screens */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-7">
         {/* Left: Daily log list — takes 3 of 5 cols */}
-        <div className="lg:col-span-3">
-          <AttendanceCalendar
+        <div className="lg:col-span-3 ">
+          <div className='lg:sticky lg:top-0'>
+            <AttendanceCalendar
             records={records}
             selectedDate={selectedDate}
             onSelectDate={setSelectedDate}
           />
+          </div>
         </div>
 
         {/* Right: Day Detail Panel — takes 2 of 5 cols, sticky on desktop */}
@@ -58,7 +60,7 @@ export function AttendancePage() {
         </div>
 
         <div className="lg:col-span-2">
-          <div className="lg:sticky lg:top-6">
+          <div className="lg:sticky lg:top-0">
             <AttendanceDailyActivity
               displayDate={selectedRecord?.displayDate}
               activities={selectedRecord?.activities ?? []} />

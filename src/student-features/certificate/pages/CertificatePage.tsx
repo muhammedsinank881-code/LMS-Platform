@@ -16,15 +16,11 @@ export function CertificatePage() {
   } = useCertificate()
 
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-4 pb-12">
       {/* Page Header */}
       <PageHeader
         title="My Certificate"
         description="Track your progress toward earning your course completion certificate. Complete all requirements to unlock and download."
-        breadcrumbs={[
-          { label: 'Student', to: '/student/dashboard' },
-          { label: 'Certificate' },
-        ]}
       />
 
       {/* Hero Status Banner */}
@@ -48,7 +44,7 @@ export function CertificatePage() {
       />
 
       {/* Two Column on large screens: Requirements (left) + Certificate Card (right) */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
         {/* Left: Full requirements checklist — 3 of 5 cols */}
         <div className="lg:col-span-3">
           <RequirementsChecklist
@@ -59,7 +55,7 @@ export function CertificatePage() {
 
         {/* Right: Certificate preview card — 2 of 5 cols, sticky on desktop */}
         <div className="lg:col-span-2">
-          <div className="lg:sticky lg:top-6">
+          <div className="lg:sticky lg:top-0">
             <CertificateCard cert={cert} isEarned={isEarned} />
           </div>
         </div>

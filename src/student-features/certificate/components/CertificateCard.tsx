@@ -10,7 +10,7 @@ interface CertificateCardProps {
 
 export function CertificateCard({ cert, isEarned }: CertificateCardProps) {
   return (
-    <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+    <div className="rounded-md border border-border bg-surface shadow-sm overflow-hidden">
       {/* Header */}
       <div className="border-b border-border px-5 py-3 flex items-center justify-between">
         <h3 className="text-sm font-bold text-foreground">Certificate Preview</h3>

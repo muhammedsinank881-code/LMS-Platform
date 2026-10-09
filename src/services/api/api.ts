@@ -27,6 +27,8 @@ import type { TeamApiClient } from './team'
 import type { QuickRepliesApiClient } from './quick-replies'
 import type { SimulatorApiClient } from './simulator'
 import type { TemplatesApiClient } from './templates'
+import type { StudentProfileApiClient } from './student-profile'
+import type { StudentJobsApiClient } from './student-jobs'
 
 /** Every resource the app talks to. A backend implements this once; the UI never sees which. */
 export interface Api {
@@ -55,6 +57,8 @@ export interface Api {
   savedViews: SavedViewsApiClient
   team: TeamApiClient
   settings: SettingsApiClient
+  studentProfile: StudentProfileApiClient
+  studentJobs: StudentJobsApiClient
   reports: ReportsApiClient
   integrations: IntegrationsApiClient
   leadForms: LeadFormsApiClient

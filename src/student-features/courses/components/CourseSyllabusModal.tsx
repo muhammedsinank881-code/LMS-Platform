@@ -16,7 +16,7 @@ export function CourseSyllabusModal({ course, open, onOpenChange }: CourseSyllab
 
   const handlePlayLesson = (lessonId: string) => {
     onOpenChange(false)
-    navigate(`/student/video-class?id=${lessonId}`)
+    navigate(`/student/video-class?id=${lessonId}&courseId=${course.id}`)
   }
 
   return (

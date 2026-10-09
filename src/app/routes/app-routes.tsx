@@ -172,6 +172,14 @@ const shellPages: RouteObject[] = [
         lazy: lazyPage(() => import('@/student-features/pages/StudentCertificatesPage'), 'StudentCertificatesPage'),
       },
       {
+        path: 'profile',
+        lazy: lazyPage(() => import('@/student-features/profile/pages/StudentProfilePage'), 'StudentProfilePage'),
+      },
+      {
+        path: 'jobs',
+        lazy: lazyPage(() => import('@/student-features/jobs/pages/StudentJobsPage'), 'StudentJobsPage'),
+      },
+      {
         path: 'video-class',
         lazy: lazyPage(() => import('@/student-features/pages/StudentVideoClassPage'), 'StudentVideoClassPage'),
       },

@@ -35,7 +35,13 @@ const MAX_AVATAR = 400_000
 export const profileApi = {
   update: (patch: ProfileInput) =>
     request((ctx) => {
-      ctx.require('settings', 'edit')
+      if (ctx.actor.role === 'student') {
+        if (Object.keys(patch).some((key) => key !== 'avatarUrl')) {
+          throw new ApiError('FORBIDDEN', 'Students can only update their profile photo here.')
+        }
+      } else {
+        ctx.require('settings', 'edit')
+      }
       const user = ctx.db.get('users', ctx.actor.id, 'User')
       if (patch.avatarUrl && patch.avatarUrl.length > MAX_AVATAR) {
         throw validationError('avatarUrl', 'That image is too large. Use a smaller file.')

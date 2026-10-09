@@ -55,6 +55,8 @@ import type {
   WebhookEndpoint,
   WebhookOutcome,
 } from '@/types'
+import type { StudentProfile } from '@/services/api/student-profile'
+import type { StudentJobApplication } from '@/services/api/student-jobs'
 
 export interface TenantSettings {
   /** Equals `tenantId`; one row per workspace. */
@@ -101,6 +103,8 @@ export interface DuplicateDismissal {
 /** Every table. All rows carry `tenantId`; nothing here is shared between workspaces. */
 export interface MockTables {
   users: User[]
+  studentProfiles: StudentProfile[]
+  studentJobApplications: StudentJobApplication[]
   teams: Team[]
   leads: Lead[]
   leadStatuses: LeadStatus[]
