@@ -34,7 +34,7 @@ export function ProjectSidebar({
       className={cn(
         'flex shrink-0 flex-col overflow-hidden border border-border bg-surface shadow-sm',
         'transition-[width,padding,border-radius] duration-300 ease-in-out',
-        isCollapsed ? 'w-12 items-center rounded-md p-1' : 'w-64 space-y-4 rounded-xl p-4',
+        isCollapsed ? 'w-8 items-center rounded-md ' : 'w-64 space-y-4 rounded-md p-4',
       )}
     >
 
