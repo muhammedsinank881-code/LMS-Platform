@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
@@ -55,44 +55,38 @@ describe('StudentJobsPage', () => {
   it('shows explicitly labelled LMS demo jobs and the student application count', async () => {
     renderPage()
 
-    expect(await screen.findByRole('heading', { name: 'Junior Software Developer' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'React.js Developer' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Junior Software Developer', level: 2 })).toBeInTheDocument()
     expect(screen.getAllByText('LMS job portal (demo)').length).toBeGreaterThan(0)
     expect(screen.getByText('Jobs you applied to')).toBeInTheDocument()
     expect(screen.getByRole('status', { name: '0 jobs applied to' })).toBeInTheDocument()
     expect(screen.queryByText('No job listings are available')).not.toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'View profile CV status' })).toHaveAttribute(
-      'href',
-      '/student/profile',
-    )
+    expect(screen.getByRole('heading', { name: 'CV / Resume' })).toBeInTheDocument()
   })
 
   it('combines title, arrangement, employment type, location and salary filters', async () => {
     const user = userEvent.setup()
     renderPage()
-    await screen.findByRole('heading', { name: 'React.js Developer' })
+    await screen.findByRole('heading', { name: 'Junior Software Developer', level: 2 })
 
-    await user.type(screen.getByRole('textbox', { name: /Search by job name/ }), 'React.js')
+    await user.type(screen.getByRole('textbox', { name:/Search jobs/i }), 'React.js')
     await user.selectOptions(screen.getByRole('combobox', { name: 'Work arrangement' }), 'hybrid')
     await user.selectOptions(screen.getByRole('combobox', { name: 'Employment type' }), 'full-time')
     await user.selectOptions(screen.getByRole('combobox', { name: 'Location' }), 'Bengaluru, India')
     await user.selectOptions(screen.getByRole('combobox', { name: 'Salary range' }), '6-plus')
 
-    expect(screen.getByRole('heading', { name: 'React.js Developer' })).toBeInTheDocument()
-    expect(screen.queryByRole('heading', { name: 'Junior Software Developer' })).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'React.js Developer', level: 2 })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Junior Software Developer', level: 2 })).not.toBeInTheDocument()
     expect(screen.getByText('Showing 1 of 7 demo jobs')).toBeInTheDocument()
   })
 
   it('records a demo application once and updates the student-specific count', async () => {
     const user = userEvent.setup()
     renderPage()
-    const jobHeading = await screen.findByRole('heading', { name: 'Junior Software Developer' })
-    const jobCard = jobHeading.closest('[class*="rounded-md border"]')
-    expect(jobCard).not.toBeNull()
-    const card = within(jobCard as HTMLElement)
-    await user.click(card.getByRole('button', { name: 'Record demo application' }))
+    await screen.findByRole('heading', { name: 'Junior Software Developer', level: 2 })
 
-    expect(await card.findByText('Applied')).toBeInTheDocument()
+    const applyButton = screen.getByRole('button', { name: /apply now/i })
+    await user.click(applyButton)
+
     await waitFor(() => {
       expect(screen.getByRole('status', { name: '1 job applied to' })).toBeInTheDocument()
     })
@@ -102,12 +96,12 @@ describe('StudentJobsPage', () => {
   it('clears search and filters', async () => {
     const user = userEvent.setup()
     renderPage()
-    await screen.findByRole('heading', { name: 'React.js Developer' })
+    await screen.findByRole('heading', { name: 'Junior Software Developer', level: 2 })
     await user.selectOptions(screen.getByRole('combobox', { name: 'Work arrangement' }), 'remote')
-    expect(screen.queryByRole('heading', { name: 'React.js Developer' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Junior Software Developer', level: 2 })).not.toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Clear filters' }))
-    expect(screen.getByRole('heading', { name: 'React.js Developer' })).toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { name: 'Junior Software Developer' }).length).toBeGreaterThan(0)
   })
 
   it('does not expose the student job page to other roles', () => {

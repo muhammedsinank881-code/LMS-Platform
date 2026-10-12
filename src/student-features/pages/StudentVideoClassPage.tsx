@@ -459,10 +459,10 @@ export function StudentVideoClassPage() {
         <aside
           aria-label="Course syllabus"
           className={`min-w-0 transition-[width] duration-200 xl:sticky xl:top-0 ${
-            isSyllabusOpen ? 'xl:w-64' : 'xl:w-12'
+            isSyllabusOpen ? 'xl:w-64' : 'xl:w-8'
           }`}
         >
-          <Card className={arePreferencesOpen ? 'p-3' : 'p-1'}>
+          <Card className={arePreferencesOpen ? 'p-3' : 'p-0'}>
             <div className={`flex items-center ${isSyllabusOpen ? 'justify-between' : 'justify-center'}`}>
               {isSyllabusOpen && <h2 className="text-sm font-semibold text-foreground">Course syllabus</h2>}
               <Button
@@ -477,7 +477,7 @@ export function StudentVideoClassPage() {
             </div>
             {isSyllabusOpen && (
               <div className="max-h-[65vh] space-y-2 overflow-y-auto pr-1">
-                <div className="rounded-lg bg-surface-hover p-3">
+                <div className="rounded-md bg-surface-hover p-3">
                   <div className="mb-2 flex items-center justify-between text-xs">
                     <span className="font-medium text-foreground">Course progress</span>
                     <span className="text-muted-foreground">{totalCompleted}/{courseLessons.length}</span>
@@ -644,10 +644,10 @@ export function StudentVideoClassPage() {
         <aside
           aria-label="Content preferences"
           className={`min-w-0 transition-[width] duration-200 xl:sticky xl:top-0 ${
-            arePreferencesOpen ? 'xl:w-56' : 'xl:w-12'
+            arePreferencesOpen ? 'xl:w-56' : 'xl:w-8'
           }`}
         >
-          <Card className={arePreferencesOpen ? 'p-3' : 'p-1'}>
+          <Card className={arePreferencesOpen ? 'p-3' : 'p-0'}>
             <div className={`flex items-center ${arePreferencesOpen ? 'justify-between' : 'justify-center'}`}>
               {arePreferencesOpen && <h2 className="text-sm font-semibold text-foreground">Content</h2>}
               <Button

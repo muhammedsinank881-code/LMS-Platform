@@ -9,7 +9,7 @@ export const ModalTrigger = DialogPrimitive.Trigger
 export const ModalClose = DialogPrimitive.Close
 
 const modalVariants = cva(
-  'relative flex w-full flex-col rounded-lg border border-border bg-surface text-foreground shadow-modal max-sm:h-dvh max-sm:max-h-dvh max-sm:rounded-none',
+  'relative flex w-full flex-col rounded-md border border-border bg-surface text-foreground shadow-modal max-sm:h-dvh max-sm:max-h-dvh max-sm:rounded-none',
   {
     variants: {
       size: {
