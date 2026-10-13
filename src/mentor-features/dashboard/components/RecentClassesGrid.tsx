@@ -91,57 +91,55 @@ export function RecentClassesGrid({ classes }: RecentClassesGridProps) {
                     </div>
 
                     {/* Three-dot dropdown actions menu */}
-                    <div onClick={(e) => e.stopPropagation()}>
-                      <Dropdown>
-                        <DropdownTrigger asChild>
-                          <button
-                            type="button"
-                            className="p-1 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                            aria-label={`Options for ${cls.title}`}
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <MoreVertical className="size-3.5" />
-                          </button>
-                        </DropdownTrigger>
-                        <DropdownContent align="end" className="w-48">
-                          <DropdownItem
-                            onClick={() => navigate(`/mentor/classes/${cls.id}`)}
-                            className="cursor-pointer"
-                          >
-                            <BookOpen className="size-3.5 mr-2 text-primary" />
-                            <span>View Class Details</span>
-                          </DropdownItem>
-                          <DropdownItem
-                            onClick={() => navigate(`/mentor/attendance?classId=${cls.id}`)}
-                            className="cursor-pointer"
-                          >
-                            <UserCheck className="size-3.5 mr-2 text-emerald-500" />
-                            <span>Take Attendance</span>
-                          </DropdownItem>
-                          <DropdownItem
-                            onClick={() => navigate('/mentor/materials')}
-                            className="cursor-pointer"
-                          >
-                            <FileText className="size-3.5 mr-2 text-muted-foreground" />
-                            <span>Learning Materials</span>
-                          </DropdownItem>
-                          <DropdownItem
-                            onClick={() => navigate('/mentor/assignments')}
-                            className="cursor-pointer"
-                          >
-                            <CheckSquare className="size-3.5 mr-2 text-muted-foreground" />
-                            <span>Assignments</span>
-                          </DropdownItem>
-                          <DropdownItem
-                            onClick={() => navigate('/mentor/schedule')}
-                            className="cursor-pointer"
-                          >
-                            <Calendar className="size-3.5 mr-2 text-muted-foreground" />
-                            <span>Schedule / Classes</span>
-                          </DropdownItem>
-                        </DropdownContent>
-                      </Dropdown>
-                    </div>
+                    <Dropdown>
+                      <DropdownTrigger asChild>
+                        <button
+                          type="button"
+                          className="p-1 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                          aria-label={`Options for ${cls.title}`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <MoreVertical className="size-3.5" />
+                        </button>
+                      </DropdownTrigger>
+                      <DropdownContent align="end" className="w-48">
+                        <DropdownItem
+                          onClick={() => navigate(`/mentor/classes/${cls.id}`)}
+                          className="cursor-pointer"
+                        >
+                          <BookOpen className="size-3.5 mr-2 text-primary" />
+                          <span>View Class Details</span>
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => navigate(`/mentor/attendance?classId=${cls.id}`)}
+                          className="cursor-pointer"
+                        >
+                          <UserCheck className="size-3.5 mr-2 text-emerald-500" />
+                          <span>Take Attendance</span>
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => navigate('/mentor/materials')}
+                          className="cursor-pointer"
+                        >
+                          <FileText className="size-3.5 mr-2 text-muted-foreground" />
+                          <span>Learning Materials</span>
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => navigate('/mentor/assignments')}
+                          className="cursor-pointer"
+                        >
+                          <CheckSquare className="size-3.5 mr-2 text-muted-foreground" />
+                          <span>Assignments</span>
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => navigate('/mentor/schedule')}
+                          className="cursor-pointer"
+                        >
+                          <Calendar className="size-3.5 mr-2 text-muted-foreground" />
+                          <span>Schedule / Classes</span>
+                        </DropdownItem>
+                      </DropdownContent>
+                    </Dropdown>
                   </div>
 
                   <div>

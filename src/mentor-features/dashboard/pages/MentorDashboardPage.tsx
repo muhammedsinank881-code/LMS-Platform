@@ -109,19 +109,21 @@ export function MentorDashboardPage() {
   const recentClassesList: RecentClassItem[] = useMemo(() => {
     if (mentorClasses && mentorClasses.length > 0) {
       return mentorClasses.slice(0, 5).map((cls) => {
-        let bgAccent: 'blue' | 'emerald' | 'purple' = 'blue'
-        let iconType: 'code' | 'web' | 'list' = 'code'
+        const isWeb = cls.iconType === 'web'
+        const isProjectOrCloud =
+          cls.iconType === 'database' || cls.iconType === 'cloud' || cls.iconType === 'mobile'
 
-        if (cls.iconType === 'web') {
-          iconType = 'web'
-          bgAccent = 'emerald'
-        } else if (cls.iconType === 'database' || cls.iconType === 'cloud' || cls.iconType === 'mobile') {
-          iconType = 'list'
-          bgAccent = 'purple'
-        } else {
-          iconType = 'code'
-          bgAccent = 'blue'
-        }
+        const bgAccent: 'blue' | 'emerald' | 'purple' = isWeb
+          ? 'emerald'
+          : isProjectOrCloud
+            ? 'purple'
+            : 'blue'
+
+        const iconType: 'code' | 'web' | 'list' = isWeb
+          ? 'web'
+          : isProjectOrCloud
+            ? 'list'
+            : 'code'
 
         const shortTitle = cls.title.includes('&')
           ? cls.title.split('&')[0].trim()
@@ -191,20 +193,14 @@ export function MentorDashboardPage() {
   const todayScheduleList: ScheduleItem[] = useMemo(() => {
     if (todaysClasses && todaysClasses.length > 0) {
       return todaysClasses.map((item) => {
-        let iconType: 'code' | 'web' | 'list' = 'code'
-        let classId = 'cls-104'
-
-        if (item.title.toLowerCase().includes('web') || item.type === 'online') {
-          iconType = 'web'
-          classId = 'cls-102'
-        } else if (
+        const isWeb = item.title.toLowerCase().includes('web') || item.type === 'online'
+        const isProject =
           item.title.toLowerCase().includes('capstone') ||
           item.title.toLowerCase().includes('project') ||
           item.title.toLowerCase().includes('database')
-        ) {
-          iconType = 'list'
-          classId = 'cls-103'
-        }
+
+        const iconType: 'code' | 'web' | 'list' = isWeb ? 'web' : isProject ? 'list' : 'code'
+        const classId = isWeb ? 'cls-102' : isProject ? 'cls-103' : 'cls-104'
 
         const shortTitle = item.title.includes('&')
           ? item.title.split('&')[0].trim()

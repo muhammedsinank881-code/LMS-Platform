@@ -111,51 +111,49 @@ export function AnnouncementsCard({
                     </Badge>
 
                     {/* Three-dot dropdown menu */}
-                    <div onClick={(e) => e.stopPropagation()}>
-                      <Dropdown>
-                        <DropdownTrigger asChild>
-                          <button
-                            type="button"
-                            className="p-1 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
-                            aria-label={`Actions for ${item.title}`}
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <MoreVertical className="size-3.5" />
-                          </button>
-                        </DropdownTrigger>
-                        <DropdownContent align="end" className="w-48">
-                          <DropdownItem
-                            onClick={() => setSelectedAnnouncement(item)}
-                            className="cursor-pointer"
-                          >
-                            <Eye className="size-3.5 mr-2 text-primary" />
-                            <span>View Notice</span>
-                          </DropdownItem>
-                          <DropdownItem
-                            onClick={() => handleCopyLink(item)}
-                            className="cursor-pointer"
-                          >
-                            <Share2 className="size-3.5 mr-2 text-muted-foreground" />
-                            <span>Share / Copy Link</span>
-                          </DropdownItem>
-                          <DropdownItem
-                            onClick={() => handleEdit(item)}
-                            className="cursor-pointer"
-                          >
-                            <Edit3 className="size-3.5 mr-2 text-muted-foreground" />
-                            <span>Edit Announcement</span>
-                          </DropdownItem>
-                          <DropdownItem
-                            destructive
-                            onClick={() => handleDelete(item)}
-                            className="cursor-pointer"
-                          >
-                            <Trash2 className="size-3.5 mr-2" />
-                            <span>Delete</span>
-                          </DropdownItem>
-                        </DropdownContent>
-                      </Dropdown>
-                    </div>
+                    <Dropdown>
+                      <DropdownTrigger asChild>
+                        <button
+                          type="button"
+                          className="p-1 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary"
+                          aria-label={`Actions for ${item.title}`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <MoreVertical className="size-3.5" />
+                        </button>
+                      </DropdownTrigger>
+                      <DropdownContent align="end" className="w-48">
+                        <DropdownItem
+                          onClick={() => setSelectedAnnouncement(item)}
+                          className="cursor-pointer"
+                        >
+                          <Eye className="size-3.5 mr-2 text-primary" />
+                          <span>View Notice</span>
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => handleCopyLink(item)}
+                          className="cursor-pointer"
+                        >
+                          <Share2 className="size-3.5 mr-2 text-muted-foreground" />
+                          <span>Share / Copy Link</span>
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => handleEdit(item)}
+                          className="cursor-pointer"
+                        >
+                          <Edit3 className="size-3.5 mr-2 text-muted-foreground" />
+                          <span>Edit Announcement</span>
+                        </DropdownItem>
+                        <DropdownItem
+                          destructive
+                          onClick={() => handleDelete(item)}
+                          className="cursor-pointer"
+                        >
+                          <Trash2 className="size-3.5 mr-2" />
+                          <span>Delete</span>
+                        </DropdownItem>
+                      </DropdownContent>
+                    </Dropdown>
                   </div>
                 </CardContent>
               </Card>

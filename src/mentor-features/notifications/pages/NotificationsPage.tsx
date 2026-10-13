@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import {
   Bell,
@@ -137,35 +137,25 @@ export function NotificationsPage() {
   const location = useLocation()
   const [searchParams] = useSearchParams()
 
-  const isAnnouncementsMode = location.pathname.includes('/announcements')
-  const [activeTab, setActiveTab] = useState<'announcements' | 'notifications'>(
-    isAnnouncementsMode ? 'announcements' : 'notifications',
-  )
-
-  useEffect(() => {
-    if (location.pathname.includes('/announcements')) {
-      setActiveTab('announcements')
-    } else if (location.pathname.includes('/notifications')) {
-      setActiveTab('notifications')
-    }
-  }, [location.pathname])
+  const isAnnouncementsPath = location.pathname.includes('/announcements')
+  const [tabOverride, setTabOverride] = useState<'announcements' | 'notifications' | null>(null)
+  const activeTab = tabOverride ?? (isAnnouncementsPath ? 'announcements' : 'notifications')
 
   const [notifs, setNotifs] = useState(MOCK_NOTIFS)
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>(MOCK_ANNOUNCEMENTS_FEED)
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('all')
   const [selectedAnnouncement, setSelectedAnnouncement] = useState<AnnouncementItem | null>(null)
+  const [closedUrlId, setClosedUrlId] = useState<string | null>(null)
 
-  // Auto-open announcement if ?id=... is present in searchParams
-  useEffect(() => {
+  const activeAnnouncement = useMemo(() => {
+    if (selectedAnnouncement) return selectedAnnouncement
     const id = searchParams.get('id')
-    if (id) {
-      const match = announcements.find((a) => a.id === id)
-      if (match) {
-        setSelectedAnnouncement(match)
-      }
+    if (id && id !== closedUrlId) {
+      return announcements.find((a) => a.id === id) || null
     }
-  }, [searchParams, announcements])
+    return null
+  }, [selectedAnnouncement, searchParams, closedUrlId, announcements])
 
   const handleMarkAllRead = () => {
     setNotifs((prev) => prev.map((n) => ({ ...n, read: true })))
@@ -233,7 +223,7 @@ export function NotificationsPage() {
       <div className="flex border-b border-border gap-6 text-sm font-semibold">
         <button
           type="button"
-          onClick={() => setActiveTab('announcements')}
+          onClick={() => setTabOverride('announcements')}
           className={`pb-2.5 transition-colors border-b-2 cursor-pointer ${
             activeTab === 'announcements'
               ? 'border-primary text-primary'
@@ -244,7 +234,7 @@ export function NotificationsPage() {
         </button>
         <button
           type="button"
-          onClick={() => setActiveTab('notifications')}
+          onClick={() => setTabOverride('notifications')}
           className={`pb-2.5 transition-colors border-b-2 cursor-pointer ${
             activeTab === 'notifications'
               ? 'border-primary text-primary'
@@ -375,7 +365,7 @@ export function NotificationsPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 self-end sm:self-start shrink-0" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center gap-2 self-end sm:self-start shrink-0">
                       <Button
                         type="button"
                         variant="outline"
@@ -383,6 +373,7 @@ export function NotificationsPage() {
                         onClick={(e) => {
                           e.stopPropagation()
                           setSelectedAnnouncement(ann)
+                          setClosedUrlId(null)
                         }}
                         className="text-xs"
                       >
@@ -396,12 +387,18 @@ export function NotificationsPage() {
                             type="button"
                             className="p-1.5 rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
                             aria-label={`Options for ${ann.title}`}
+                            onClick={(e) => e.stopPropagation()}
                           >
                             <MoreVertical className="size-4" />
                           </button>
                         </DropdownTrigger>
                         <DropdownContent align="end" className="w-44">
-                          <DropdownItem onClick={() => setSelectedAnnouncement(ann)}>
+                          <DropdownItem
+                            onClick={() => {
+                              setSelectedAnnouncement(ann)
+                              setClosedUrlId(null)
+                            }}
+                          >
                             <Eye className="size-3.5 mr-2 text-primary" />
                             <span>View Full Notice</span>
                           </DropdownItem>
@@ -460,9 +457,17 @@ export function NotificationsPage() {
 
       {/* Details Modal */}
       <AnnouncementDetailsModal
-        announcement={selectedAnnouncement}
-        open={Boolean(selectedAnnouncement)}
-        onOpenChange={(open) => !open && setSelectedAnnouncement(null)}
+        announcement={activeAnnouncement}
+        open={Boolean(activeAnnouncement)}
+        onOpenChange={(open) => {
+          if (!open) {
+            setSelectedAnnouncement(null)
+            const id = searchParams.get('id')
+            if (id) {
+              setClosedUrlId(id)
+            }
+          }
+        }}
         onDelete={handleDeleteAnnouncement}
       />
     </div>
