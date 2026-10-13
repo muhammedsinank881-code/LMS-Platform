@@ -7,9 +7,11 @@ import {
   MapPin,
   RefreshCw,
   Trash2,
+  UserCheck,
   Users,
   Video,
 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import {
   Badge,
   Button,
@@ -37,6 +39,7 @@ export function ClassDetailsModal({
   onReschedule,
   onCancel,
 }: ClassDetailsModalProps) {
+  const navigate = useNavigate()
   if (!cls) return null
 
   const isOngoing = cls.status === 'ongoing'
@@ -179,6 +182,18 @@ export function ClassDetailsModal({
         <ModalFooter className="border-t border-border gap-2">
           {!isCancelled ? (
             <>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => {
+                  onClose()
+                  navigate('/mentor/attendance')
+                }}
+              >
+                <UserCheck className="size-4 mr-1.5 text-emerald-500" />
+                <span>Take Attendance</span>
+              </Button>
+
               <Button
                 type="button"
                 variant="destructive"
