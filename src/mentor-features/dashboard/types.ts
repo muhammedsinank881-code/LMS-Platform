@@ -14,6 +14,13 @@ export interface ScheduleItem {
   location: string
   status: 'ongoing' | 'upcoming' | 'completed'
   iconType: 'code' | 'web' | 'list'
+  classId?: string
+  date?: string
+  room?: string
+  meetingLink?: string
+  studentsCount?: number
+  semester?: string
+  description?: string
 }
 
 export interface RecentClassItem {
@@ -23,6 +30,18 @@ export interface RecentClassItem {
   studentsCount: number
   iconType: 'code' | 'web' | 'list'
   bgAccent: 'blue' | 'emerald' | 'purple'
+  courseCode?: string
+  room?: string
+  status?: 'active' | 'completed'
+  attendanceRate?: number
+  syllabusProgress?: number
+}
+
+export interface AnnouncementAttachment {
+  name: string
+  url: string
+  size?: string
+  type?: 'pdf' | 'doc' | 'link'
 }
 
 export interface AnnouncementItem {
@@ -31,6 +50,10 @@ export interface AnnouncementItem {
   date: string
   category?: string
   isPinned?: boolean
+  content?: string
+  author?: string
+  targetAudience?: string
+  attachments?: AnnouncementAttachment[]
 }
 
 export interface MentorDashboardData {

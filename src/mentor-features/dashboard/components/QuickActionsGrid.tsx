@@ -1,4 +1,4 @@
-import { CalendarPlus, FilePlus, ArrowRight, UploadCloud, UserCheck } from 'lucide-react'
+import { CalendarPlus, FilePlus, UploadCloud, UserCheck } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui'
 import type { QuickActionItem } from '../types'
@@ -47,12 +47,7 @@ export function QuickActionsGrid({ actions }: QuickActionsGridProps) {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-bold text-foreground tracking-tight uppercase text-muted-foreground/90">Quick Actions</h2>
-        <button
-          type="button"
-          className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-        >
-          See All <ArrowRight className="size-3" />
-        </button>
+        
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
