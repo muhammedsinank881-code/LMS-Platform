@@ -2,9 +2,7 @@ import { useState } from 'react'
 import {
   Calendar,
   Check,
-  Copy,
   Download,
-  ExternalLink,
   FileText,
   Megaphone,
   Pin,

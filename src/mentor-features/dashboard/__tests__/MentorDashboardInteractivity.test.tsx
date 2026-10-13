@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { BrowserRouter, MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { AnnouncementsCard } from '../components/AnnouncementsCard'
 import { RecentClassesGrid } from '../components/RecentClassesGrid'

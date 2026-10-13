@@ -2,10 +2,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import {
   Bell,
-  Calendar,
   CheckCheck,
   Clock,
-  Download,
   Eye,
   FileText,
   Megaphone,
@@ -180,8 +178,8 @@ export function NotificationsPage() {
     toast.success('Announcement link copied to clipboard')
   }
 
-  const handleDeleteAnnouncement = (id: string) => {
-    setAnnouncements((prev) => prev.filter((a) => a.id !== id))
+  const handleDeleteAnnouncement = (ann: AnnouncementItem) => {
+    setAnnouncements((prev) => prev.filter((a) => a.id !== ann.id))
     toast.success('Announcement removed')
   }
 

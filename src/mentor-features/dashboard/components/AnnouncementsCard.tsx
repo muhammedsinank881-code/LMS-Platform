@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ArrowRight, Edit3, Eye, Megaphone, MoreVertical, Share2, Trash2 } from 'lucide-react'
 import {
   Badge,
@@ -25,7 +25,6 @@ export function AnnouncementsCard({
   onDeleteAnnouncement,
   onEditAnnouncement,
 }: AnnouncementsCardProps) {
-  const navigate = useNavigate()
   const [selectedAnnouncement, setSelectedAnnouncement] = useState<AnnouncementItem | null>(null)
 
   const handleCopyLink = (announcement: AnnouncementItem) => {
