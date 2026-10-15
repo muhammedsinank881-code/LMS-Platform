@@ -3,6 +3,7 @@ import { Search } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { Modal, ModalContent, ModalDescription, ModalTitle } from '@/components/ui'
 import { NAV_ITEMS } from '@/components/layout/nav-config'
+import { STUDENT_NAV_ITEMS } from '@/components/layout/student-nav-config'
 import { usePermission } from '@/hooks/use-permission'
 import { useUiStore } from '@/store/ui-store'
 
@@ -17,9 +18,12 @@ export function CommandPalette() {
   const open = useUiStore((state) => state.commandPaletteOpen)
   const setOpen = useUiStore((state) => state.setCommandPaletteOpen)
   const navigate = useNavigate()
-  const { can } = usePermission()
+  const { can, role } = usePermission()
 
-  const items = NAV_ITEMS.filter((item) => can(item.resource, 'view'))
+  const items =
+    role === 'student'
+      ? STUDENT_NAV_ITEMS
+      : NAV_ITEMS.filter((item) => can(item.resource, 'view'))
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
@@ -44,7 +48,7 @@ export function CommandPalette() {
             >
               {items.map((item) => (
                 <Command.Item
-                  key={item.resource}
+                  key={item.path}
                   value={item.label}
                   className={itemClasses}
                   onSelect={() => {

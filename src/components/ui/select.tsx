@@ -43,7 +43,7 @@ function OptionItem({ option }: { option: SelectOption }) {
     <SelectPrimitive.Item
       value={option.value}
       disabled={option.disabled}
-      className={cn(menuItem, 'pr-8')}
+      className={cn(menuItem, 'min-h-8 py-1 text-[10px] max-sm:min-h-8 sm:text-sm', 'pr-8')}
     >
       <SelectPrimitive.ItemText>{option.label}</SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator className="absolute right-2 flex items-center">
@@ -85,11 +85,14 @@ export function Select({
         aria-invalid={invalid || undefined}
         className={cn(
           fieldVariants({ size, invalid }),
-          'inline-flex items-center justify-between gap-2 text-left data-[placeholder]:text-muted-foreground',
+          'inline-flex h-9 min-h-0 items-center justify-between gap-2 text-left text-[10px] data-[placeholder]:text-muted-foreground sm:text-xs',
           className,
         )}
       >
-        <SelectPrimitive.Value placeholder={placeholder} className="truncate" />
+        <SelectPrimitive.Value
+          placeholder={placeholder}
+          className="truncate text-[10px] lg:text-xs"
+        />
         <SelectPrimitive.Icon asChild>
           <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         </SelectPrimitive.Icon>
@@ -100,7 +103,7 @@ export function Select({
           sideOffset={4}
           className={cn(
             popoverSurface,
-            'max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden',
+            'max-h-[var(--radix-select-content-available-height)] min-w-[var(--radix-select-trigger-width)] overflow-hidden text-[10px] lg:text-xs',
           )}
         >
           <SelectPrimitive.Viewport className="p-1">

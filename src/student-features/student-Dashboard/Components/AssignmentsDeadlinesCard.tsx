@@ -1,8 +1,10 @@
 import { Calendar, CheckCircle2 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { Badge, Button, Card } from '@/components/ui'
 import { MOCK_STUDENT_DATA } from '../../mock/student-data'
 
 export function AssignmentsDeadlinesCard() {
+  const navigate = useNavigate()
   const { assignments } = MOCK_STUDENT_DATA
 
   return (
@@ -41,7 +43,12 @@ export function AssignmentsDeadlinesCard() {
 
             <div className="flex items-center justify-between gap-2 shrink-0">
               {item.status === 'pending' ? (
-                <Button size="sm" variant="primary" className="h-7 text-xs px-3">
+                <Button
+                  size="sm"
+                  variant="primary"
+                  className="h-7 text-xs px-3"
+                  onClick={() => navigate(`/student/assignments?id=${encodeURIComponent(item.id)}`)}
+                >
                   Submit Task
                 </Button>
               ) : (

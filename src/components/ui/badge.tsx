@@ -57,7 +57,7 @@ const tones = {
 export type BadgeTone = keyof typeof tones
 
 const badgeVariants = cva(
-  'inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full font-medium',
+  'inline-flex min-w-0 shrink items-center gap-1.5 whitespace-nowrap rounded-full font-medium',
   {
     variants: {
       size: {

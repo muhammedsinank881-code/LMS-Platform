@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Calendar, Check, Code, Send, Upload } from 'lucide-react'
-import { Avatar, Badge, Button, Input, Modal, ModalBody, ModalContent, ModalDescription, ModalHeader, ModalTitle, Textarea } from '@/components/ui'
+import { Badge, Button, Input, Modal, ModalBody, ModalContent, ModalDescription, ModalHeader, ModalTitle, Textarea } from '@/components/ui'
 import type { StudentTask } from '../data/assignmentsData'
+import { TaskOverview } from './TaskOverview'
 
 interface SubmitAssignmentModalProps {
   task: StudentTask | null
@@ -62,27 +63,7 @@ export function SubmitAssignmentModal({
 
         <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto">
           <ModalBody className="space-y-4 py-4 text-xs">
-            {/* Mentor & Instructions */}
-            <div className="rounded-lg bg-surface-hover p-3 border border-border/60 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-foreground">Task Overview & Requirements</span>
-                <div className="flex items-center gap-1.5">
-                  <Avatar name={task.mentorName} src={task.mentorAvatar} size="xs" />
-                  <span className="text-[11px] text-muted-foreground">{task.mentorName}</span>
-                </div>
-              </div>
-              <p className="text-muted-foreground text-[11px]">{task.description}</p>
-              {task.instructions && task.instructions.length > 0 && (
-                <div className="pt-1 space-y-1">
-                  <p className="font-semibold text-foreground text-[11px]">Instructions:</p>
-                  <ul className="list-disc list-inside text-muted-foreground text-[11px] space-y-0.5">
-                    {task.instructions.map((inst, idx) => (
-                      <li key={idx}>{inst}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
+            <TaskOverview task={task} />
 
             {/* Inputs */}
             <div className="space-y-3">

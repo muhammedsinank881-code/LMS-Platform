@@ -38,7 +38,7 @@ export function MobileTabBar({ onOpenMore }: MobileTabBarProps) {
           }
         >
           <item.icon aria-hidden="true" className="h-5 w-5" />
-          {'resource' in item && item.resource === 'dashboard' ? 'Home' : item.label}
+          {/* {'resource' in item && item.resource === 'dashboard' ? 'Home' : item.label} */}
         </NavLink>
       ))}
       <button
@@ -47,7 +47,6 @@ export function MobileTabBar({ onOpenMore }: MobileTabBarProps) {
         className={cn(tabClasses, 'text-muted-foreground hover:text-foreground')}
       >
         <Ellipsis aria-hidden="true" className="h-5 w-5" />
-        More
       </button>
     </nav>
   )

@@ -83,7 +83,7 @@ export function CourseFilters({
       {/* Bottom row: Topic Pills & Sort Selector */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/50 pt-3 text-xs">
         <div className="flex flex-wrap items-center gap-1.5">
-          <span className="text-muted-foreground font-medium mr-1 text-[11px] flex items-center gap-1">
+          <span className="mr-1 flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
             <SlidersHorizontal className="h-3 w-3" /> Topic:
           </span>
           {CATEGORIES.map((cat) => (
@@ -93,7 +93,7 @@ export function CourseFilters({
               onClick={() => onCategoryChange(cat)}
               className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                 selectedCategory === cat
-                  ? 'bg-primary text-primary-foreground font-semibold shadow-sm'
+                  ? 'bg-primary font-semibold text-primary-foreground shadow-sm'
                   : 'bg-surface-hover text-muted-foreground hover:bg-border/60 hover:text-foreground'
               }`}
             >
@@ -103,14 +103,15 @@ export function CourseFilters({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-muted-foreground text-[11px] font-medium">
-            Showing <strong className="text-foreground">{totalCount}</strong> course{totalCount === 1 ? '' : 's'}
+          <span className="text-[11px] font-medium text-muted-foreground">
+            Showing <strong className="text-foreground">{totalCount}</strong> course
+            {totalCount === 1 ? '' : 's'}
           </span>
           <Select
             options={SORT_OPTIONS}
             value={sortBy}
             onValueChange={(val) => onSortChange(val as SortOption)}
-            className="w-44 text-xs"
+            className="w-44 !text-[10px] sm:!text-xs"
           />
         </div>
       </div>

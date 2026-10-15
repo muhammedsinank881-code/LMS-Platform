@@ -162,7 +162,7 @@ export const MOCK_STUDENT_DATA = {
       status: 'pending',
     },
     {
-      id: 'assign-2',
+      id: 'quiz-1',
       title: 'TypeScript Generics & Zod Validation Challenge',
       course: 'Full-Stack Web Development',
       dueDate: 'Today, 06:00 PM',
@@ -170,7 +170,7 @@ export const MOCK_STUDENT_DATA = {
       status: 'pending',
     },
     {
-      id: 'assign-3',
+      id: 'assign-2',
       title: 'Zustand Store Persistence & State Management',
       course: 'State Management 101',
       dueDate: 'Tomorrow, 05:00 PM',
@@ -179,7 +179,7 @@ export const MOCK_STUDENT_DATA = {
       score: '98/100',
     },
     {
-      id: 'assign-4',
+      id: 'assign-3',
       title: 'Recharts Dashboard & Data Visualization Project',
       course: 'Frontend Engineering',
       dueDate: 'Oct 12, 2026',
