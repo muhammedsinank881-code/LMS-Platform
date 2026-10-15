@@ -104,6 +104,10 @@ export const mentorRoutes: RouteObject[] = [
         lazy: lazyPage(() => import('@/mentor-features/notifications/pages/NotificationsPage'), 'NotificationsPage'),
       },
       {
+        path: 'announcements',
+        lazy: lazyPage(() => import('@/mentor-features/notifications/pages/NotificationsPage'), 'NotificationsPage'),
+      },
+      {
         path: 'profile',
         lazy: lazyPage(() => import('@/mentor-features/profile/pages/ProfilePage'), 'ProfilePage'),
       },

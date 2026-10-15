@@ -52,6 +52,17 @@ export function SchedulePage() {
     }
   }, [searchParams, setSearchParams, setIsScheduleModalOpen])
 
+  // Open class details modal if ?classId=... or ?selected=... is passed
+  useEffect(() => {
+    const classIdParam = searchParams.get('classId') || searchParams.get('selected')
+    if (classIdParam) {
+      const found = classes.find((c) => c.id === classIdParam)
+      if (found) {
+        setSelectedClassDetails(found)
+      }
+    }
+  }, [searchParams, classes, setSelectedClassDetails])
+
   return (
     <div className="space-y-6 text-foreground">
       {/* 1. Page Header */}
