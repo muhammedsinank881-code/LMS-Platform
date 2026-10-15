@@ -152,6 +152,7 @@ export function useStudentAssignments() {
   }, [tasks])
 
   return {
+    allTasks: tasks,
     tasks: filteredTasks,
     stats,
     searchQuery,

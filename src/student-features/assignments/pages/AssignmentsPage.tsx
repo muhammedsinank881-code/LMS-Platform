@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import { ClipboardList } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
-import { Button } from '@/components/ui'
+import { Button, Card } from '@/components/ui'
 import { AssignmentCard } from '../components/AssignmentCard'
 import { AssignmentFilters } from '../components/AssignmentFilters'
 import { AssignmentsStatsOverview } from '../components/AssignmentsStatsOverview'
@@ -11,7 +13,10 @@ import { SubmitAssignmentModal } from '../components/SubmitAssignmentModal'
 import { useStudentAssignments } from '../hooks/useStudentAssignments'
 
 export function AssignmentsPage() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const requestedTaskId = searchParams.get('id')
   const {
+    allTasks,
     tasks,
     stats,
     searchQuery,
@@ -39,6 +44,37 @@ export function AssignmentsPage() {
     closeFeedbackModal,
   } = useStudentAssignments()
 
+  const selectedTask = requestedTaskId
+    ? allTasks.find((task) => task.id === requestedTaskId)
+    : undefined
+
+  useEffect(() => {
+    if (!requestedTaskId || !selectedTask || selectedTask.status !== 'pending') return
+
+    if (selectedTask.type === 'quiz') openQuizModal(selectedTask)
+    else openSubmitModal(selectedTask)
+
+    setSearchParams((currentParams) => {
+      currentParams.delete('id')
+      return currentParams
+    }, { replace: true })
+  }, [openQuizModal, openSubmitModal, requestedTaskId, selectedTask, setSearchParams])
+
+  const clearTaskSelection = () => {
+    setSearchParams((currentParams) => {
+      currentParams.delete('id')
+      return currentParams
+    }, { replace: true })
+  }
+
+  const selectionMessage = requestedTaskId
+    ? !selectedTask
+      ? 'Assignment not found. It may have been removed or is no longer available.'
+      : selectedTask.status !== 'pending'
+        ? 'This task is not currently available for submission.'
+        : null
+    : null
+
   const handleResetFilters = () => {
     setSearchQuery('')
     setTypeTab('all')
@@ -54,10 +90,16 @@ export function AssignmentsPage() {
         description="Track your pending tasks, upcoming quizzes, due dates, and mentor feedback."
       />
 
-      {/* Top 5 Stats Cards Overview */}
-      <AssignmentsStatsOverview stats={stats} />
+      {selectionMessage ? (
+        <Card role="status" className="flex flex-wrap items-center justify-between gap-3 border-dashed p-4">
+          <p className="text-sm text-muted-foreground">{selectionMessage}</p>
+          <Button variant="outline" size="sm" onClick={clearTaskSelection}>
+            View all assignments & quizzes
+          </Button>
+        </Card>
+      ) : null}
 
-      {/* Filters, Tabs & Search Bar */}
+      <AssignmentsStatsOverview stats={stats} />
       <AssignmentFilters
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
@@ -70,8 +112,6 @@ export function AssignmentsPage() {
         availableCourses={availableCourses}
         totalCount={tasks.length}
       />
-
-      {/* Tasks List Grid */}
       {tasks.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {tasks.map((task) =>
@@ -93,7 +133,6 @@ export function AssignmentsPage() {
           )}
         </div>
       ) : (
-        /* Empty State */
         <div className="rounded-xl border border-dashed border-border bg-surface p-12 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-subtle text-primary">
             <ClipboardList className="h-6 w-6" />

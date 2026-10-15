@@ -15,9 +15,9 @@ export function FeedbackModal({ task, open, onOpenChange }: FeedbackModalProps) 
 
   return (
     <Modal open={open} onOpenChange={onOpenChange}>
-      <ModalContent size="md" className="max-h-[85vh] flex flex-col">
+      <ModalContent size="md" className="flex max-h-[90dvh] flex-col overflow-hidden md:max-h-[85vh]">
         <ModalHeader className="pb-3 border-b border-border/60">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-1 md:items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="rounded-md bg-primary-subtle px-2 py-0.5 text-xs font-bold text-primary font-mono">
                 {task.courseCode}
@@ -32,7 +32,7 @@ export function FeedbackModal({ task, open, onOpenChange }: FeedbackModalProps) 
                 Grade: {task.score}
               </Badge>
             ) : (
-              <Badge tone="info" appearance="soft" size="md" className="font-medium text-xs">
+              <Badge tone="info" appearance="soft" size="md" className="font-medium text-xs w-fit">
                 Under Mentor Review
               </Badge>
             )}

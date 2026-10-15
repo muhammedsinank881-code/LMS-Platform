@@ -459,6 +459,6 @@ export function StudentJobsPage() {
   const { role } = usePermission()
   if (role !== 'student') return <NoAccess />
   return <StudentJobsContent />
-}
+} 
 
 export default StudentJobsPage

@@ -11,7 +11,7 @@ import { MOCK_STUDENT_DATA } from '../../mock/student-data'
 
 export function StudentDashboardPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <PageHeader
         title={`Welcome back, ${MOCK_STUDENT_DATA.studentName}! 👋`}
         description="Track your course progress, class attendance, assignments, and mentor communication."
@@ -24,8 +24,8 @@ export function StudentDashboardPage() {
       <AttendanceAnalyticsCard />
 
       {/* Active Course & Pending Classes Grid */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="space-y-4 lg:col-span-2">
           <ActiveCourseCard />
           <AssignmentsDeadlinesCard />
         </div>
@@ -35,7 +35,7 @@ export function StudentDashboardPage() {
       </div>
 
       {/* Bottom Grid: Certificates, WhatsApp Mentor Chat, Announcements */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         <StudentCertificatesWidget />
         <MentorChatWidget />
         <StudentAnnouncementsWidget />

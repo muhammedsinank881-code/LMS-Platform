@@ -59,7 +59,7 @@ export function Topbar({ onOpenNav }: TopbarProps) {
         >
           <Search aria-hidden="true" />
         </Button>
-        {userRole === 'mentor' ? (
+        {userRole !== 'student' && (userRole === 'mentor' ? (
           <Dropdown>
             <DropdownTrigger asChild>
               <Button aria-label="Add">
@@ -90,7 +90,7 @@ export function Topbar({ onOpenNav }: TopbarProps) {
               ) : null}
             </DropdownContent>
           </Dropdown>
-        ) : null}
+        ) : null)}
         <NotificationBell />
         <UserMenu />
       </div>
