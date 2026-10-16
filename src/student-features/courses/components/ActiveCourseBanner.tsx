@@ -52,8 +52,8 @@ export function ActiveCourseBanner({ course, onOpenSyllabus }: ActiveCourseBanne
           <div className="flex flex-wrap items-center gap-4 rounded-lg bg-surface/80 p-3 border border-border/60 text-xs">
             <div className="flex items-center gap-2 text-foreground font-medium">
               <PlayCircle className="h-4 w-4 text-primary shrink-0" />
-              <span className="text-muted-foreground">Up Next:</span>
-              <span className="font-semibold text-foreground truncate max-w-md">
+              <span className="text-muted-foreground shrink-0">Up Next:</span>
+              <span className="text-[10px] md:text-xs min-w-0 flex-1 whitespace-normal break-words font-semibold text-foreground">
                 {course.nextLessonTitle}
               </span>
             </div>

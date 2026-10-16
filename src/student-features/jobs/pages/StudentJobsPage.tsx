@@ -1,29 +1,40 @@
-import { useMemo, useState } from 'react'
-import { BriefcaseBusiness, ExternalLink, MapPin, Search } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Bookmark, BriefcaseBusiness, MapPin } from 'lucide-react'
 import { NoAccess } from '@/components/common/NoAccess'
 import { PageHeader } from '@/components/layout/PageHeader'
-import { Badge, Button, Card, EmptyState, Input, toast } from '@/components/ui'
+import {
+  Badge,
+  Button,
+  Card,
+  EmptyState,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  toast,
+} from '@/components/ui'
 import { getErrorMessage } from '@/services/api/errors'
 import type { StudentJob } from '@/services/api/student-jobs'
 import { usePermission } from '@/hooks/use-permission'
 import { useStudentJobs } from '../hooks/useStudentJobs'
+import CVResumeCard from '../components/CVResumeCard'
+import JobSearchPage from '../components/JobSearchPage'
 
-type SalaryFilter = 'all' | 'under-3' | '3-to-6' | '6-plus'
+export type SalaryFilter = 'all' | 'under-3' | '3-to-6' | '6-plus'
+type JobTab = 'all' | 'applied' | 'saved'
 
 const NO_JOBS: StudentJob[] = []
 const NO_APPLICATIONS: [] = []
-
-const selectClassName =
-  'h-10 min-w-0 rounded-md border border-input bg-surface px-3 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+const SAVED_JOBS_KEY = 'leadflow-student-saved-jobs'
 
 function matchesSalary(job: StudentJob, filter: SalaryFilter): boolean {
   if (filter === 'all') return true
   if (job.salaryMinLpa === null && job.salaryMaxLpa === null) return false
   if (filter === 'under-3') return job.salaryMaxLpa !== null && job.salaryMaxLpa <= 3
   if (filter === '3-to-6') {
-    return (job.salaryMaxLpa === null || job.salaryMaxLpa >= 3) &&
+    return (
+      (job.salaryMaxLpa === null || job.salaryMaxLpa >= 3) &&
       (job.salaryMinLpa === null || job.salaryMinLpa <= 6)
+    )
   }
   return job.salaryMinLpa !== null && job.salaryMinLpa >= 6
 }
@@ -41,11 +52,28 @@ function formatLabel(value: string): string {
 
 function StudentJobsContent() {
   const { overview, apply } = useStudentJobs()
+  const [activeTab, setActiveTab] = useState<JobTab>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [workMode, setWorkMode] = useState('all')
   const [jobType, setJobType] = useState('all')
   const [location, setLocation] = useState('all')
   const [salary, setSalary] = useState<SalaryFilter>('all')
+  const [selectedJobId, setSelectedJobId] = useState<string | null>(null)
+  const [cv, setCv] = useState<{ name: string; url: string; size: number | null } | null>(null)
+  const [savedJobIds, setSavedJobIds] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return []
+    try {
+      const raw = window.localStorage.getItem(SAVED_JOBS_KEY)
+      const parsed = raw ? (JSON.parse(raw) as string[]) : []
+      return Array.isArray(parsed) ? parsed : []
+    } catch {
+      return []
+    }
+  })
+
+  useEffect(() => {
+    window.localStorage.setItem(SAVED_JOBS_KEY, JSON.stringify(savedJobIds))
+  }, [savedJobIds])
 
   const jobs = overview.data?.jobs ?? NO_JOBS
   const applications = overview.data?.applications ?? NO_APPLICATIONS
@@ -53,15 +81,15 @@ function StudentJobsContent() {
     () => new Set(applications.map((application) => application.jobId)),
     [applications],
   )
-  const locations = useMemo(
-    () => [...new Set(jobs.map((job) => job.location))].sort((left, right) => left.localeCompare(right)),
-    [jobs],
-  )
+  const savedSet = useMemo(() => new Set(savedJobIds), [savedJobIds])
+
   const filteredJobs = useMemo(() => {
     const query = searchQuery.trim().toLocaleLowerCase()
     return jobs.filter((job) => {
       const searchFields = [job.title, job.company, job.description, job.location, ...job.skills]
-      if (query && !searchFields.some((value) => value.toLocaleLowerCase().includes(query))) return false
+      if (query && !searchFields.some((value) => value.toLocaleLowerCase().includes(query))) {
+        return false
+      }
       if (workMode !== 'all' && job.workMode !== workMode) return false
       if (jobType !== 'all' && job.jobType !== jobType) return false
       if (location !== 'all' && job.location !== location) return false
@@ -69,6 +97,18 @@ function StudentJobsContent() {
       return true
     })
   }, [jobs, searchQuery, workMode, jobType, location, salary])
+
+  const tabResults = useMemo(() => {
+    if (activeTab === 'applied') {
+      return filteredJobs.filter((job) => appliedJobIds.has(job.id))
+    }
+    if (activeTab === 'saved') {
+      return filteredJobs.filter((job) => savedSet.has(job.id))
+    }
+    return filteredJobs
+  }, [activeTab, filteredJobs, appliedJobIds, savedSet])
+
+  const selectedJob = tabResults.find((job) => job.id === selectedJobId) ?? tabResults[0] ?? null
 
   const clearFilters = () => {
     setSearchQuery('')
@@ -78,123 +118,107 @@ function StudentJobsContent() {
     setSalary('all')
   }
 
+  const handleSaveToggle = (jobId: string) => {
+    setSavedJobIds((current) =>
+      current.includes(jobId) ? current.filter((id) => id !== jobId) : [...current, jobId],
+    )
+  }
+
+  const handleUploadCv = async (file: File) => {
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error('File size must be 5 MB or less.')
+    }
+
+    const isValid = /\.(pdf|doc|docx)$/i.test(file.name)
+    const isMimeAllowed =
+      file.type === 'application/pdf' ||
+      file.type === 'application/msword' ||
+      file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+
+    if (!isValid || !isMimeAllowed) {
+      throw new Error('Please select a PDF, DOC, or DOCX file.')
+    }
+
+    const previewUrl = URL.createObjectURL(file)
+    setCv({ name: file.name, url: previewUrl, size: file.size })
+  }
+
+  const handleRemoveCv = async () => {
+    if (!cv) return
+    setCv(null)
+    if (cv.url.startsWith('blob:')) URL.revokeObjectURL(cv.url)
+  }
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <PageHeader
         title="Job Search"
-        description="Browse sample opportunities from the LMS job portal and track demo applications."
+        description="Browse sample opportunities from the LeadFlow job portal and track demo applications."
       />
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Card
-          className="flex items-center gap-3 p-4"
-          role="status"
-          aria-live="polite"
-          aria-label={`${applications.length} ${applications.length === 1 ? 'job' : 'jobs'} applied to`}
-        >
-          <BriefcaseBusiness aria-hidden="true" className="h-5 w-5 text-primary" />
-          <div>
-            <p className="text-xs text-muted-foreground">Available jobs</p>
-            <p className="text-lg font-semibold tabular-nums text-foreground">{jobs.length}</p>
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+        <div className="flex-1 xl:max-w-[58%]">
+          <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as JobTab)}>
+            <TabsList className="w-full justify-start overflow-x-auto border-b border-border bg-transparent pb-2">
+              <TabsTrigger value="all" className="gap-1.5 text-xs">
+                All Jobs
+                <Badge tone="neutral" className="h-5 min-w-5 rounded-full px-1.5">
+                  {jobs.length}
+                </Badge>
+              </TabsTrigger>
+              <TabsTrigger value="applied" className="gap-1.5 text-xs">
+                Applied
+                <Badge tone="neutral" className="h-5 min-w-5 rounded-full px-1.5">
+                  {applications.length}
+                </Badge>
+              </TabsTrigger>
+              <TabsTrigger value="saved" className="gap-1.5 text-xs">
+                Saved
+                <Badge tone="neutral" className="h-5 min-w-5 rounded-full px-1.5">
+                  {savedJobIds.length}
+                </Badge>
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
+            <span
+              role="status"
+              aria-live="polite"
+              aria-label={`${applications.length} ${applications.length === 1 ? 'job' : 'jobs'} applied to`}
+            >
+              {applications.length}
+            </span>
+            <span>Jobs you applied to</span>
           </div>
-        </Card>
-        <Card className="flex items-center gap-3 p-4">
-          <Badge tone="success">{applications.length}</Badge>
-          <div>
-            <p className="text-xs text-muted-foreground">Jobs you applied to</p>
-            <p className="text-lg font-semibold tabular-nums text-foreground">{applications.length}</p>
-          </div>
-        </Card>
+        </div>
+
+        <div className="w-full xl:max-w-[40%]">
+          <CVResumeCard
+            cvUrl={cv?.url ?? null}
+            cvName={cv?.name ?? null}
+            cvSize={cv?.size ?? null}
+            onUpload={handleUploadCv}
+            onRemove={handleRemoveCv}
+          />
+        </div>
       </div>
 
-      <Card className="space-y-4 p-4 sm:p-5">
-        <div className="space-y-2">
-          <label htmlFor="job-search" className="text-sm font-medium text-foreground">
-            Search by job name, skills, company, or keywords
-          </label>
-          <div className="relative">
-            <Search
-              aria-hidden="true"
-              className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-            />
-            <Input
-              id="job-search"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="e.g. Junior Software Developer, React.js Developer"
-              className="pl-9"
-            />
-          </div>
-        </div>
-
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
-            Work arrangement
-            <select
-              aria-label="Work arrangement"
-              className={selectClassName}
-              value={workMode}
-              onChange={(event) => setWorkMode(event.target.value)}
-            >
-              <option value="all">Any arrangement</option>
-              <option value="remote">Remote</option>
-              <option value="hybrid">Hybrid</option>
-              <option value="onsite">Onsite</option>
-            </select>
-          </label>
-          <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
-            Employment type
-            <select
-              aria-label="Employment type"
-              className={selectClassName}
-              value={jobType}
-              onChange={(event) => setJobType(event.target.value)}
-            >
-              <option value="all">Any job type</option>
-              <option value="internship">Internship</option>
-              <option value="full-time">Full-time</option>
-              <option value="part-time">Part-time</option>
-              <option value="contract">Contract</option>
-            </select>
-          </label>
-          <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
-            Location
-            <select
-              aria-label="Location"
-              className={selectClassName}
-              value={location}
-              onChange={(event) => setLocation(event.target.value)}
-            >
-              <option value="all">All locations</option>
-              {locations.map((jobLocation) => (
-                <option key={jobLocation} value={jobLocation}>{jobLocation}</option>
-              ))}
-            </select>
-          </label>
-          <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
-            Salary (annual)
-            <select
-              aria-label="Salary range"
-              className={selectClassName}
-              value={salary}
-              onChange={(event) => setSalary(event.target.value as SalaryFilter)}
-            >
-              <option value="all">Any salary</option>
-              <option value="under-3">Under ₹3 LPA</option>
-              <option value="3-to-6">₹3–6 LPA</option>
-              <option value="6-plus">₹6+ LPA</option>
-            </select>
-          </label>
-        </div>
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="text-xs text-muted-foreground" aria-live="polite">
-            Showing {filteredJobs.length} of {jobs.length} demo jobs
-          </p>
-          <Button type="button" size="sm" variant="outline" onClick={clearFilters}>
-            Clear filters
-          </Button>
-        </div>
-      </Card>
+      <JobSearchPage
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        workMode={workMode}
+        onWorkModeChange={setWorkMode}
+        jobType={jobType}
+        onJobTypeChange={setJobType}
+        location={location}
+        onLocationChange={setLocation}
+        salary={salary}
+        onSalaryChange={setSalary}
+        locations={[...new Set(jobs.map((job) => job.location))]}
+        onClearFilters={clearFilters}
+        resultsCount={tabResults.length}
+        totalJobsCount={jobs.length}
+      />
 
       {overview.isPending ? (
         <Card className="p-6 text-sm text-muted-foreground" role="status">
@@ -211,96 +235,219 @@ function StudentJobsContent() {
             size="sm"
           />
         </Card>
-      ) : filteredJobs.length === 0 ? (
-        <Card className="p-2 sm:p-4">
-          <EmptyState
-            icon={BriefcaseBusiness}
-            title={jobs.length ? 'No jobs match these filters' : 'No job listings are available'}
-            description={jobs.length ? 'Try changing your search or filters.' : 'There are currently no internal LMS job listings.'}
-            action={jobs.length ? <Button variant="outline" onClick={clearFilters}>Clear filters</Button> : undefined}
-            size="sm"
-          />
-        </Card>
+      ) : tabResults.length === 0 ? (
+        <div className="grid gap-4 xl:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
+          <Card className="p-2 sm:p-4">
+            <EmptyState
+              icon={BriefcaseBusiness}
+              title={jobs.length ? 'No jobs match these filters' : 'No job listings are available'}
+              description={
+                jobs.length
+                  ? 'Try changing your search or filters.'
+                  : 'There are currently no internal LMS job listings.'
+              }
+              action={
+                jobs.length ? (
+                  <Button variant="outline" onClick={clearFilters}>
+                    Clear filters
+                  </Button>
+                ) : undefined
+              }
+              size="sm"
+            />
+          </Card>
+          <Card className="p-4 sm:p-5">
+            <EmptyState
+              icon={BriefcaseBusiness}
+              title="No job selected"
+              description="Choose a job from the list to see the full details."
+              size="sm"
+            />
+          </Card>
+        </div>
       ) : (
-        <div className="space-y-3">
-          {filteredJobs.map((job) => {
-            const isApplied = appliedJobIds.has(job.id)
-            return (
-              <Card key={job.id} className="space-y-4 p-4 sm:p-5">
-                <div className="flex flex-col justify-between gap-3 sm:flex-row">
-                  <div className="min-w-0 space-y-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h2 className="text-base font-semibold text-foreground">{job.title}</h2>
-                      <Badge tone="info">{job.source}</Badge>
+        <div className="grid gap-4 xl:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
+          <div className="space-y-3">
+            <div className="max-h-[640px] space-y-3 overflow-y-auto pr-1">
+              {tabResults.map((job) => {
+                const isApplied = appliedJobIds.has(job.id)
+                const isSaved = savedSet.has(job.id)
+                const isSelected = selectedJob?.id === job.id
+
+                return (
+                  <button
+                    key={job.id}
+                    type="button"
+                    onClick={() => setSelectedJobId(job.id)}
+                    className={`w-full rounded-md border bg-surface p-3 text-left transition-colors hover:border-primary/50 hover:bg-muted/40 ${
+                      isSelected ? 'border-primary bg-primary/5 shadow-sm' : 'border-border'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <h3 className="truncate text-sm font-semibold text-foreground">
+                          {job.title}
+                        </h3>
+                        <p className="text-xs text-muted-foreground">{job.company}</p>
+                        <p className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                          {job.source}
+                        </p>
+                      </div>
+                      {isApplied ? (
+                        <Badge tone="success" className="shrink-0">
+                          Applied
+                        </Badge>
+                      ) : isSaved ? (
+                        <Badge tone="info" className="shrink-0">
+                          Saved
+                        </Badge>
+                      ) : null}
                     </div>
-                    <p className="text-sm text-muted-foreground">{job.company}</p>
-                  </div>
-                  <div className="flex shrink-0 items-start">
-                    {isApplied ? (
-                      <Badge tone="success">Applied</Badge>
-                    ) : (
-                      <Button
-                        size="sm"
-                        loading={apply.isPending && apply.variables === job.id}
-                        disabled={apply.isPending}
-                        onClick={() => {
-                          apply.mutate(job.id, {
-                            onSuccess: () => toast.success('Demo application recorded', {
-                              description: 'This is a mock LMS record and was not sent to an employer.',
-                            }),
-                            onError: (error) => toast.error('Could not record application', {
-                              description: getErrorMessage(error),
-                            }),
-                          })
-                        }}
-                      >
-                        Record demo application
-                      </Button>
-                    )}
-                  </div>
+
+                    <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                      {job.description}
+                    </p>
+
+                    <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-muted-foreground">
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin aria-hidden="true" className="h-3 w-3" />
+                        {job.location}
+                      </span>
+                      <span>{formatLabel(job.workMode)}</span>
+                      <span>{formatLabel(job.jobType)}</span>
+                      <span>{formatSalary(job)}</span>
+                    </div>
+
+                    <div className="mt-3 flex flex-wrap gap-1.5" aria-label="Required skills">
+                      {job.skills.slice(0, 3).map((skill) => (
+                        <Badge key={skill} className="!rounded-full !px-2 !py-0.5 text-[10px]">
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {selectedJob ? (
+            <Card className="p-4 sm:p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    {selectedJob.source}
+                  </p>
+                  <h2 className="mt-2 text-xl font-semibold text-foreground">
+                    {selectedJob.title}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">{selectedJob.company}</p>
+                </div>
+                <Badge tone="info">{selectedJob.location}</Badge>
+              </div>
+
+              <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <MapPin aria-hidden="true" className="h-4 w-4" /> {selectedJob.location}
+                </span>
+                <span>{formatLabel(selectedJob.workMode)}</span>
+                <span>{formatLabel(selectedJob.jobType)}</span>
+                <span>{formatSalary(selectedJob)}</span>
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                {appliedJobIds.has(selectedJob.id) ? (
+                  <Button type="button" variant="secondary" disabled>
+                    Applied
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    loading={apply.isPending && apply.variables === selectedJob.id}
+                    disabled={apply.isPending}
+                    onClick={() => {
+                      apply.mutate(selectedJob.id, {
+                        onSuccess: () =>
+                          toast.success('Demo application recorded', {
+                            description:
+                              'This is a mock LMS record and was not sent to an employer.',
+                          }),
+                        onError: (error) =>
+                          toast.error('Could not record application', {
+                            description: getErrorMessage(error),
+                          }),
+                      })
+                    }}
+                  >
+                    Apply now
+                  </Button>
+                )}
+                <Button
+                  type="button"
+                  variant={savedSet.has(selectedJob.id) ? 'secondary' : 'outline'}
+                  onClick={() => handleSaveToggle(selectedJob.id)}
+                >
+                  {savedSet.has(selectedJob.id) ? 'Saved' : 'Save job'}
+                </Button>
+              </div>
+
+              {appliedJobIds.has(selectedJob.id) ? (
+                <p className="mt-3 text-xs text-muted-foreground">
+                  Application saved in this demo session
+                </p>
+              ) : null}
+
+              <div className="mt-5 space-y-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Experience
+                  </p>
+                  <p className="mt-1 text-sm text-foreground">{selectedJob.experience}</p>
                 </div>
 
-                <p className="text-sm leading-relaxed text-muted-foreground">{job.description}</p>
-                <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
-                  <span className="inline-flex items-center gap-1.5">
-                    <MapPin aria-hidden="true" className="h-3.5 w-3.5" /> {job.location}
-                  </span>
-                  <span>{formatLabel(job.workMode)}</span>
-                  <span>{formatLabel(job.jobType)}</span>
-                  <span>{formatSalary(job)}</span>
-                  <span>{job.experience}</span>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Description
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    {selectedJob.description}
+                  </p>
                 </div>
-                <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3">
-                  <div className="flex flex-wrap gap-1.5" aria-label="Required skills">
-                    {job.skills.map((skill) => <Badge key={skill}>{skill}</Badge>)}
+
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Skills
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {selectedJob.skills.map((skill) => (
+                      <Badge key={skill}>{skill}</Badge>
+                    ))}
                   </div>
-                  {isApplied ? (
-                    <span className="text-xs text-muted-foreground">Application saved in this demo session</span>
-                  ) : null}
                 </div>
-              </Card>
-            )
-          })}
+              </div>
+            </Card>
+          ) : (
+            <Card className="p-4 sm:p-5">
+              <EmptyState
+                icon={BriefcaseBusiness}
+                title="No job selected"
+                description="Choose a job from the list to see the full details."
+                size="sm"
+              />
+            </Card>
+          )}
         </div>
       )}
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-1">
         <Card className="space-y-2 p-4 sm:p-5">
-          <h2 className="text-sm font-semibold text-foreground">CV / resume</h2>
+          <div className="flex items-center gap-2">
+            <Bookmark aria-hidden="true" className="h-4 w-4 text-primary" />
+            <h2 className="text-sm font-semibold text-foreground">External job sources</h2>
+          </div>
           <p className="text-sm text-muted-foreground">
-            Secure CV upload and storage are not configured, so demo applications do not include a resume.
-          </p>
-          <Button asChild variant="outline" size="sm" className="mt-1">
-            <Link to="/student/profile">
-              View profile CV status <ExternalLink aria-hidden="true" />
-            </Link>
-          </Button>
-        </Card>
-
-        <Card className="space-y-2 p-4 sm:p-5">
-          <h2 className="text-sm font-semibold text-foreground">External job sources</h2>
-          <p className="text-sm text-muted-foreground">
-            LinkedIn, Naukri, and Indeed feeds are not connected. Only clearly marked sample listings from the LMS demo portal appear here.
+            LinkedIn, Naukri, and Indeed feeds are not connected. Only clearly marked sample
+            listings from the LMS demo portal appear here.
           </p>
         </Card>
       </div>
@@ -312,6 +459,6 @@ export function StudentJobsPage() {
   const { role } = usePermission()
   if (role !== 'student') return <NoAccess />
   return <StudentJobsContent />
-}
+} 
 
 export default StudentJobsPage

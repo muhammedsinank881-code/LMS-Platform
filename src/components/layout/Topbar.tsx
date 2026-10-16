@@ -59,7 +59,7 @@ export function Topbar({ onOpenNav }: TopbarProps) {
         >
           <Search aria-hidden="true" />
         </Button>
-        {userRole === 'mentor' ? (
+        {userRole !== 'student' && (userRole === 'mentor' ? (
           <Dropdown>
             <DropdownTrigger asChild>
               <Button
@@ -111,6 +111,7 @@ export function Topbar({ onOpenNav }: TopbarProps) {
             <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-primary" />
           </Button>
         ) : null}
+        ) : null)}
         <NotificationBell />
         <UserMenu />
       </div>

@@ -95,8 +95,8 @@ function QuizAttemptModalContent({
     <Modal open={open} onOpenChange={onOpenChange}>
       <ModalContent size="lg" className="flex max-h-[85vh] flex-col">
         <ModalHeader className="border-b border-border/60 pb-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col md:flex-row gap-2 items-center justify-between">
+            <div className="flex flex-row items-center gap-2">
               <span className="rounded-md bg-purple-500/10 px-2 py-0.5 font-mono text-xs font-bold text-purple-600 dark:text-purple-400">
                 {task.courseCode}
               </span>

@@ -51,6 +51,8 @@ export function MobileTabBar({ onOpenMore }: MobileTabBarProps) {
           <span className="truncate px-0.5">
             {'resource' in item && item.resource === 'dashboard' ? 'Home' : item.label}
           </span>
+          <item.icon aria-hidden="true" className="h-5 w-5" />
+          {/* {'resource' in item && item.resource === 'dashboard' ? 'Home' : item.label} */}
         </NavLink>
       ))}
       <button
@@ -60,6 +62,7 @@ export function MobileTabBar({ onOpenMore }: MobileTabBarProps) {
       >
         <Ellipsis aria-hidden="true" className="h-4 w-4 sm:h-5 sm:w-5 shrink-0" />
         <span className="truncate px-0.5">More</span>
+        <Ellipsis aria-hidden="true" className="h-5 w-5" />
       </button>
     </nav>
   )

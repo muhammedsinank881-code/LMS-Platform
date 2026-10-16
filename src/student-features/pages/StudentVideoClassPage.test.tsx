@@ -43,6 +43,23 @@ describe('StudentVideoClassPage', () => {
     expect(screen.getByRole('heading', { name: 'Content' })).toBeInTheDocument()
   })
 
+  it('opens mobile sidebars in drawers without changing desktop collapse state', async () => {
+    const user = userEvent.setup()
+    renderLearningPage()
+
+    await user.click(screen.getByRole('button', { name: 'Open Course Syllabus panel' }))
+    expect(screen.getByRole('dialog', { name: 'Course syllabus' })).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('dialog', { name: 'Course syllabus' })).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Open Content Preferences panel' }))
+    expect(screen.getByRole('dialog', { name: 'Content preferences' })).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+    expect(screen.getByRole('button', { name: 'Collapse course syllabus' })).toBeInTheDocument()
+  })
+
   it('hides video material without removing it and restores it with Select all', async () => {
     const user = userEvent.setup()
     const { container } = renderLearningPage()
