@@ -15,18 +15,18 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
     student.status.charAt(0).toUpperCase() + student.status.slice(1)
 
   return (
-    <Card className="px-4 py-3 h-[64px] min-h-[64px] flex items-center justify-between gap-3">
+    <Card className="px-3 sm:px-4 py-2 sm:py-3 min-h-[56px] sm:min-h-[64px] flex items-center justify-between gap-2.5 sm:gap-3">
       {/* Left: Avatar + Details */}
-      <div className="flex items-center gap-3.5 min-w-0">
-        <div className="h-10 w-10 rounded-full bg-primary-subtle text-primary font-bold text-xs flex items-center justify-center shrink-0 border border-primary/20">
+      <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+        <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-primary-subtle text-primary font-bold text-[10px] sm:text-xs flex items-center justify-center shrink-0 border border-primary/20">
           {student.avatarInitials ||
             student.name.substring(0, 2).toUpperCase()}
         </div>
         <div className="min-w-0 space-y-0.5">
-          <h4 className="text-sm font-semibold text-foreground truncate leading-tight">
+          <h4 className="text-xs sm:text-sm font-semibold text-foreground truncate leading-tight">
             {student.name}
           </h4>
-          <p className="text-xs text-muted-foreground truncate flex items-center gap-1.5">
+          <p className="text-[11px] sm:text-xs text-muted-foreground truncate flex items-center gap-1">
             <span>{student.rollNumber}</span>
             <span>·</span>
             <span
@@ -45,11 +45,11 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
       </div>
 
       {/* Right: P / A / L Segmented Control */}
-      <div className="flex items-center bg-muted p-1 rounded-md border border-border shrink-0">
+      <div className="flex items-center bg-muted p-0.5 sm:p-1 rounded-md border border-border shrink-0">
         <button
           type="button"
           onClick={() => onStatusChange(student.id, 'present')}
-          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
+          className={`w-7 h-7 sm:w-9 sm:h-8 rounded text-[11px] sm:text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
             isPresent
               ? 'bg-success text-success-foreground'
               : 'text-muted-foreground hover:text-foreground hover:bg-surface'
@@ -62,7 +62,7 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
         <button
           type="button"
           onClick={() => onStatusChange(student.id, 'absent')}
-          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
+          className={`w-7 h-7 sm:w-9 sm:h-8 rounded text-[11px] sm:text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
             isAbsent
               ? 'bg-destructive text-destructive-foreground'
               : 'text-muted-foreground hover:text-foreground hover:bg-surface'
@@ -75,7 +75,7 @@ export function StudentRow({ student, onStatusChange }: StudentRowProps) {
         <button
           type="button"
           onClick={() => onStatusChange(student.id, 'late')}
-          className={`w-8 h-8 sm:w-9 sm:h-8 rounded text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
+          className={`w-7 h-7 sm:w-9 sm:h-8 rounded text-[11px] sm:text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
             isLate
               ? 'bg-warning text-warning-foreground'
               : 'text-muted-foreground hover:text-foreground hover:bg-surface'

@@ -57,31 +57,31 @@ export function ScheduleCalendar({
   }
 
   return (
-    <Card className="p-4 space-y-4 border-border bg-surface shadow-2xs">
+    <Card className="p-3 sm:p-4 space-y-3 sm:space-y-4 border-border bg-surface shadow-2xs">
       {/* Calendar Header Navigation & View Toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-border pb-2.5 sm:pb-3">
         {/* Previous / Next Month/Week Navigation */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
             onClick={() => onDateChange('2026-10-08')}
-            className="p-1.5 rounded-md border border-border bg-surface hover:bg-muted text-foreground transition-colors cursor-pointer"
+            className="p-1 sm:p-1.5 rounded-md border border-border bg-surface hover:bg-muted text-foreground transition-colors cursor-pointer"
             aria-label="Previous"
           >
-            <ChevronLeft className="size-4" />
+            <ChevronLeft className="size-3.5 sm:size-4" />
           </button>
 
-          <h3 className="text-base font-bold text-foreground tracking-tight">
+          <h3 className="text-sm sm:text-base font-bold text-foreground tracking-tight">
             October 2026
           </h3>
 
           <button
             type="button"
             onClick={() => onDateChange('2026-10-08')}
-            className="p-1.5 rounded-md border border-border bg-surface hover:bg-muted text-foreground transition-colors cursor-pointer"
+            className="p-1 sm:p-1.5 rounded-md border border-border bg-surface hover:bg-muted text-foreground transition-colors cursor-pointer"
             aria-label="Next"
           >
-            <ChevronRight className="size-4" />
+            <ChevronRight className="size-3.5 sm:size-4" />
           </button>
         </div>
 
@@ -91,7 +91,7 @@ export function ScheduleCalendar({
           onValueChange={(val) => onViewModeChange(val as CalendarViewMode)}
           variant="pill"
         >
-          <TabsList>
+          <TabsList className="w-full sm:w-auto">
             <TabsTrigger value="month">Month</TabsTrigger>
             <TabsTrigger value="week">Week</TabsTrigger>
             <TabsTrigger value="day">Day</TabsTrigger>
@@ -174,49 +174,51 @@ export function ScheduleCalendar({
 
       {/* MONTH VIEW GRID */}
       {viewMode === 'month' ? (
-        <div className="grid grid-cols-7 gap-1 border border-border rounded-lg p-2 bg-muted/20">
-          {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
-            <div key={d} className="p-2 text-center text-xs font-bold text-muted-foreground uppercase">
-              {d}
-            </div>
-          ))}
-          {Array.from({ length: 31 }, (_, i) => {
-            const dateNum = (i + 1).toString().padStart(2, '0')
-            const dateStr = `2026-10-${dateNum}`
-            const dateClasses = classes.filter((c) => c.date === dateStr)
-            const isToday = dateStr === '2026-10-08'
-
-            return (
-              <div
-                key={dateStr}
-                className={`min-h-[70px] p-1.5 rounded-md border bg-surface transition-colors flex flex-col justify-between ${
-                  isToday ? 'border-primary ring-1 ring-primary/30' : 'border-border/60'
-                }`}
-              >
-                <div className="flex items-center justify-between text-[11px] font-bold text-foreground">
-                  <span className={isToday ? 'text-primary font-bold' : ''}>{dateNum}</span>
-                  {dateClasses.length > 0 ? (
-                    <Badge tone="primary" size="sm" className="text-[9px] h-4 px-1">
-                      {dateClasses.length}
-                    </Badge>
-                  ) : null}
-                </div>
-
-                <div className="space-y-0.5">
-                  {dateClasses.slice(0, 2).map((c) => (
-                    <button
-                      type="button"
-                      key={c.id}
-                      onClick={() => onSelectClass(c)}
-                      className="w-full text-left text-[10px] font-semibold text-primary truncate bg-primary-subtle px-1 py-0.5 rounded cursor-pointer"
-                    >
-                      {c.title}
-                    </button>
-                  ))}
-                </div>
+        <div className="overflow-x-auto no-scrollbar">
+          <div className="min-w-[480px] sm:min-w-0 grid grid-cols-7 gap-1 border border-border rounded-lg p-1.5 sm:p-2 bg-muted/20">
+            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d) => (
+              <div key={d} className="p-1 sm:p-2 text-center text-[10px] sm:text-xs font-bold text-muted-foreground uppercase">
+                {d}
               </div>
-            )
-          })}
+            ))}
+            {Array.from({ length: 31 }, (_, i) => {
+              const dateNum = (i + 1).toString().padStart(2, '0')
+              const dateStr = `2026-10-${dateNum}`
+              const dateClasses = classes.filter((c) => c.date === dateStr)
+              const isToday = dateStr === '2026-10-08'
+
+              return (
+                <div
+                  key={dateStr}
+                  className={`min-h-[70px] p-1.5 rounded-md border bg-surface transition-colors flex flex-col justify-between ${
+                    isToday ? 'border-primary ring-1 ring-primary/30' : 'border-border/60'
+                  }`}
+                >
+                  <div className="flex items-center justify-between text-[11px] font-bold text-foreground">
+                    <span className={isToday ? 'text-primary font-bold' : ''}>{dateNum}</span>
+                    {dateClasses.length > 0 ? (
+                      <Badge tone="primary" size="sm" className="text-[9px] h-4 px-1">
+                        {dateClasses.length}
+                      </Badge>
+                    ) : null}
+                  </div>
+
+                  <div className="space-y-0.5">
+                    {dateClasses.slice(0, 2).map((c) => (
+                      <button
+                        type="button"
+                        key={c.id}
+                        onClick={() => onSelectClass(c)}
+                        className="w-full text-left text-[10px] font-semibold text-primary truncate bg-primary-subtle px-1 py-0.5 rounded cursor-pointer"
+                      >
+                        {c.title}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       ) : null}
 

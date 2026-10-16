@@ -30,8 +30,8 @@ export function StudentDetailsDrawer({
         aria-modal="true"
       >
         {/* Header */}
-        <div className="sticky top-0 bg-surface/95 backdrop-blur-sm border-b border-border p-4 flex items-center justify-between z-10">
-          <h3 className="text-base font-semibold text-foreground">
+        <div className="sticky top-0 bg-surface/95 backdrop-blur-sm border-b border-border p-3.5 sm:p-4 flex items-center justify-between z-10">
+          <h3 className="text-sm sm:text-base font-semibold text-foreground">
             Student Profile Details
           </h3>
           <Button
@@ -46,14 +46,14 @@ export function StudentDetailsDrawer({
         </div>
 
         {/* Content Body */}
-        <div className="p-5 space-y-6 flex-1 text-foreground">
+        <div className="p-3.5 sm:p-5 space-y-4 sm:space-y-6 flex-1 text-foreground">
           {/* Main Info Box */}
-          <div className="flex items-start gap-4 pb-4 border-b border-border">
-            <div className="h-14 w-14 rounded-full bg-primary-subtle text-primary font-bold text-base flex items-center justify-center shrink-0 border border-primary/20">
+          <div className="flex items-start gap-3 sm:gap-4 pb-3.5 sm:pb-4 border-b border-border">
+            <div className="h-11 w-11 sm:h-14 sm:w-14 rounded-full bg-primary-subtle text-primary font-bold text-sm sm:text-base flex items-center justify-center shrink-0 border border-primary/20">
               {student.avatarInitials}
             </div>
-            <div className="min-w-0 space-y-1">
-              <h2 className="text-base font-semibold text-foreground truncate">
+            <div className="min-w-0 space-y-0.5 sm:space-y-1">
+              <h2 className="text-sm sm:text-base font-semibold text-foreground truncate">
                 {student.name}
               </h2>
               <p className="text-xs font-semibold text-muted-foreground">

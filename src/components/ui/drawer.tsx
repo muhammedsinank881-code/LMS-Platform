@@ -56,7 +56,7 @@ export function DrawerContent({
 export function DrawerHeader({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      className={cn('flex flex-col gap-1 border-b border-border p-6 pr-14', className)}
+      className={cn('flex flex-col gap-1 border-b border-border p-4 sm:p-6 pr-12 sm:pr-14', className)}
       {...props}
     />
   )
@@ -65,7 +65,7 @@ export function DrawerHeader({ className, ...props }: ComponentProps<'div'>) {
 export function DrawerTitle({ className, ...props }: ComponentProps<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
-      className={cn('text-lg font-semibold leading-7 text-foreground', className)}
+      className={cn('text-base sm:text-lg font-semibold leading-6 sm:leading-7 text-foreground', className)}
       {...props}
     />
   )
@@ -77,21 +77,21 @@ export function DrawerDescription({
 }: ComponentProps<typeof DialogPrimitive.Description>) {
   return (
     <DialogPrimitive.Description
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-xs sm:text-sm text-muted-foreground', className)}
       {...props}
     />
   )
 }
 
 export function DrawerBody({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('flex-1 overflow-y-auto p-6 text-sm', className)} {...props} />
+  return <div className={cn('flex-1 overflow-y-auto p-3.5 sm:p-6 text-xs sm:text-sm', className)} {...props} />
 }
 
 export function DrawerFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'flex flex-col-reverse gap-2 border-t border-border p-4 sm:flex-row sm:justify-end',
+        'flex flex-col-reverse gap-2 border-t border-border p-3 sm:p-4 sm:flex-row sm:justify-end',
         className,
       )}
       {...props}

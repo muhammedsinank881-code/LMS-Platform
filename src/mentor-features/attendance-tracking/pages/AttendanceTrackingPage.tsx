@@ -1,137 +1,83 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   AttendanceHeader,
-  AttendanceSummaryCard,
   ClassDateSelector,
-  RosterSearchActions,
-  StudentRosterList,
+  AttendanceSessionCard,
+  AttendanceOverview,
+  AttendanceEvidenceCard,
+  StudentSearch,
+  AttendanceStatusFilters,
+  EnrolledStudentsList,
+  AttendanceDetailsView,
 } from '../components'
+import {
+  MOCK_CLASSES,
+  DEFAULT_SESSION,
+  AVAILABLE_SESSIONS,
+  MOCK_ROSTER_BCA3,
+  MOCK_ROSTER_BCA4,
+  MOCK_ROSTER_BCA5,
+  MOCK_ROSTER_BSCCS,
+} from '../data/mockAttendanceData'
 import type {
   AttendanceStatus,
-  ClassCohortOption,
+  SessionInfo,
   StudentAttendanceRecord,
 } from '../types'
 
-const MOCK_CLASSES: ClassCohortOption[] = [
-  { id: 'bca-3', name: 'BCA - 3rd Year', totalStudents: 24 },
-  { id: 'bca-5', name: 'BCA - 5th Semester', totalStudents: 28 },
-  { id: 'bca-4', name: 'BCA - 4th Semester', totalStudents: 12 },
-]
-
-const INITIAL_ROSTER: StudentAttendanceRecord[] = [
-  {
-    id: '1',
-    name: 'Muhammad Riyan',
-    rollNumber: 'BCA23001',
-    avatarInitials: 'MR',
-    status: 'late',
-  },
-  {
-    id: '2',
-    name: 'Fathima Nida',
-    rollNumber: 'BCA23002',
-    avatarInitials: 'FN',
-    status: 'present',
-  },
-  {
-    id: '3',
-    name: 'Alan Shihab',
-    rollNumber: 'BCA23003',
-    avatarInitials: 'AS',
-    status: 'late',
-  },
-  {
-    id: '4',
-    name: 'Rinsha K',
-    rollNumber: 'BCA23004',
-    avatarInitials: 'RK',
-    status: 'present',
-  },
-  {
-    id: '5',
-    name: 'Aiswarya Lakshmi',
-    rollNumber: 'BCA23005',
-    avatarInitials: 'AL',
-    status: 'present',
-  },
-  {
-    id: '6',
-    name: 'Devadathan P',
-    rollNumber: 'BCA23006',
-    avatarInitials: 'DP',
-    status: 'absent',
-  },
-  {
-    id: '7',
-    name: 'Farhan Ahamed',
-    rollNumber: 'BCA23007',
-    avatarInitials: 'FA',
-    status: 'present',
-  },
-  {
-    id: '8',
-    name: 'Gouri Parvathy',
-    rollNumber: 'BCA23008',
-    avatarInitials: 'GP',
-    status: 'present',
-  },
-  {
-    id: '9',
-    name: 'Hisham Moosa',
-    rollNumber: 'BCA23009',
-    avatarInitials: 'HM',
-    status: 'absent',
-  },
-  {
-    id: '10',
-    name: 'Kavya Suresh',
-    rollNumber: 'BCA23010',
-    avatarInitials: 'KS',
-    status: 'present',
-  },
-  {
-    id: '11',
-    name: 'Nikhil Raj',
-    rollNumber: 'BCA23011',
-    avatarInitials: 'NR',
-    status: 'present',
-  },
-  {
-    id: '12',
-    name: 'Saniya Thomas',
-    rollNumber: 'BCA23012',
-    avatarInitials: 'ST',
-    status: 'absent',
-  },
-]
-
 export function AttendanceTrackingPage() {
   const navigate = useNavigate()
-  const [selectedClass, setSelectedClass] = useState<string>('bca-4')
-  const [currentDate, setCurrentDate] = useState<Date>(new Date(2026, 9, 4))
+
+  // Class & Date state
+  const [selectedClass, setSelectedClass] = useState<string>('bca-3')
+  const [currentDate, setCurrentDate] = useState<Date>(new Date(2026, 9, 16))
+
+  // Session info state (now selectable)
+  const [session, setSession] = useState<SessionInfo>(DEFAULT_SESSION)
+
+  // Search & Filter state
   const [searchQuery, setSearchQuery] = useState('')
-  const [roster, setRoster] = useState<StudentAttendanceRecord[]>(INITIAL_ROSTER)
+  const [activeFilter, setActiveFilter] = useState('all')
+
+  // Selected student for Attendance Details navigation
+  const [selectedStudent, setSelectedStudent] =
+    useState<StudentAttendanceRecord | null>(null)
+
+  // Rosters by class
+  const [rostersByClass, setRostersByClass] = useState<{
+    [classId: string]: StudentAttendanceRecord[]
+  }>({
+    'bca-3': MOCK_ROSTER_BCA3,
+    'bca-4': MOCK_ROSTER_BCA4,
+    'bca-5': MOCK_ROSTER_BCA5,
+    'bsc-cs': MOCK_ROSTER_BSCCS,
+  })
+
   const [savedSuccess, setSavedSuccess] = useState(false)
 
-  // Calculations
-  const totalStudents = roster.length
-  const presentCount = roster.filter((s) => s.status === 'present').length
-  const absentCount = roster.filter((s) => s.status === 'absent').length
-  const lateCount = roster.filter((s) => s.status === 'late').length
+  // Current active roster
+  const currentRoster = rostersByClass[selectedClass] || MOCK_ROSTER_BCA3
+
+  // Current class cohort
+  const currentClassObj =
+    MOCK_CLASSES.find((c) => c.id === selectedClass) || MOCK_CLASSES[0]
+
+  // Attendance metrics calculations
+  const totalStudents = currentRoster.length
+  const presentCount = currentRoster.filter((s) => s.status === 'present').length
+  const lateCount = currentRoster.filter((s) => s.status === 'late').length
+  const partialCount = currentRoster.filter((s) => s.status === 'partial').length
+  const absentCount = currentRoster.filter((s) => s.status === 'absent').length
+  const pendingCount = currentRoster.filter((s) => s.status === 'pending').length
+
+  // Verified attendance rate: (present + late) / total
   const attendanceRate =
     totalStudents > 0
       ? Math.round(((presentCount + lateCount) / totalStudents) * 100)
       : 0
 
-  // Dynamic student count per class to prevent hardcoding/inconsistency
-  const getStudentCountForClass = (clsId: string) => {
-    if (clsId === selectedClass) return totalStudents
-    const cls = MOCK_CLASSES.find((c) => c.id === clsId)
-    return cls ? cls.totalStudents : totalStudents
-  }
-
-  // Date Nav Handlers
+  // Date Navigation Handlers
   const handlePrevDay = () => {
     setCurrentDate((prev) => {
       const d = new Date(prev)
@@ -149,43 +95,128 @@ export function AttendanceTrackingPage() {
   }
 
   const formatDateDisplay = (date: Date) => {
-    const today = new Date(2026, 9, 4)
+    const today = new Date(2026, 9, 16)
     const isToday =
       date.getFullYear() === today.getFullYear() &&
       date.getMonth() === today.getMonth() &&
       date.getDate() === today.getDate()
 
     const formatted = date.toLocaleDateString('en-GB', {
-      day: '2-digit',
+      day: 'numeric',
       month: 'short',
       year: 'numeric',
     })
 
-    return isToday ? `Today • ${formatted}` : formatted
+    return isToday ? `Today · ${formatted}` : formatted
   }
 
-  // Filtered Roster
-  const filteredRoster = roster.filter(
-    (student) =>
-      student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      student.rollNumber.toLowerCase().includes(searchQuery.toLowerCase()),
-  )
+  // Dynamic student count per class
+  const getStudentCountForClass = (clsId: string) => {
+    if (rostersByClass[clsId]) {
+      return rostersByClass[clsId].length
+    }
+    const found = MOCK_CLASSES.find((c) => c.id === clsId)
+    return found ? found.totalStudents : totalStudents
+  }
 
-  // Handlers
-  const handleStatusChange = (id: string, newStatus: AttendanceStatus) => {
-    setRoster((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, status: newStatus } : s)),
-    )
+  // Filtered Roster by Search and Filter Chip
+  const filteredRoster = useMemo(() => {
+    return currentRoster.filter((student) => {
+      const matchesSearch =
+        student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.rollNumber.toLowerCase().includes(searchQuery.toLowerCase())
+
+      const matchesFilter =
+        activeFilter === 'all' || student.status === activeFilter
+
+      return matchesSearch && matchesFilter
+    })
+  }, [currentRoster, searchQuery, activeFilter])
+
+  // Handlers for attendance updates
+  const handleStatusChange = (
+    id: string,
+    newStatus: AttendanceStatus,
+    reason?: string,
+  ) => {
+    setRostersByClass((prev) => {
+      const currentList = prev[selectedClass] || currentRoster
+      const updatedList = currentList.map((s) => {
+        if (s.id !== id) return s
+
+        let updatedRule = s.calculationRuleText
+        if (reason) {
+          updatedRule = `Overridden by mentor (${reason}): Status set to ${newStatus}.`
+        } else if (newStatus === 'present') {
+          updatedRule = `Present — ${s.durationMinutes ?? 55} of ${
+            s.totalMinutes ?? 60
+          } minutes verified; minimum required: 45 minutes.`
+        } else if (newStatus === 'late') {
+          updatedRule = `Late — ${s.durationMinutes ?? 48} of ${
+            s.totalMinutes ?? 60
+          } minutes verified; joined after grace threshold.`
+        } else if (newStatus === 'partial') {
+          updatedRule = `Partial — ${s.durationMinutes ?? 30} of ${
+            s.totalMinutes ?? 60
+          } minutes verified; fell below minimum threshold.`
+        } else if (newStatus === 'absent') {
+          updatedRule =
+            'Absent — No telemetry event or session attendance recorded.'
+        }
+
+        return {
+          ...s,
+          status: newStatus,
+          calculationRuleText: updatedRule,
+        }
+      })
+
+      return {
+        ...prev,
+        [selectedClass]: updatedList,
+      }
+    })
+
+    // Also update selectedStudent if details view is open
+    setSelectedStudent((prev) => {
+      if (!prev || prev.id !== id) return prev
+      return {
+        ...prev,
+        status: newStatus,
+      }
+    })
+
     setSavedSuccess(false)
   }
 
   const handleMarkAllPresent = () => {
-    setRoster((prev) => prev.map((s) => ({ ...s, status: 'present' })))
+    setRostersByClass((prev) => {
+      const currentList = prev[selectedClass] || currentRoster
+      const updatedList = currentList.map((s) => ({
+        ...s,
+        status: 'present' as AttendanceStatus,
+        durationMinutes: s.durationMinutes || 55,
+        totalMinutes: 60,
+      }))
+
+      return {
+        ...prev,
+        [selectedClass]: updatedList,
+      }
+    })
     setSavedSuccess(false)
   }
 
   const handleReset = () => {
-    setRoster(INITIAL_ROSTER)
+    let initialCohort = MOCK_ROSTER_BCA3
+    if (selectedClass === 'bca-4') initialCohort = MOCK_ROSTER_BCA4
+    if (selectedClass === 'bca-5') initialCohort = MOCK_ROSTER_BCA5
+    if (selectedClass === 'bsc-cs') initialCohort = MOCK_ROSTER_BSCCS
+
+    setRostersByClass((prev) => ({
+      ...prev,
+      [selectedClass]: initialCohort,
+    }))
     setSavedSuccess(false)
   }
 
@@ -195,50 +226,103 @@ export function AttendanceTrackingPage() {
   }
 
   return (
-    <div className="space-y-6 text-foreground">
-      {/* 1. Page Header */}
-      <AttendanceHeader
-        onBack={() => navigate('/mentor/dashboard')}
-        onSave={handleSave}
-        savedSuccess={savedSuccess}
-      />
+    <div className="space-y-4 sm:space-y-6 text-foreground">
+      {selectedStudent ? (
+        /* ==================================================
+           ATTENDANCE DETAILS VIEW (SCREENSHOT 2)
+           ================================================== */
+        <AttendanceDetailsView
+          student={selectedStudent}
+          session={session}
+          currentClass={currentClassObj}
+          onBack={() => setSelectedStudent(null)}
+          onUpdateStatus={handleStatusChange}
+        />
+      ) : (
+        /* ==================================================
+           MAIN ATTENDANCE PAGE (SCREENSHOT 1)
+           ================================================== */
+        <>
+          {/* 1. Page Header */}
+          <AttendanceHeader
+            onBack={() => navigate('/mentor/dashboard')}
+            onSave={handleSave}
+            savedSuccess={savedSuccess}
+          />
 
-      {/* 2. Class + Date Selector */}
-      <ClassDateSelector
-        selectedClass={selectedClass}
-        onClassChange={setSelectedClass}
-        classes={MOCK_CLASSES}
-        getStudentCountForClass={getStudentCountForClass}
-        currentDate={currentDate}
-        onPrevDay={handlePrevDay}
-        onNextDay={handleNextDay}
-        formatDateDisplay={formatDateDisplay}
-      />
+          {/* 2 & 3. Class / Batch Selector + Date Navigation Card */}
+          <ClassDateSelector
+            selectedClass={selectedClass}
+            onClassChange={(clsId) => {
+              setSelectedClass(clsId)
+              setActiveFilter('all')
+            }}
+            classes={MOCK_CLASSES}
+            getStudentCountForClass={getStudentCountForClass}
+            currentDate={currentDate}
+            onPrevDay={handlePrevDay}
+            onNextDay={handleNextDay}
+            formatDateDisplay={formatDateDisplay}
+          />
 
-      {/* 3. Attendance Summary */}
-      <AttendanceSummaryCard
-        totalStudents={totalStudents}
-        presentCount={presentCount}
-        absentCount={absentCount}
-        lateCount={lateCount}
-        attendanceRate={attendanceRate}
-      />
+          {/* 4. Selected Class / Session Card (Selectable Subject) */}
+          <AttendanceSessionCard
+            session={session}
+            availableSessions={AVAILABLE_SESSIONS}
+            onSessionChange={setSession}
+          />
 
-      {/* 4. Search Filter & Roster Actions */}
-      <RosterSearchActions
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        filteredCount={filteredRoster.length}
-        onMarkAllPresent={handleMarkAllPresent}
-        onReset={handleReset}
-      />
+          {/* 5. Attendance Overview */}
+          <AttendanceOverview
+            totalStudents={totalStudents}
+            presentCount={presentCount}
+            lateCount={lateCount}
+            partialCount={partialCount}
+            absentCount={absentCount}
+            pendingCount={pendingCount}
+            onStatusClick={(statusId) => setActiveFilter(statusId)}
+          />
 
-      {/* 5. Student Roster List */}
-      <StudentRosterList
-        roster={filteredRoster}
-        searchQuery={searchQuery}
-        onStatusChange={handleStatusChange}
-      />
+          {/* 6. Evidence / Session Verification Card */}
+          <AttendanceEvidenceCard
+            evidenceSource={session.evidenceSource}
+            verificationState={session.verificationState}
+            attendanceRate={attendanceRate}
+            onRefresh={() => {
+              // Subtle feedback animation already handled in component
+            }}
+          />
+
+          {/* 7. Full-Width Standalone Search Card */}
+          <StudentSearch
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+          />
+
+          {/* 8. Status Filter Chips */}
+          <AttendanceStatusFilters
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+            totalCount={totalStudents}
+            presentCount={presentCount}
+            lateCount={lateCount}
+            partialCount={partialCount}
+            absentCount={absentCount}
+            pendingCount={pendingCount}
+          />
+
+          {/* 9, 10, 11, 12. Enrolled Students List with Cards & Actions */}
+          <EnrolledStudentsList
+            roster={filteredRoster}
+            totalEnrolledCount={totalStudents}
+            onStudentClick={(student) => setSelectedStudent(student)}
+            onStatusChange={handleStatusChange}
+            onMarkAllPresent={handleMarkAllPresent}
+            onReset={handleReset}
+            searchQuery={searchQuery}
+          />
+        </>
+      )}
     </div>
   )
 }

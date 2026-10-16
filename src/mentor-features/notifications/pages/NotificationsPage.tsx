@@ -194,7 +194,7 @@ export function NotificationsPage() {
   }, [announcements])
 
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       {/* Header */}
       <PageHeader
         title={activeTab === 'announcements' ? 'Announcements & Notices' : 'Notifications'}
@@ -210,8 +210,8 @@ export function NotificationsPage() {
         actions={
           <div className="flex items-center gap-2">
             {activeTab === 'notifications' ? (
-              <Button type="button" variant="outline" size="sm" onClick={handleMarkAllRead}>
-                <CheckCheck className="size-4 mr-1.5" />
+              <Button type="button" variant="outline" size="sm" onClick={handleMarkAllRead} className="h-8 sm:h-9 text-xs sm:text-sm">
+                <CheckCheck className="size-3.5 sm:size-4 mr-1 sm:mr-1.5" />
                 <span>Mark all as read</span>
               </Button>
             ) : null}
@@ -220,11 +220,11 @@ export function NotificationsPage() {
       />
 
       {/* Tabs navigation */}
-      <div className="flex border-b border-border gap-6 text-sm font-semibold">
+      <div className="flex border-b border-border gap-4 sm:gap-6 text-xs sm:text-sm font-semibold">
         <button
           type="button"
           onClick={() => setTabOverride('announcements')}
-          className={`pb-2.5 transition-colors border-b-2 cursor-pointer ${
+          className={`pb-2 sm:pb-2.5 transition-colors border-b-2 cursor-pointer ${
             activeTab === 'announcements'
               ? 'border-primary text-primary'
               : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -235,7 +235,7 @@ export function NotificationsPage() {
         <button
           type="button"
           onClick={() => setTabOverride('notifications')}
-          className={`pb-2.5 transition-colors border-b-2 cursor-pointer ${
+          className={`pb-2 sm:pb-2.5 transition-colors border-b-2 cursor-pointer ${
             activeTab === 'notifications'
               ? 'border-primary text-primary'
               : 'border-transparent text-muted-foreground hover:text-foreground'

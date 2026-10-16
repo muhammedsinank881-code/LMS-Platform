@@ -19,10 +19,11 @@ export function ResultsHeader({ onOpenEnterModal }: ResultsHeaderProps) {
         <Button
           type="button"
           variant="primary"
+          size="sm"
           onClick={onOpenEnterModal}
-          className="flex items-center gap-2"
+          className="h-8 sm:h-9 text-xs sm:text-sm px-2.5 sm:px-3.5"
         >
-          <Plus className="size-4" />
+          <Plus className="size-3.5 sm:size-4 mr-1 sm:mr-1.5" />
           <span>Enter Results</span>
         </Button>
       }

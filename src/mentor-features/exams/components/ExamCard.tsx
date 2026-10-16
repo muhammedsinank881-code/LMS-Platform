@@ -27,33 +27,33 @@ export function ExamCard({ exam }: ExamCardProps) {
       }}
       role="button"
       tabIndex={0}
-      className="group relative flex flex-col justify-between p-5 cursor-pointer select-none space-y-4"
+      className="group relative flex flex-col justify-between p-3.5 sm:p-5 cursor-pointer select-none space-y-3 sm:space-y-4"
     >
       {/* Row 1: Title & Status Badge */}
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-2.5 sm:gap-3">
         <div className="min-w-0 flex-1">
           <Tooltip content={exam.title} side="top">
-            <h3 className="text-base font-semibold text-foreground tracking-tight truncate group-hover:text-primary transition-colors">
+            <h3 className="text-sm sm:text-base font-semibold text-foreground tracking-tight truncate group-hover:text-primary transition-colors">
               {exam.title}
             </h3>
           </Tooltip>
-          <p className="text-xs text-muted-foreground font-medium mt-0.5 truncate">
+          <p className="text-[11px] sm:text-xs text-muted-foreground font-medium mt-0.5 truncate">
             {exam.classBatch} · {exam.subject}
           </p>
         </div>
 
-        <ExamStatusBadge status={exam.status} className="shrink-0" />
+        <ExamStatusBadge status={exam.status} className="shrink-0 text-[10px] sm:text-xs" />
       </div>
 
       {/* Row 2: Date, Time & Duration */}
-      <div className="flex items-center gap-2 text-xs font-medium text-foreground">
-        <div className="flex items-center gap-1.5 text-muted-foreground">
-          <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
+      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-medium text-foreground">
+        <div className="flex items-center gap-1 sm:gap-1.5 text-muted-foreground">
+          <Calendar className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-muted-foreground" />
           <span>{exam.formattedDate}</span>
         </div>
         <span>·</span>
-        <div className="flex items-center gap-1.5 text-muted-foreground">
-          <Clock className="h-3.5 w-3.5 text-muted-foreground" />
+        <div className="flex items-center gap-1 sm:gap-1.5 text-muted-foreground">
+          <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-muted-foreground" />
           <span>{exam.time}</span>
         </div>
         <span>·</span>
@@ -61,23 +61,23 @@ export function ExamCard({ exam }: ExamCardProps) {
       </div>
 
       {/* Row 3: Students, Room & Arrow CTA */}
-      <div className="pt-3 border-t border-border flex items-center justify-between gap-2 text-xs text-muted-foreground font-medium">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <Users className="h-3.5 w-3.5 text-primary" />
+      <div className="pt-2 sm:pt-3 border-t border-border flex items-center justify-between gap-2 text-[11px] sm:text-xs text-muted-foreground font-medium">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <Users className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary" />
             <span className="text-foreground font-semibold">
               {exam.studentsCount} Students
             </span>
           </div>
           <span>·</span>
-          <div className="flex items-center gap-1.5">
-            <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <MapPin className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-muted-foreground" />
             <span>{exam.room}</span>
           </div>
         </div>
 
         <div className="p-1 rounded-md text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all">
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </div>
       </div>
     </Card>

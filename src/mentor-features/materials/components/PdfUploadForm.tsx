@@ -343,15 +343,17 @@ export function PdfUploadForm({
 
       {/* Buttons */}
       <div className="flex items-center justify-end gap-2 pt-3 border-t border-border">
-        <Button type="button" variant="outline" onClick={onCancel}>
+        <Button type="button" variant="outline" size="sm" onClick={onCancel} className="flex-1 sm:flex-none justify-center">
           Cancel
         </Button>
         <Button
           type="submit"
           variant="primary"
+          size="sm"
           disabled={!selectedFile || uploadProgress < 100}
+          className="flex-1 sm:flex-none justify-center"
         >
-          <Upload className="size-4 mr-1.5" />
+          <Upload className="size-3.5 sm:size-4 mr-1 sm:mr-1.5" />
           <span>Upload Material</span>
         </Button>
       </div>

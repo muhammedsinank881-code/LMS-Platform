@@ -76,46 +76,46 @@ export function AnnouncementDetailsModal({
             ) : null}
           </div>
 
-          <ModalTitle className="text-xl font-bold text-foreground mt-2 leading-snug">
+          <ModalTitle className="text-lg sm:text-xl font-bold text-foreground mt-2 leading-snug">
             {announcement.title}
           </ModalTitle>
         </ModalHeader>
 
-        <ModalBody className="space-y-4 py-4 max-h-[75vh] overflow-y-auto">
+        <ModalBody className="space-y-3 sm:space-y-4 py-3 sm:py-4 max-h-[75vh] overflow-y-auto">
           {/* Metadata Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs bg-muted/40 p-3 rounded-lg border border-border">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 text-xs bg-muted/40 p-2.5 sm:p-3 rounded-lg border border-border">
             <div className="space-y-0.5">
-              <span className="text-[11px] text-muted-foreground font-medium flex items-center gap-1">
+              <span className="text-[10px] sm:text-[11px] text-muted-foreground font-medium flex items-center gap-1">
                 <Calendar className="size-3 text-primary" /> Published Date
               </span>
-              <p className="font-semibold text-foreground">{announcement.date}</p>
+              <p className="font-semibold text-foreground text-xs sm:text-sm">{announcement.date}</p>
             </div>
 
             {announcement.author ? (
               <div className="space-y-0.5">
-                <span className="text-[11px] text-muted-foreground font-medium flex items-center gap-1">
+                <span className="text-[10px] sm:text-[11px] text-muted-foreground font-medium flex items-center gap-1">
                   <Megaphone className="size-3 text-primary" /> Published By
                 </span>
-                <p className="font-semibold text-foreground truncate">{announcement.author}</p>
+                <p className="font-semibold text-foreground truncate text-xs sm:text-sm">{announcement.author}</p>
               </div>
             ) : null}
 
             {announcement.targetAudience ? (
               <div className="space-y-0.5 sm:col-span-1">
-                <span className="text-[11px] text-muted-foreground font-medium flex items-center gap-1">
+                <span className="text-[10px] sm:text-[11px] text-muted-foreground font-medium flex items-center gap-1">
                   <Users className="size-3 text-primary" /> Target Audience
                 </span>
-                <p className="font-semibold text-foreground truncate">{announcement.targetAudience}</p>
+                <p className="font-semibold text-foreground truncate text-xs sm:text-sm">{announcement.targetAudience}</p>
               </div>
             ) : null}
           </div>
 
           {/* Main Content */}
           <div className="space-y-1.5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Notice Details
             </h4>
-            <div className="text-sm text-foreground bg-surface p-4 rounded-lg border border-border leading-relaxed whitespace-pre-wrap">
+            <div className="text-xs sm:text-sm text-foreground bg-surface p-3 sm:p-4 rounded-lg border border-border leading-relaxed whitespace-pre-wrap">
               {announcement.content ||
                 'No additional details provided. Please contact the administration or academic coordinator for further guidance regarding this announcement.'}
             </div>
@@ -124,21 +124,21 @@ export function AnnouncementDetailsModal({
           {/* Attached Files & Links */}
           {announcement.attachments && announcement.attachments.length > 0 ? (
             <div className="space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 Attached Files & Circulars ({announcement.attachments.length})
               </h4>
               <div className="space-y-1.5">
                 {announcement.attachments.map((att, idx) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-lg bg-surface border border-border flex items-center justify-between gap-3 text-xs hover:border-primary/40 transition-colors"
+                    className="p-2.5 sm:p-3 rounded-lg bg-surface border border-border flex items-center justify-between gap-2.5 text-xs hover:border-primary/40 transition-colors"
                   >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="p-2 rounded-md bg-primary-subtle text-primary shrink-0">
-                        <FileText className="size-4" />
+                    <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                      <div className="p-1.5 sm:p-2 rounded-md bg-primary-subtle text-primary shrink-0">
+                        <FileText className="size-3.5 sm:size-4" />
                       </div>
                       <div className="min-w-0">
-                        <p className="font-semibold text-foreground truncate">{att.name}</p>
+                        <p className="font-semibold text-foreground truncate text-xs sm:text-sm">{att.name}</p>
                         {att.size ? (
                           <p className="text-[10px] text-muted-foreground font-medium mt-0.5">
                             {att.size}
@@ -153,9 +153,9 @@ export function AnnouncementDetailsModal({
                         e.preventDefault()
                         toast.success(`Downloading ${att.name}`)
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-muted text-foreground hover:bg-primary hover:text-primary-foreground font-medium transition-colors shrink-0 cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md bg-muted text-foreground hover:bg-primary hover:text-primary-foreground font-medium text-xs transition-colors shrink-0 cursor-pointer"
                     >
-                      <Download className="size-3.5" />
+                      <Download className="size-3 sm:size-3.5" />
                       <span>Download</span>
                     </a>
                   </div>
@@ -165,13 +165,13 @@ export function AnnouncementDetailsModal({
           ) : null}
         </ModalBody>
 
-        <ModalFooter className="border-t border-border gap-2 justify-between">
+        <ModalFooter className="border-t border-border gap-2 flex-col sm:flex-row sm:justify-between">
           <Button
             type="button"
             variant="outline"
             size="sm"
             onClick={handleCopyLink}
-            className="cursor-pointer"
+            className="cursor-pointer w-full sm:w-auto justify-center"
           >
             {copied ? (
               <>
@@ -186,7 +186,7 @@ export function AnnouncementDetailsModal({
             )}
           </Button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 w-full sm:w-auto justify-end">
             {onEdit ? (
               <Button
                 type="button"
@@ -196,7 +196,7 @@ export function AnnouncementDetailsModal({
                   onOpenChange(false)
                   onEdit(announcement)
                 }}
-                className="cursor-pointer"
+                className="cursor-pointer flex-1 sm:flex-none justify-center"
               >
                 Edit
               </Button>
@@ -211,7 +211,7 @@ export function AnnouncementDetailsModal({
                   onOpenChange(false)
                   onDelete(announcement)
                 }}
-                className="cursor-pointer"
+                className="cursor-pointer flex-1 sm:flex-none justify-center"
               >
                 Delete
               </Button>
@@ -222,7 +222,7 @@ export function AnnouncementDetailsModal({
               variant="primary"
               size="sm"
               onClick={() => onOpenChange(false)}
-              className="cursor-pointer"
+              className="cursor-pointer flex-1 sm:flex-none justify-center"
             >
               Close
             </Button>

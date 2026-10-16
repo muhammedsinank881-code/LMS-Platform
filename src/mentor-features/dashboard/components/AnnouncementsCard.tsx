@@ -88,25 +88,25 @@ export function AnnouncementsCard({
                 aria-label={`View notice: ${item.title}`}
                 className="border-border bg-surface shadow-2xs transition-all hover:border-primary/50 hover:shadow-xs focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary flex-1 flex flex-col justify-center cursor-pointer select-none group"
               >
-                <CardContent className="p-3 flex items-center justify-between gap-2.5">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="p-2 rounded-lg bg-primary-subtle text-primary shrink-0 transition-transform group-hover:scale-105">
-                      <Megaphone className="size-4" />
+                <CardContent className="p-2.5 sm:p-3 flex items-center justify-between gap-2 sm:gap-2.5">
+                  <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                    <div className="p-1.5 sm:p-2 rounded-lg bg-primary-subtle text-primary shrink-0 transition-transform group-hover:scale-105">
+                      <Megaphone className="size-3.5 sm:size-4" />
                     </div>
                     <div className="space-y-0.5 min-w-0">
                       <h4 className="text-xs sm:text-sm font-bold text-foreground truncate group-hover:text-primary transition-colors">
                         {item.title}
                       </h4>
                       {item.category ? (
-                        <span className="text-[11px] text-muted-foreground block truncate">
+                        <span className="text-[10px] sm:text-[11px] text-muted-foreground block truncate">
                           {item.category}
                         </span>
                       ) : null}
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <Badge tone="info" appearance="soft" size="sm" className="text-[10px] px-2 h-5">
+                  <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+                    <Badge tone="info" appearance="soft" size="sm" className="text-[9px] sm:text-[10px] px-1.5 sm:px-2 h-4.5 sm:h-5">
                       {item.date}
                     </Badge>
 

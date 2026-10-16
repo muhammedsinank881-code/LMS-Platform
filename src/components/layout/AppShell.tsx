@@ -45,7 +45,7 @@ export function AppShell() {
       </aside>
 
       <Drawer open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
-        <DrawerContent side="left" size="sm" className="max-w-72 sm:max-w-72 lg:hidden">
+        <DrawerContent side="left" size="sm" className="w-[85vw] max-w-72 lg:hidden">
           <DrawerTitle className="sr-only">Navigation</DrawerTitle>
           <DrawerDescription className="sr-only">
             Jump to any section of LeadFlow.
@@ -66,8 +66,8 @@ export function AppShell() {
           id="main-content"
           tabIndex={-1}
           className={cn(
-            'flex-1 scroll-pb-28 overflow-y-auto p-4 outline-none print:overflow-visible print:p-0 lg:px-6 lg:py-6',
-            hideTabs ? 'pb-[max(1rem,env(safe-area-inset-bottom))]' : 'pb-24',
+            'flex-1 scroll-pb-28 overflow-y-auto px-3 py-3 sm:p-4 outline-none print:overflow-visible print:p-0 lg:px-6 lg:py-6',
+            hideTabs ? 'pb-[max(1rem,env(safe-area-inset-bottom))]' : 'pb-20 sm:pb-24',
           )}
         >
           <div className="mx-auto w-full min-w-0 max-w-full">

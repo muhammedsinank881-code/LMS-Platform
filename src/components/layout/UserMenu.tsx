@@ -23,7 +23,7 @@ export function UserMenu() {
     <Dropdown>
       <DropdownTrigger
         aria-label={`Account menu for ${user.name}`}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:h-8 sm:w-8"
+        className="inline-flex h-8 w-8 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background shrink-0"
       >
         <Avatar name={user.name} src={user.avatarUrl} size="sm" />
       </DropdownTrigger>
@@ -35,14 +35,14 @@ export function UserMenu() {
         </DropdownLabel>
         <DropdownSeparator />
         <DropdownItem asChild>
-          <Link to={user.role === 'student' ? '/student/profile' : '/settings'}>
+          <Link to={user.role === 'mentor' ? '/mentor/profile' : user.role === 'student' ? '/student/profile' : '/settings'}>
             <UserRound aria-hidden="true" />
             Profile
           </Link>
         </DropdownItem>
         {user.role === 'student' ? null : (
           <DropdownItem asChild>
-            <Link to="/settings">
+            <Link to={user.role === 'mentor' ? '/mentor/settings' : '/settings'}>
               <Settings aria-hidden="true" />
               Settings
             </Link>

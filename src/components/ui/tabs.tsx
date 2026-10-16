@@ -43,8 +43,8 @@ export function TabsTrigger({ className, ...props }: ComponentProps<typeof TabsP
         // Inset ring so the focus indicator is not clipped by the scrolling list.
         `inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-foreground ${focusRing} focus-visible:ring-inset focus-visible:ring-offset-0`,
         variant === 'underline'
-          ? '-mb-px h-10 border-b-2 border-transparent px-3 data-[state=active]:border-primary max-sm:h-11'
-          : 'h-8 rounded-sm px-3 data-[state=active]:bg-surface max-sm:h-11',
+          ? '-mb-px h-9 sm:h-10 border-b-2 border-transparent px-2.5 sm:px-3 text-xs sm:text-sm data-[state=active]:border-primary'
+          : 'h-8 rounded-sm px-2.5 sm:px-3 text-xs sm:text-sm data-[state=active]:bg-surface',
         className,
       )}
       {...props}

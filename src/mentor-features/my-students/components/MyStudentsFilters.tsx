@@ -32,7 +32,8 @@ export function MyStudentsFilters({
         <div className="flex-1">
           <Input
             type="search"
-            leftAdornment={<Search className="h-4 w-4" />}
+            size="sm"
+            leftAdornment={<Search className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
             placeholder="Search by name, student ID, class, or email..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}

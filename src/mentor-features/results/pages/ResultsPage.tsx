@@ -57,7 +57,7 @@ export function ResultsPage() {
   }
 
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       {/* 1. Header Section */}
       <ResultsHeader onOpenEnterModal={() => setEnterModalOpen(true)} />
 

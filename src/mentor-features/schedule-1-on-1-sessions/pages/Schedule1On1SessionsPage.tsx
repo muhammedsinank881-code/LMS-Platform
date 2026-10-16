@@ -2,7 +2,7 @@ import { PageHeader } from '@/components/layout/PageHeader'
 
 export function Schedule1On1SessionsPage() {
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       <PageHeader
         title="1-on-1 Sessions"
         description="Schedule, manage, and conduct 1-on-1 mentoring sessions with students."

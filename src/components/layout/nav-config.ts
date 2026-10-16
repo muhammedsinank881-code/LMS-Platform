@@ -157,6 +157,14 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     section: 'ACADEMICS',
   },
   {
+    resource: 'reports',
+    label: 'Syllabus Completion',
+    path: '/mentor/syllabus-completion',
+    icon: CheckSquare,
+    description: 'Track syllabus progress across classes.',
+    section: 'ACADEMICS',
+  },
+  {
     resource: 'team',
     label: 'Students',
     path: '/mentor/students',

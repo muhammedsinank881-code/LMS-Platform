@@ -43,7 +43,7 @@ export function MaterialsPage() {
   }, [searchParams, setSearchParams, setIsUploadOpen])
 
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       {/* 1. Page Header */}
       <MaterialsHeader onOpenUploadModal={() => setIsUploadOpen(true)} />
 

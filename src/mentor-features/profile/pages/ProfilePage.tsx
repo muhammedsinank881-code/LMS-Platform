@@ -8,7 +8,7 @@ export function ProfilePage() {
   const name = user?.name || 'Ms. Husna'
 
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       <PageHeader
         title="My Profile"
         description="View your mentor profile and academic responsibilities"
@@ -19,26 +19,26 @@ export function ProfilePage() {
       />
 
       {/* Header Profile Card */}
-      <Card className="p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5">
-        <div className="w-20 h-20 rounded-full bg-primary-subtle text-primary text-xl font-bold flex items-center justify-center border-2 border-primary/30 shrink-0">
+      <Card className="p-3.5 sm:p-6 flex flex-col sm:flex-row items-center sm:items-start gap-3.5 sm:gap-5">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary-subtle text-primary text-base sm:text-xl font-bold flex items-center justify-center border-2 border-primary/30 shrink-0">
           {name.split(' ').map((n) => n[0]).join('').substring(0, 2).toUpperCase()}
         </div>
 
         <div className="min-w-0 flex-1 text-center sm:text-left space-y-1">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-foreground">{name}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">{name}</h2>
               <p className="text-xs sm:text-sm font-semibold text-primary">
                 Senior Teacher • Computer Science Department
               </p>
             </div>
 
-            <Badge tone="success" className="self-center sm:self-start">
+            <Badge tone="success" size="sm" className="self-center sm:self-start">
               Active Mentor
             </Badge>
           </div>
 
-          <p className="text-xs text-muted-foreground pt-2 leading-relaxed">
+          <p className="text-[11px] sm:text-xs text-muted-foreground pt-1.5 sm:pt-2 leading-relaxed">
             Passionate software engineer and computer science lecturer with 6+ years of experience in Web Development, Database Systems, and mentoring capstone project teams.
           </p>
         </div>

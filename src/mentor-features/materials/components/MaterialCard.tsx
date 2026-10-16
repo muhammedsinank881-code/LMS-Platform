@@ -40,29 +40,29 @@ export function MaterialCard({
   }
 
   return (
-    <Card className="p-4 flex flex-col justify-between space-y-3 hover:border-primary/40 transition-all shadow-2xs group relative">
+    <Card className="p-3 sm:p-4 flex flex-col justify-between space-y-2.5 sm:space-y-3 hover:border-primary/40 transition-all shadow-2xs group relative">
       {/* Header: Type icon, Title, Status Badge */}
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3 min-w-0">
+      <div className="flex items-start justify-between gap-2.5 sm:gap-3">
+        <div className="flex items-start gap-2.5 sm:gap-3 min-w-0">
           <div
-            className={`p-2.5 rounded-lg shrink-0 mt-0.5 ${
+            className={`p-2 sm:p-2.5 rounded-lg shrink-0 mt-0.5 ${
               isPdf
                 ? 'bg-primary-subtle text-primary'
                 : 'bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-400'
             }`}
           >
-            {isPdf ? <FileText className="size-5" /> : <PlayCircle className="size-5" />}
+            {isPdf ? <FileText className="size-4 sm:size-5" /> : <PlayCircle className="size-4 sm:size-5" />}
           </div>
 
           <div className="min-w-0 space-y-0.5">
             <button
               type="button"
               onClick={() => onViewDetails(material)}
-              className="text-left text-sm font-bold text-foreground hover:text-primary transition-colors cursor-pointer leading-snug line-clamp-2"
+              className="text-left text-xs sm:text-sm font-bold text-foreground hover:text-primary transition-colors cursor-pointer leading-snug line-clamp-2"
             >
               {material.title}
             </button>
-            <p className="text-xs text-muted-foreground font-medium truncate">
+            <p className="text-[11px] sm:text-xs text-muted-foreground font-medium truncate">
               {material.courseClass} · <span className="text-foreground/80">{material.module}</span>
             </p>
           </div>
@@ -73,7 +73,7 @@ export function MaterialCard({
           appearance="soft"
           dot
           size="sm"
-          className="shrink-0"
+          className="shrink-0 text-[10px] sm:text-xs"
         >
           {isPublished ? 'Published' : 'Draft'}
         </Badge>
@@ -81,20 +81,20 @@ export function MaterialCard({
 
       {/* Description / Topic if present */}
       {material.topic ? (
-        <div className="text-xs text-muted-foreground bg-muted/40 p-2 rounded-md border border-border/50 flex items-center justify-between">
+        <div className="text-[11px] sm:text-xs text-muted-foreground bg-muted/40 p-1.5 sm:p-2 rounded-md border border-border/50 flex items-center justify-between">
           <span className="font-semibold text-foreground truncate">Topic: {material.topic}</span>
           {material.duration ? <span className="shrink-0 font-medium">{material.duration}</span> : null}
         </div>
       ) : null}
 
       {/* Info Line */}
-      <div className="pt-2 border-t border-border/60 flex items-center justify-between text-xs text-muted-foreground">
-        <div className="flex items-center gap-1.5 font-medium">
+      <div className="pt-2 border-t border-border/60 flex items-center justify-between text-[11px] sm:text-xs text-muted-foreground">
+        <div className="flex items-center gap-1 sm:gap-1.5 font-medium truncate">
           <span className="uppercase font-bold text-foreground">{material.type}</span>
           <span>·</span>
           <span>{isPdf ? material.fileSize || 'PDF' : material.duration || 'Video'}</span>
           <span>·</span>
-          <span>Uploaded {material.uploadedDate}</span>
+          <span className="truncate">Uploaded {material.uploadedDate}</span>
         </div>
 
         {/* Action Menu Toggle / Actions */}
