@@ -80,14 +80,14 @@ export function RecentClassesGrid({ classes }: RecentClassesGridProps) {
                   }
                 }}
                 aria-label={`Open class: ${cls.title}`}
-                className="min-w-[200px] sm:min-w-[230px] w-[200px] sm:w-[230px] shrink-0 snap-start border-border bg-surface shadow-2xs transition-all hover:border-primary/50 hover:shadow-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary group cursor-pointer select-none"
+                className="min-w-[170px] sm:min-w-[220px] w-[170px] sm:w-[220px] shrink-0 snap-start border-border bg-surface shadow-2xs transition-all hover:border-primary/50 hover:shadow-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary group cursor-pointer select-none"
               >
-                <CardContent className="p-3 space-y-3">
+                <CardContent className="p-2.5 sm:p-3 space-y-2 sm:space-y-3">
                   <div className="flex items-center justify-between">
                     <div
-                      className={`p-2 rounded-lg ${iconConfig.bg} transition-transform group-hover:scale-105`}
+                      className={`p-1.5 sm:p-2 rounded-lg ${iconConfig.bg} transition-transform group-hover:scale-105`}
                     >
-                      <Icon className="size-4" />
+                      <Icon className="size-3.5 sm:size-4" />
                     </div>
 
                     {/* Three-dot dropdown actions menu */}

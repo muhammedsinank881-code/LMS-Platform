@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useAuthStore } from '@/store/auth-store'
 import { MOCK_MENTOR_CLASSES } from '../mockData'
 import type { ClassFilterTab, ClassSummaryStats, MentorClass } from '../types'
@@ -7,17 +7,28 @@ export interface UseMentorClassesOptions {
   initialTab?: ClassFilterTab
 }
 
+// Module-level shared store so class state stays synchronized across all pages & dashboard
+let sharedClassList: MentorClass[] = [...MOCK_MENTOR_CLASSES]
+const subscribers = new Set<(classes: MentorClass[]) => void>()
+
 export function useMentorClasses(options: UseMentorClassesOptions = {}) {
   const { initialTab = 'all' } = options
 
   const user = useAuthStore((state) => state.user)
   const mentorId = user?.id || 'user-mentor'
 
-  const [classList, setClassList] = useState<MentorClass[]>(MOCK_MENTOR_CLASSES)
+  const [classList, setClassList] = useState<MentorClass[]>(sharedClassList)
   const [activeTab, setActiveTab] = useState<ClassFilterTab>(initialTab)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    subscribers.add(setClassList)
+    return () => {
+      subscribers.delete(setClassList)
+    }
+  }, [])
 
   // 1. Filter classes strictly assigned to the logged-in mentor
   const mentorAssignedClasses = useMemo(() => {
@@ -91,11 +102,14 @@ export function useMentorClasses(options: UseMentorClassesOptions = {}) {
       syllabusProgress: 0,
       enrolledStudents: [],
     }
-    setClassList((prev) => [created, ...prev])
+    sharedClassList = [created, ...sharedClassList]
+    subscribers.forEach((setter) => setter([...sharedClassList]))
+    return created
   }
 
   return {
     classes: filteredClasses,
+    allClasses: classList,
     allClassesCount: mentorAssignedClasses.length,
     stats,
     activeTab,

@@ -53,13 +53,13 @@ export function ModalContent({
 }
 
 export function ModalHeader({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('flex flex-col gap-1 p-6 pb-4 pr-14', className)} {...props} />
+  return <div className={cn('flex flex-col gap-1 p-4 sm:p-6 pb-3 sm:pb-4 pr-12 sm:pr-14', className)} {...props} />
 }
 
 export function ModalTitle({ className, ...props }: ComponentProps<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
-      className={cn('text-lg font-semibold leading-7 text-foreground', className)}
+      className={cn('text-base sm:text-lg font-semibold leading-6 sm:leading-7 text-foreground', className)}
       {...props}
     />
   )
@@ -71,21 +71,21 @@ export function ModalDescription({
 }: ComponentProps<typeof DialogPrimitive.Description>) {
   return (
     <DialogPrimitive.Description
-      className={cn('text-sm text-muted-foreground', className)}
+      className={cn('text-xs sm:text-sm text-muted-foreground', className)}
       {...props}
     />
   )
 }
 
 export function ModalBody({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={cn('px-6 py-2 text-sm max-sm:min-h-0 max-sm:flex-1 max-sm:overflow-y-auto', className)} {...props} />
+  return <div className={cn('px-4 sm:px-6 py-2 text-xs sm:text-sm max-sm:min-h-0 max-sm:flex-1 max-sm:overflow-y-auto', className)} {...props} />
 }
 
 export function ModalFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'flex flex-col-reverse gap-2 p-6 pt-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:flex-row sm:justify-end sm:pb-6',
+        'flex flex-col-reverse gap-2 p-4 sm:p-6 pt-3 sm:pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:flex-row sm:justify-end sm:pb-6',
         className,
       )}
       {...props}

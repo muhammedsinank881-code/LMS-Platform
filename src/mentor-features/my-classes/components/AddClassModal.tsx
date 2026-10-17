@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalTitle,
+  toast,
 } from '@/components/ui'
 import type { MentorClass } from '../types'
 
@@ -48,6 +49,8 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
       description: description.trim() || `Course batch module for ${title.trim()}`,
     })
 
+    toast.success(`Class "${title.trim()}" created successfully!`)
+
     // Reset form
     setTitle('')
     setCourseCode('')
@@ -65,8 +68,8 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
             </ModalTitle>
           </ModalHeader>
 
-          <ModalBody className="space-y-4">
-            <div className="space-y-1.5">
+          <ModalBody className="space-y-3 sm:space-y-4 max-h-[65vh] overflow-y-auto">
+            <div className="space-y-1 sm:space-y-1.5">
               <Label htmlFor="class-title" className="text-xs font-semibold text-foreground">
                 Class / Course Name *
               </Label>
@@ -79,8 +82,8 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="space-y-1 sm:space-y-1.5">
                 <Label htmlFor="course-code" className="text-xs font-semibold text-foreground">
                   Course Code *
                 </Label>
@@ -94,7 +97,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                 />
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1 sm:space-y-1.5">
                 <Label htmlFor="program" className="text-xs font-semibold text-foreground">
                   Program / Degree
                 </Label>
@@ -107,8 +110,8 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="space-y-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              <div className="space-y-1 sm:space-y-1.5">
                 <Label htmlFor="year" className="text-xs font-semibold text-foreground">
                   Year
                 </Label>
@@ -116,7 +119,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                   id="year"
                   value={year}
                   onChange={(e) => setYear(e.target.value)}
-                  className="w-full h-10 px-3 bg-surface border border-input rounded-md text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
+                  className="w-full h-9 sm:h-10 px-2.5 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
                 >
                   <option value="1st Year">1st Year</option>
                   <option value="2nd Year">2nd Year</option>
@@ -125,7 +128,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                 </select>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1 sm:space-y-1.5">
                 <Label htmlFor="semester" className="text-xs font-semibold text-foreground">
                   Semester
                 </Label>
@@ -133,7 +136,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                   id="semester"
                   value={semester}
                   onChange={(e) => setSemester(e.target.value)}
-                  className="w-full h-10 px-3 bg-surface border border-input rounded-md text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
+                  className="w-full h-9 sm:h-10 px-2.5 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
                 >
                   <option value="Semester 1">Semester 1</option>
                   <option value="Semester 2">Semester 2</option>
@@ -144,7 +147,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                 </select>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1 sm:space-y-1.5">
                 <Label htmlFor="room" className="text-xs font-semibold text-foreground">
                   Room / Lab
                 </Label>
@@ -157,8 +160,8 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="space-y-1 sm:space-y-1.5">
                 <Label htmlFor="students-count" className="text-xs font-semibold text-foreground">
                   Estimated Students
                 </Label>
@@ -171,7 +174,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                 />
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-1 sm:space-y-1.5">
                 <Label htmlFor="class-status" className="text-xs font-semibold text-foreground">
                   Class Status
                 </Label>
@@ -179,7 +182,7 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
                   id="class-status"
                   value={status}
                   onChange={(e) => setStatus(e.target.value as 'active' | 'completed')}
-                  className="w-full h-10 px-3 bg-surface border border-input rounded-md text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
+                  className="w-full h-9 sm:h-10 px-2.5 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm text-foreground focus:ring-2 focus:ring-ring focus:outline-none"
                 >
                   <option value="active">Active</option>
                   <option value="completed">Completed</option>
@@ -188,17 +191,21 @@ export function AddClassModal({ open, onOpenChange, onAddClass }: AddClassModalP
             </div>
           </ModalBody>
 
-          <ModalFooter>
+          <ModalFooter className="flex-row gap-2 justify-end">
             <Button
               type="button"
               variant="outline"
+              size="sm"
               onClick={() => onOpenChange(false)}
+              className="flex-1 sm:flex-none justify-center"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               variant="primary"
+              size="sm"
+              className="flex-1 sm:flex-none justify-center"
             >
               Create Class
             </Button>

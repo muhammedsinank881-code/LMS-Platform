@@ -33,10 +33,10 @@ export function NotificationBell() {
     <Dropdown>
       <Tooltip content="Notifications">
         <DropdownTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label={label} className="relative">
+          <Button variant="ghost" size="icon-sm" aria-label={label} className="relative h-8 w-8 sm:h-9 sm:w-9 shrink-0 [&_svg]:size-4">
             <Bell aria-hidden="true" />
             {unread > 0 ? (
-              <span aria-hidden="true" className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-semibold leading-none text-destructive-foreground">
+              <span aria-hidden="true" className="absolute -top-0.5 -right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-3.5 sm:h-4 sm:min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[9px] sm:text-[10px] font-semibold leading-none text-destructive-foreground">
                 {unread > 9 ? '9+' : unread}
               </span>
             ) : null}

@@ -25,10 +25,10 @@ export const fieldVariants = cva(
   {
     variants: {
       size: {
-        sm: 'h-8 px-3 text-sm max-sm:h-11 max-sm:text-base',
-        md: 'h-10 px-3 text-sm max-sm:h-11 max-sm:text-base',
+        sm: 'h-8 px-2.5 text-xs sm:text-sm max-sm:h-9 max-sm:text-sm',
+        md: 'h-10 px-3 text-sm max-sm:h-10 max-sm:text-sm',
         lg: 'h-12 px-4 text-base',
-        multiline: 'min-h-24 px-3 py-2 text-sm max-sm:text-base',
+        multiline: 'min-h-24 px-3 py-2 text-sm max-sm:text-sm',
       },
       invalid: {
         true: 'border-destructive focus-visible:border-destructive focus-visible:ring-destructive',

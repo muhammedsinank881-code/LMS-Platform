@@ -9,20 +9,20 @@ interface MentorWelcomeBannerProps {
 export function MentorWelcomeBanner({ name, title, activeBatch }: MentorWelcomeBannerProps) {
   return (
     <Card className="border-border bg-gradient-to-r from-surface via-surface to-primary/5 shadow-2xs">
-      <CardContent className="p-3.5 sm:p-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <Avatar name={name} size="md" className="border border-primary/20 shrink-0" />
-            <div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="text-base sm:text-lg font-bold text-foreground tracking-tight">
+      <CardContent className="p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <Avatar name={name} size="sm" className="sm:size-md border border-primary/20 shrink-0" />
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                <h1 className="text-sm sm:text-base md:text-lg font-bold text-foreground tracking-tight truncate">
                   Welcome back, {name} 👋
                 </h1>
-                <Badge tone="primary" appearance="soft" size="sm">
+                <Badge tone="primary" appearance="soft" size="sm" className="text-[10px] sm:text-xs">
                   {title}
                 </Badge>
               </div>
-              <p className="text-xs text-muted-foreground mt-0.5">
+              <p className="text-[11px] sm:text-xs text-muted-foreground mt-0.5 truncate">
                 Cohort: <span className="font-medium text-foreground">{activeBatch}</span> • {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
               </p>
             </div>

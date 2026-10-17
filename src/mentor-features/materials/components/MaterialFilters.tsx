@@ -55,13 +55,13 @@ export function MaterialFilters({
       </div>
 
       {/* Dropdown Filters & Sort Controls */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-t border-border">
-        <div className="flex flex-wrap items-center gap-2.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pt-1 border-t border-border">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full sm:w-auto">
           {/* Course Select */}
           <select
             value={filters.course}
             onChange={(e) => onFiltersChange({ course: e.target.value })}
-            className="h-9 px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
+            className="w-full sm:w-auto h-8 sm:h-9 px-2 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
             aria-label="Filter by Course / Class"
           >
             <option value="all">All Courses / Classes</option>
@@ -76,7 +76,7 @@ export function MaterialFilters({
           <select
             value={filters.module}
             onChange={(e) => onFiltersChange({ module: e.target.value })}
-            className="h-9 px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
+            className="w-full sm:w-auto h-8 sm:h-9 px-2 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
             aria-label="Filter by Module"
           >
             <option value="all">All Modules</option>
@@ -91,7 +91,7 @@ export function MaterialFilters({
           <select
             value={filters.status}
             onChange={(e) => onFiltersChange({ status: e.target.value as MaterialFiltersState['status'] })}
-            className="h-9 px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
+            className="w-full sm:w-auto h-8 sm:h-9 px-2 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
             aria-label="Filter by Visibility Status"
           >
             <option value="all">All Statuses</option>
@@ -103,7 +103,7 @@ export function MaterialFilters({
           <select
             value={filters.sort}
             onChange={(e) => onFiltersChange({ sort: e.target.value as MaterialSortOption })}
-            className="h-9 px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
+            className="w-full sm:w-auto h-8 sm:h-9 px-2 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-2xs"
             aria-label="Sort materials"
           >
             <option value="recent">Sort: Recently uploaded</option>

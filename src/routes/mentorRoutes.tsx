@@ -24,6 +24,16 @@ export const mentorRoutes: RouteObject[] = [
         lazy: lazyPage(() => import('@/mentor-features/my-classes/pages/MyClassesPage'), 'MyClassesPage'),
       },
       {
+        path: 'syllabus-completion',
+        lazy: lazyPage(
+          () =>
+            import(
+              '@/mentor-features/syllabus-completion/pages/SyllabusCompletionPage'
+            ),
+          'SyllabusCompletionPage',
+        ),
+      },
+      {
         path: 'classes/:classId',
         lazy: lazyPage(() => import('@/mentor-features/my-classes/pages/ClassDetailsPage'), 'ClassDetailsPage'),
       },

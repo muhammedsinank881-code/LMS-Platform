@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { AnnouncementsCard } from '../components/AnnouncementsCard'
+import { DashboardSummaryCards } from '../components/DashboardSummaryCards'
 import { RecentClassesGrid } from '../components/RecentClassesGrid'
 import { TodayScheduleTimeline } from '../components/TodayScheduleTimeline'
 import type { AnnouncementItem, RecentClassItem, ScheduleItem } from '../types'
@@ -221,6 +222,87 @@ describe('Mentor Dashboard Interactive Sections', () => {
       // Clicking three-dot button does not navigate to class details
       fireEvent.click(threeDotBtn)
       expect(mockNavigate).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('DashboardSummaryCards - Syllabus Completion', () => {
+    const defaultProps = {
+      totalStudents: 140,
+      allClassesCount: 6,
+      activeClassesCount: 3,
+      attendanceRate: 92,
+    }
+
+    it('renders real dynamic syllabus percentage, status badge, and phase', () => {
+      render(
+        <MemoryRouter>
+          <DashboardSummaryCards
+            {...defaultProps}
+            syllabusProgress={85}
+            syllabusBadgeText="On Track"
+            syllabusBadgeTone="success"
+            syllabusPhaseText="Advanced Modules Phase"
+          />
+        </MemoryRouter>,
+      )
+
+      // Shows dynamic percentage across desktop and mobile views
+      expect(screen.getAllByText('85%').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText('Syllabus Completion').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText('On Track').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText('Advanced Modules Phase').length).toBeGreaterThanOrEqual(1)
+    })
+
+    it('renders subtle progress indicator representing exact percentage', () => {
+      render(
+        <MemoryRouter>
+          <DashboardSummaryCards
+            {...defaultProps}
+            syllabusProgress={79}
+          />
+        </MemoryRouter>,
+      )
+
+      const progressBars = screen.getAllByRole('progressbar')
+      expect(progressBars.length).toBeGreaterThanOrEqual(1)
+      expect(progressBars[0]).toHaveAttribute('aria-valuenow', '79')
+    })
+
+    it('navigates to /mentor/syllabus-completion when clicking View Syllabus', () => {
+      mockNavigate.mockClear()
+      render(
+        <MemoryRouter>
+          <DashboardSummaryCards
+            {...defaultProps}
+            syllabusProgress={79}
+          />
+        </MemoryRouter>,
+      )
+
+      const viewSyllabusAction = screen.getAllByText(/View Syllabus/i)[0]
+      expect(viewSyllabusAction).toBeInTheDocument()
+      fireEvent.click(viewSyllabusAction)
+      expect(mockNavigate).toHaveBeenCalledWith('/mentor/syllabus-completion')
+    })
+
+    it('handles empty syllabus state without fake numbers or errors', () => {
+      render(
+        <MemoryRouter>
+          <DashboardSummaryCards
+            {...defaultProps}
+            syllabusProgress={null}
+            syllabusBadgeText="No Data"
+            syllabusBadgeTone="neutral"
+            syllabusPhaseText="No syllabus data"
+          />
+        </MemoryRouter>,
+      )
+
+      expect(screen.getAllByText('--').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText('No Data').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText('No syllabus data').length).toBeGreaterThanOrEqual(1)
+      // No progress bar when no syllabus data
+      expect(screen.queryByRole('progressbar')).toBeNull()
     })
   })
 })

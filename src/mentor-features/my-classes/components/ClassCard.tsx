@@ -58,60 +58,60 @@ export function ClassCard({ cls }: ClassCardProps) {
       }}
       role="button"
       tabIndex={0}
-      className="group relative flex flex-col justify-between p-5 cursor-pointer select-none"
+      className="group relative flex flex-col justify-between p-3.5 sm:p-5 cursor-pointer select-none"
     >
       {/* Header Row: Icon + Title/Program + Code Badge */}
-      <div className="space-y-3">
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className={`p-2.5 rounded-md ${iconConfig.bg} shrink-0 transition-transform group-hover:scale-105`}>
-              <Icon className="h-5 w-5" />
+      <div className="space-y-2.5 sm:space-y-3">
+        <div className="flex items-start justify-between gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className={`p-2 sm:p-2.5 rounded-md ${iconConfig.bg} shrink-0 transition-transform group-hover:scale-105`}>
+              <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div className="min-w-0 flex-1">
               <Tooltip content={cls.title} side="top">
-                <h3 className="text-base font-semibold text-foreground tracking-tight truncate leading-snug group-hover:text-primary transition-colors">
+                <h3 className="text-sm sm:text-base font-semibold text-foreground tracking-tight truncate leading-snug group-hover:text-primary transition-colors">
                   {cls.title}
                 </h3>
               </Tooltip>
-              <p className="text-xs text-muted-foreground font-medium mt-0.5 truncate">
+              <p className="text-[11px] sm:text-xs text-muted-foreground font-medium mt-0.5 truncate">
                 {cls.program} · {cls.year}
               </p>
             </div>
           </div>
 
-          <Badge tone="neutral" size="sm" className="font-mono shrink-0">
+          <Badge tone="neutral" size="sm" className="font-mono shrink-0 text-[10px] sm:text-xs">
             {cls.courseCode}
           </Badge>
         </div>
 
         {/* Student Count & Room Info Row */}
-        <div className="pt-2 flex items-center justify-between text-xs text-muted-foreground font-medium border-t border-border">
+        <div className="pt-2 flex items-center justify-between text-[11px] sm:text-xs text-muted-foreground font-medium border-t border-border">
           <div className="flex items-center gap-1.5">
-            <Users className="h-4 w-4 text-primary" />
+            <Users className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
             <span className="text-foreground font-semibold">{cls.studentsCount} Students</span>
           </div>
 
           <div className="flex items-center gap-1.5">
-            <MapPin className="h-4 w-4 text-muted-foreground" />
+            <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
             <span>{cls.room}</span>
           </div>
         </div>
       </div>
 
       {/* Card Footer: Semester + Status Indicator + Arrow */}
-      <div className="mt-4 pt-3 border-t border-border flex items-center justify-between gap-2 text-xs">
-        <div className="flex items-center gap-2 text-muted-foreground font-medium truncate">
+      <div className="mt-3 sm:mt-4 pt-2.5 sm:pt-3 border-t border-border flex items-center justify-between gap-2 text-[11px] sm:text-xs">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground font-medium truncate">
           <Clock className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
           <span className="truncate">{cls.semester}</span>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
-          <Badge tone={isActive ? 'success' : 'neutral'} size="sm" dot={isActive}>
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <Badge tone={isActive ? 'success' : 'neutral'} size="sm" dot={isActive} className="text-[10px] sm:text-xs">
             {isActive ? 'Active' : 'Completed'}
           </Badge>
 
           <div className="p-1 rounded-md text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all">
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </div>
         </div>
       </div>

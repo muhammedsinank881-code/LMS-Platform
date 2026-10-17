@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Menu, Plus, Search } from 'lucide-react'
+import { Menu, MessageSquare, Plus, Search } from 'lucide-react'
 import { Button, Dropdown, DropdownContent, DropdownItem, DropdownTrigger } from '@/components/ui'
 import { usePermission } from '@/hooks/use-permission'
 import { getModifierKeyLabel } from '@/lib/platform'
@@ -22,17 +22,17 @@ export function Topbar({ onOpenNav }: TopbarProps) {
   const shortcut = `${getModifierKeyLabel()} K`
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-3 border-b border-border bg-surface px-4 print:hidden lg:px-6">
+    <header className="flex h-14 sm:h-16 shrink-0 items-center gap-1.5 sm:gap-3 border-b border-border bg-surface px-2.5 sm:px-4 print:hidden lg:px-6">
       <Button
         variant="ghost"
-        size="icon"
-        className="lg:hidden"
+        size="icon-sm"
+        className="h-8 w-8 sm:h-9 sm:w-9 lg:hidden shrink-0 [&_svg]:size-4"
         onClick={onOpenNav}
         aria-label="Open navigation"
       >
         <Menu aria-hidden="true" />
       </Button>
-      <BrandMark iconOnly className="lg:hidden" />
+      <BrandMark iconOnly className="lg:hidden shrink-0" />
 
       <button
         type="button"
@@ -52,18 +52,22 @@ export function Topbar({ onOpenNav }: TopbarProps) {
       <div className="flex items-center gap-1 sm:gap-2">
         <Button
           variant="ghost"
-          size="icon"
-          className="sm:hidden"
+          size="icon-sm"
+          className="h-8 w-8 sm:h-9 sm:w-9 sm:hidden shrink-0 [&_svg]:size-4"
           onClick={() => setCommandPaletteOpen(true)}
           aria-label="Search"
         >
           <Search aria-hidden="true" />
         </Button>
-        {userRole !== 'student' && (userRole === 'mentor' ? (
+        {userRole === 'mentor' && (
           <Dropdown>
             <DropdownTrigger asChild>
-              <Button aria-label="Add">
-                <Plus aria-hidden="true" />
+              <Button
+                size="sm"
+                className="h-8 w-8 p-0 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1.5 shrink-0"
+                aria-label="Add"
+              >
+                <Plus aria-hidden="true" className="size-4" />
                 <span className="max-sm:hidden">Add</span>
               </Button>
             </DropdownTrigger>
@@ -73,11 +77,17 @@ export function Topbar({ onOpenNav }: TopbarProps) {
               <DropdownItem onSelect={() => navigate('/mentor/exams')}>Create exam</DropdownItem>
             </DropdownContent>
           </Dropdown>
-        ) : can('leads', 'create') || can('followups', 'create') ? (
+        )}
+
+        {userRole !== 'mentor' && userRole !== 'student' && (can('leads', 'create') || can('followups', 'create')) && (
           <Dropdown>
             <DropdownTrigger asChild>
-              <Button aria-label="Add">
-                <Plus aria-hidden="true" />
+              <Button
+                size="sm"
+                className="h-8 w-8 p-0 sm:h-8 sm:w-auto sm:px-2.5 sm:gap-1.5 shrink-0"
+                aria-label="Add"
+              >
+                <Plus aria-hidden="true" className="size-4" />
                 <span className="max-sm:hidden">Add</span>
               </Button>
             </DropdownTrigger>
@@ -90,7 +100,20 @@ export function Topbar({ onOpenNav }: TopbarProps) {
               ) : null}
             </DropdownContent>
           </Dropdown>
-        ) : null)}
+        )}
+
+        {userRole === 'mentor' && (
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="h-8 w-8 sm:h-9 sm:w-9 lg:hidden shrink-0 [&_svg]:size-4 relative"
+            onClick={() => navigate('/mentor/messages')}
+            aria-label="Messages"
+          >
+            <MessageSquare aria-hidden="true" className="size-4" />
+            <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-primary" />
+          </Button>
+        )}
         <NotificationBell />
         <UserMenu />
       </div>

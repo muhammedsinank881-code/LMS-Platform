@@ -160,23 +160,25 @@ export function CreateAssignmentPage() {
           <Button
             type="button"
             variant="outline"
+            size="sm"
             onClick={() => navigate('/mentor/assignments')}
+            className="h-8 sm:h-9 text-xs sm:text-sm px-2.5 sm:px-3.5"
           >
-            <ArrowLeft className="size-4 mr-1.5" />
+            <ArrowLeft className="size-3.5 sm:size-4 mr-1 sm:mr-1.5" />
             <span>Back to Assignments</span>
           </Button>
         }
       />
 
       {/* Main Two-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Left Column: Basic Information & Instructions (2 Columns Wide on Desktop) */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-4 sm:space-y-6">
           {/* Basic Information Card */}
-          <Card className="p-5 sm:p-6 space-y-5">
-            <div className="flex items-center gap-2 pb-3 border-b border-border">
-              <FileText className="size-5 text-primary" />
-              <h2 className="text-base font-bold text-foreground">Basic Information</h2>
+          <Card className="p-3.5 sm:p-6 space-y-3.5 sm:space-y-5">
+            <div className="flex items-center gap-2 pb-2.5 sm:pb-3 border-b border-border">
+              <FileText className="size-4 sm:size-5 text-primary" />
+              <h2 className="text-sm sm:text-base font-bold text-foreground">Basic Information</h2>
             </div>
 
             <div className="space-y-4">
@@ -487,23 +489,25 @@ export function CreateAssignmentPage() {
           </Card>
 
           {/* Form Actions Card */}
-          <Card className="p-5 space-y-3">
+          <Card className="p-3.5 sm:p-5 space-y-2.5 sm:space-y-3">
             <Button
               type="button"
               variant="primary"
+              size="sm"
               onClick={() => handleSave('active')}
               disabled={!isValid && Object.keys(touched).length > 0}
-              className="w-full h-10 font-bold"
+              className="w-full h-9 sm:h-10 text-xs sm:text-sm font-bold"
             >
-              <Check className="size-4 mr-1.5" />
+              <Check className="size-3.5 sm:size-4 mr-1.5" />
               <span>Publish Assignment</span>
             </Button>
 
             <Button
               type="button"
               variant="outline"
+              size="sm"
               onClick={() => handleSave('draft')}
-              className="w-full h-10 font-semibold"
+              className="w-full h-9 sm:h-10 text-xs sm:text-sm font-semibold"
             >
               <span>Save as Draft</span>
             </Button>
@@ -511,8 +515,9 @@ export function CreateAssignmentPage() {
             <Button
               type="button"
               variant="ghost"
+              size="sm"
               onClick={() => navigate('/mentor/assignments')}
-              className="w-full h-10 text-muted-foreground hover:text-foreground"
+              className="w-full h-9 sm:h-10 text-xs sm:text-sm text-muted-foreground hover:text-foreground"
             >
               <span>Cancel</span>
             </Button>

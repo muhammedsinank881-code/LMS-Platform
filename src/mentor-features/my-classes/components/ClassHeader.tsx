@@ -16,8 +16,8 @@ export function ClassHeader({ onOpenAddModal }: ClassHeaderProps) {
         { label: 'My Classes' },
       ]}
       actions={
-        <Button variant="primary" onClick={onOpenAddModal}>
-          <Plus className="h-4 w-4" /> Add Class
+        <Button variant="primary" size="sm" onClick={onOpenAddModal} className="h-8 sm:h-9 text-xs sm:text-sm px-2.5 sm:px-3.5">
+          <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1 sm:mr-1.5" /> Add Class
         </Button>
       }
     />

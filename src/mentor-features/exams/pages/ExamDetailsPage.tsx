@@ -68,74 +68,78 @@ export function ExamDetailsPage() {
   }
 
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       {/* Back Navigation */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <button
           type="button"
           onClick={() => navigate('/mentor/exams')}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
-          <ArrowLeft className="size-4" />
+          <ArrowLeft className="size-3.5 sm:size-4" />
           <span>Back to Exams</span>
         </button>
 
-        <ExamStatusBadge status={exam.status} />
+        <ExamStatusBadge status={exam.status} className="text-[10px] sm:text-xs" />
       </div>
 
       {/* Main Exam Header Banner */}
-      <Card className="p-6 space-y-4">
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <div className="p-3.5 rounded-lg bg-primary-subtle text-primary shrink-0">
-              <Award className="size-8" />
+      <Card className="p-3.5 sm:p-6 space-y-3 sm:space-y-4">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 sm:gap-4">
+          <div className="flex items-start gap-3 sm:gap-4 min-w-0">
+            <div className="p-2 sm:p-3.5 rounded-lg bg-primary-subtle text-primary shrink-0">
+              <Award className="size-5 sm:size-8" />
             </div>
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            <div className="min-w-0">
+              <h1 className="text-lg sm:text-2xl font-bold tracking-tight text-foreground truncate">
                 {exam.title}
               </h1>
-              <p className="text-sm text-muted-foreground mt-1 font-medium">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1 font-medium truncate">
                 {exam.classBatch} · {exam.subject} ({exam.courseName})
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <Button
               type="button"
               variant="outline"
+              size="sm"
+              className="h-8 sm:h-9 text-xs sm:text-sm flex-1 sm:flex-none justify-center"
             >
-              <Edit3 className="size-4 mr-1.5" />
+              <Edit3 className="size-3.5 sm:size-4 mr-1 sm:mr-1.5" />
               <span>Edit Exam</span>
             </Button>
             <Button
               type="button"
               variant="primary"
+              size="sm"
+              className="h-8 sm:h-9 text-xs sm:text-sm flex-1 sm:flex-none justify-center"
             >
-              <FileCheck className="size-4 mr-1.5" />
-              <span>Enter Marks / Results</span>
+              <FileCheck className="size-3.5 sm:size-4 mr-1 sm:mr-1.5" />
+              <span>Enter Marks</span>
             </Button>
           </div>
         </div>
 
         {/* Quick Details Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-border">
-          <div className="p-3 rounded-md bg-muted border border-border">
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-              <Calendar className="size-3.5 text-primary" />
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 pt-2 sm:pt-3 border-t border-border">
+          <div className="p-2.5 sm:p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-muted-foreground font-medium">
+              <Calendar className="size-3 sm:size-3.5 text-primary" />
               <span>Date & Time</span>
             </div>
-            <p className="text-sm font-bold text-foreground mt-1">
+            <p className="text-xs sm:text-sm font-bold text-foreground mt-0.5 sm:mt-1 truncate">
               {exam.formattedDate} · {exam.time}
             </p>
           </div>
 
-          <div className="p-3 rounded-md bg-muted border border-border">
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
-              <Clock className="size-3.5 text-primary" />
+          <div className="p-2.5 sm:p-3 rounded-md bg-muted border border-border">
+            <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-muted-foreground font-medium">
+              <Clock className="size-3 sm:size-3.5 text-primary" />
               <span>Duration</span>
             </div>
-            <p className="text-sm font-bold text-foreground mt-1">
+            <p className="text-xs sm:text-sm font-bold text-foreground mt-0.5 sm:mt-1">
               {exam.duration}
             </p>
           </div>
@@ -200,16 +204,16 @@ export function ExamDetailsPage() {
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto rounded-md border border-border">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-muted/50 text-xs uppercase font-medium text-muted-foreground border-b border-border">
+        <div className="overflow-x-auto rounded-md border border-border bg-surface -mx-3.5 sm:mx-0">
+          <table className="w-full text-left text-xs sm:text-sm min-w-[500px]">
+            <thead className="bg-muted/50 text-[10px] sm:text-xs uppercase font-medium text-muted-foreground border-b border-border">
               <tr>
-                <th className="p-3">Roll Number</th>
-                <th className="p-3">Student Name</th>
-                <th className="p-3">Email</th>
-                <th className="p-3">Marks Obtained</th>
-                <th className="p-3">Grade</th>
-                <th className="p-3 text-right">Action</th>
+                <th className="p-2.5 sm:p-3">Roll Number</th>
+                <th className="p-2.5 sm:p-3">Student Name</th>
+                <th className="p-2.5 sm:p-3">Email</th>
+                <th className="p-2.5 sm:p-3">Marks Obtained</th>
+                <th className="p-2.5 sm:p-3">Grade</th>
+                <th className="p-2.5 sm:p-3 text-right">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border font-medium">

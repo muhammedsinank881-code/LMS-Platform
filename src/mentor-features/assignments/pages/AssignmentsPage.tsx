@@ -31,7 +31,7 @@ export function AssignmentsPage() {
   })
 
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       {/* Header */}
       <PageHeader
         title="Assignments"
@@ -44,53 +44,56 @@ export function AssignmentsPage() {
           <Button
             type="button"
             variant="primary"
+            size="sm"
             onClick={() => navigate('/mentor/assignments/create')}
+            className="h-8 sm:h-9 text-xs sm:text-sm px-2.5 sm:px-3.5"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1 sm:mr-1.5" />
             <span>Create Assignment</span>
           </Button>
         }
       />
 
       {/* Quick Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="p-4 flex items-center gap-3.5">
-          <div className="h-10 w-10 rounded-md bg-primary-subtle text-primary flex items-center justify-center shrink-0">
-            <Clock className="h-5 w-5" />
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4">
+        <Card className="p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3.5">
+          <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-md bg-primary-subtle text-primary flex items-center justify-center shrink-0">
+            <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
           </div>
           <div>
-            <div className="text-xl font-semibold text-foreground">2 Active</div>
-            <div className="text-xs text-muted-foreground">Pending submissions</div>
+            <div className="text-lg sm:text-xl font-semibold text-foreground">2 Active</div>
+            <div className="text-[11px] sm:text-xs text-muted-foreground">Pending submissions</div>
           </div>
         </Card>
 
-        <Card className="p-4 flex items-center gap-3.5">
-          <div className="h-10 w-10 rounded-md bg-primary-subtle text-primary flex items-center justify-center shrink-0">
-            <FileCheck className="h-5 w-5" />
+        <Card className="p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3.5">
+          <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-md bg-primary-subtle text-primary flex items-center justify-center shrink-0">
+            <FileCheck className="h-4 w-4 sm:h-5 sm:w-5" />
           </div>
           <div>
-            <div className="text-xl font-semibold text-foreground">30 Submissions</div>
-            <div className="text-xs text-muted-foreground">Ready for review</div>
+            <div className="text-lg sm:text-xl font-semibold text-foreground">30 Submissions</div>
+            <div className="text-[11px] sm:text-xs text-muted-foreground">Ready for review</div>
           </div>
         </Card>
 
-        <Card className="p-4 flex items-center gap-3.5">
-          <div className="h-10 w-10 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
-            <CheckCircle2 className="h-5 w-5" />
+        <Card className="p-3 sm:p-4 flex items-center gap-2.5 sm:gap-3.5">
+          <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+            <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5" />
           </div>
           <div>
-            <div className="text-xl font-semibold text-foreground">1 Graded</div>
-            <div className="text-xs text-muted-foreground">Feedback released</div>
+            <div className="text-lg sm:text-xl font-semibold text-foreground">1 Graded</div>
+            <div className="text-[11px] sm:text-xs text-muted-foreground">Feedback released</div>
           </div>
         </Card>
       </div>
 
       {/* Search & Filter Toolbar */}
-      <div className="flex flex-col sm:flex-row gap-3 justify-between items-center">
+      <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-between items-stretch sm:items-center">
         <div className="w-full sm:w-80">
           <Input
             type="search"
-            leftAdornment={<Search className="h-4 w-4" />}
+            size="sm"
+            leftAdornment={<Search className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
             placeholder="Search assignments or classes..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -98,7 +101,7 @@ export function AssignmentsPage() {
         </div>
 
         <Tabs value={selectedStatus} onValueChange={(v) => setSelectedStatus(v as 'all' | 'active' | 'graded' | 'draft')} variant="pill">
-          <TabsList>
+          <TabsList className="w-full sm:w-auto">
             <TabsTrigger value="all">All</TabsTrigger>
             <TabsTrigger value="active">Active</TabsTrigger>
             <TabsTrigger value="graded">Graded</TabsTrigger>
@@ -108,38 +111,38 @@ export function AssignmentsPage() {
       </div>
 
       {/* Assignments List Cards */}
-      <div className="space-y-3">
+      <div className="space-y-2.5 sm:space-y-3">
         {filteredAssignments.map((asg) => (
           <Card
             key={asg.id}
-            className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            className="p-3 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4"
           >
-            <div className="flex items-start gap-3.5 min-w-0">
-              <div className="h-10 w-10 rounded-md bg-primary-subtle text-primary flex items-center justify-center shrink-0 mt-0.5">
-                <FileText className="h-5 w-5" />
+            <div className="flex items-start gap-2.5 sm:gap-3.5 min-w-0">
+              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-md bg-primary-subtle text-primary flex items-center justify-center shrink-0 mt-0.5">
+                <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
               </div>
-              <div className="min-w-0 space-y-1">
-                <h3 className="text-base font-semibold text-foreground truncate leading-tight">
+              <div className="min-w-0 space-y-0.5 sm:space-y-1">
+                <h3 className="text-sm sm:text-base font-semibold text-foreground truncate leading-tight">
                   {asg.title}
                 </h3>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] sm:text-xs text-muted-foreground">
                   <span className="font-semibold text-foreground flex items-center gap-1">
-                    <BookOpen className="h-3.5 w-3.5 text-primary" />
+                    <BookOpen className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-primary" />
                     {asg.classBatch}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
-                    <Calendar className="h-3.5 w-3.5" />
+                    <Calendar className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                     Due: {asg.dueDate}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between sm:justify-end gap-4 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
-              <div className="text-right sm:text-center">
-                <div className="text-xs text-muted-foreground font-medium">Submissions</div>
-                <div className="text-sm font-semibold text-foreground">
+            <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
+              <div className="text-left sm:text-center">
+                <div className="text-[11px] sm:text-xs text-muted-foreground font-medium">Submissions</div>
+                <div className="text-xs sm:text-sm font-semibold text-foreground">
                   {asg.submissionsCount} / {asg.totalStudents}
                 </div>
               </div>
@@ -152,6 +155,8 @@ export function AssignmentsPage() {
                     ? 'primary'
                     : 'neutral'
                 }
+                size="sm"
+                className="text-[10px] sm:text-xs"
               >
                 {asg.status}
               </Badge>

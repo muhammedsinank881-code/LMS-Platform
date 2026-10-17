@@ -2,7 +2,7 @@ import { PageHeader } from '@/components/layout/PageHeader'
 
 export function CapstoneProjectsPage() {
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       <PageHeader
         title="Capstone Projects"
         description="Track student teams, milestone deliverables, project repositories, and final evaluation scores."

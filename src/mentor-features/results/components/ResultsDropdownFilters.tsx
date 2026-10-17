@@ -18,10 +18,10 @@ export function ResultsDropdownFilters({
   totalCount,
 }: ResultsDropdownFiltersProps) {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pt-1">
       {/* Dropdown Filters */}
-      <div className="flex flex-wrap items-center gap-2.5">
-        <div className="flex items-center gap-2">
+      <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-2.5 w-full sm:w-auto">
+        <div>
           <label htmlFor="results-class-select" className="sr-only">
             Filter by Class
           </label>
@@ -29,7 +29,7 @@ export function ResultsDropdownFilters({
             id="results-class-select"
             value={selectedClass}
             onChange={(e) => onClassChange(e.target.value)}
-            className="h-9 px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-xs"
+            className="w-full sm:w-auto h-8 sm:h-9 px-2 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-xs"
           >
             <option value="all">All Classes</option>
             {availableClasses.map((cls) => (
@@ -40,7 +40,7 @@ export function ResultsDropdownFilters({
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div>
           <label htmlFor="results-exam-select" className="sr-only">
             Filter by Exam / Subject
           </label>
@@ -48,7 +48,7 @@ export function ResultsDropdownFilters({
             id="results-exam-select"
             value={selectedExam}
             onChange={(e) => onExamChange(e.target.value)}
-            className="h-9 px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-xs"
+            className="w-full sm:w-auto h-8 sm:h-9 px-2 sm:px-3 bg-surface border border-input rounded-md text-xs sm:text-sm font-medium text-foreground focus:ring-2 focus:ring-ring focus:outline-none cursor-pointer shadow-xs"
           >
             <option value="all">All Exams</option>
             {availableExams.map((ex) => (

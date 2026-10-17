@@ -47,11 +47,12 @@ const MOCK_THREADS: MessageThread[] = [
 export function MessagesPage() {
   const [activeThreadId, setActiveThreadId] = useState<string>('msg-1')
   const [replyText, setReplyText] = useState('')
+  const [showMobileChat, setShowMobileChat] = useState(false)
 
   const activeThread = MOCK_THREADS.find((t) => t.id === activeThreadId) || MOCK_THREADS[0]
 
   return (
-    <div className="space-y-6 text-foreground">
+    <div className="space-y-4 sm:space-y-6 text-foreground">
       {/* Header */}
       <PageHeader
         title="Student Messages"
@@ -63,12 +64,13 @@ export function MessagesPage() {
       />
 
       {/* Messaging Layout */}
-      <Card className="p-0 overflow-hidden grid grid-cols-1 md:grid-cols-3 min-h-[500px]">
+      <Card className="p-0 overflow-hidden grid grid-cols-1 md:grid-cols-3 min-h-[440px] sm:min-h-[500px]">
         {/* Threads List */}
-        <div className="border-r border-border p-3 space-y-2">
+        <div className={`border-r border-border p-2.5 sm:p-3 space-y-2 ${showMobileChat ? 'hidden md:block' : 'block'}`}>
           <div className="mb-2">
             <Input
               type="search"
+              size="sm"
               placeholder="Search conversations..."
               leftAdornment={<Search className="size-3.5" />}
             />
@@ -79,14 +81,17 @@ export function MessagesPage() {
               <button
                 key={thread.id}
                 type="button"
-                onClick={() => setActiveThreadId(thread.id)}
-                className={`w-full text-left p-3 rounded-md transition-colors flex items-start gap-3 cursor-pointer ${
+                onClick={() => {
+                  setActiveThreadId(thread.id)
+                  setShowMobileChat(true)
+                }}
+                className={`w-full text-left p-2.5 sm:p-3 rounded-md transition-colors flex items-start gap-2.5 sm:gap-3 cursor-pointer ${
                   activeThreadId === thread.id
                     ? 'bg-primary-subtle border border-primary/30'
                     : 'hover:bg-muted'
                 }`}
               >
-                <div className="w-9 h-9 rounded-full bg-primary-subtle text-primary font-bold text-xs flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary-subtle text-primary font-bold text-xs flex items-center justify-center shrink-0">
                   {thread.avatarInitials}
                 </div>
                 <div className="min-w-0 flex-1 space-y-0.5">
@@ -94,9 +99,9 @@ export function MessagesPage() {
                     <span className="text-xs font-bold text-foreground truncate">
                       {thread.name}
                     </span>
-                    <span className="text-[10px] text-muted-foreground">{thread.time}</span>
+                    <span className="text-[10px] text-muted-foreground shrink-0">{thread.time}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground truncate leading-tight">
+                  <p className="text-[11px] sm:text-xs text-muted-foreground truncate leading-tight">
                     {thread.lastMessage}
                   </p>
                 </div>
@@ -106,34 +111,45 @@ export function MessagesPage() {
         </div>
 
         {/* Chat Window */}
-        <div className="col-span-2 flex flex-col justify-between bg-muted/20">
+        <div className={`col-span-2 flex flex-col justify-between bg-muted/20 ${!showMobileChat ? 'hidden md:flex' : 'flex'}`}>
           {/* Chat Header */}
-          <div className="p-4 bg-surface border-b border-border flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-primary-subtle text-primary font-bold text-xs flex items-center justify-center">
+          <div className="p-3 sm:p-4 bg-surface border-b border-border flex items-center justify-between">
+            <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+              <button
+                type="button"
+                onClick={() => setShowMobileChat(false)}
+                className="md:hidden p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted mr-0.5 cursor-pointer"
+                aria-label="Back to messages"
+              >
+                <svg className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary-subtle text-primary font-bold text-xs flex items-center justify-center shrink-0">
                 {activeThread?.avatarInitials}
               </div>
-              <div>
-                <h3 className="text-sm font-bold text-foreground">
+              <div className="min-w-0">
+                <h3 className="text-xs sm:text-sm font-bold text-foreground truncate">
                   {activeThread?.name}
                 </h3>
-                <p className="text-[11px] text-muted-foreground">{activeThread?.role}</p>
+                <p className="text-[10px] sm:text-[11px] text-muted-foreground truncate">{activeThread?.role}</p>
               </div>
             </div>
           </div>
 
           {/* Messages Area */}
-          <div className="p-4 space-y-3 flex-1 overflow-y-auto">
-            <div className="bg-surface p-3 rounded-md border border-border max-w-md text-xs space-y-1">
-              <p className="text-foreground">{activeThread?.lastMessage}</p>
+          <div className="p-3 sm:p-4 space-y-3 flex-1 overflow-y-auto">
+            <div className="bg-surface p-2.5 sm:p-3 rounded-md border border-border max-w-xs sm:max-w-md text-xs space-y-1">
+              <p className="text-foreground text-xs sm:text-sm">{activeThread?.lastMessage}</p>
               <span className="text-[10px] text-muted-foreground block text-right">{activeThread?.time}</span>
             </div>
           </div>
 
           {/* Composer */}
-          <div className="p-3 bg-surface border-t border-border flex items-center gap-2">
+          <div className="p-2.5 sm:p-3 bg-surface border-t border-border flex items-center gap-2">
             <Input
               type="text"
+              size="sm"
               placeholder="Type your message reply..."
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
@@ -142,10 +158,11 @@ export function MessagesPage() {
             <Button
               type="button"
               variant="primary"
+              size="sm"
               onClick={() => setReplyText('')}
-              className="h-10 shrink-0"
+              className="h-8 sm:h-9 shrink-0 px-3"
             >
-              <Send className="size-3.5 mr-1.5" />
+              <Send className="size-3.5 mr-1 sm:mr-1.5" />
               <span>Send</span>
             </Button>
           </div>

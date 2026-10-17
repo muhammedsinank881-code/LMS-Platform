@@ -24,11 +24,11 @@ export function StatCard({
       : 'text-foreground'
 
   return (
-    <Card className="p-4 sm:p-5 text-center flex flex-col justify-center space-y-1">
-      <div className={`text-xl sm:text-2xl font-semibold tracking-tight leading-tight ${textColor}`}>
+    <Card className="p-2.5 sm:p-5 text-center flex flex-col justify-center space-y-0.5 sm:space-y-1">
+      <div className={`text-lg sm:text-2xl font-semibold tracking-tight leading-tight ${textColor}`}>
         {value}
       </div>
-      <div className="text-xs font-medium text-muted-foreground">
+      <div className="text-[11px] sm:text-xs font-medium text-muted-foreground">
         {label}
       </div>
     </Card>
