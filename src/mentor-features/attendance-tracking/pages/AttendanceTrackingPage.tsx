@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import {
   AttendanceHeader,
   ClassDateSelector,
-  AttendanceSessionCard,
   AttendanceOverview,
   AttendanceEvidenceCard,
   StudentSearch,
@@ -250,7 +249,7 @@ export function AttendanceTrackingPage() {
             savedSuccess={savedSuccess}
           />
 
-          {/* 2 & 3. Class / Batch Selector + Date Navigation Card */}
+          {/* 2 & 3. Unified Class / Batch, Subject & Date Navigation Card */}
           <ClassDateSelector
             selectedClass={selectedClass}
             onClassChange={(clsId) => {
@@ -263,10 +262,6 @@ export function AttendanceTrackingPage() {
             onPrevDay={handlePrevDay}
             onNextDay={handleNextDay}
             formatDateDisplay={formatDateDisplay}
-          />
-
-          {/* 4. Selected Class / Session Card (Selectable Subject) */}
-          <AttendanceSessionCard
             session={session}
             availableSessions={AVAILABLE_SESSIONS}
             onSessionChange={setSession}

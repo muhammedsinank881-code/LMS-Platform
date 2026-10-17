@@ -74,6 +74,7 @@ export function Topbar({ onOpenNav }: TopbarProps) {
             <DropdownContent align="end">
               <DropdownItem onSelect={() => navigate('/mentor/classes')}>Add class</DropdownItem>
               <DropdownItem onSelect={() => navigate('/mentor/assignments')}>Create assignment</DropdownItem>
+              <DropdownItem onSelect={() => navigate('/mentor/quizzes')}>Create quiz</DropdownItem>
               <DropdownItem onSelect={() => navigate('/mentor/exams')}>Create exam</DropdownItem>
             </DropdownContent>
           </Dropdown>

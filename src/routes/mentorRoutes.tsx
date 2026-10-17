@@ -82,6 +82,14 @@ export const mentorRoutes: RouteObject[] = [
         lazy: lazyPage(() => import('@/mentor-features/assignments/pages/CreateAssignmentPage'), 'CreateAssignmentPage'),
       },
       {
+        path: 'quizzes',
+        lazy: lazyPage(() => import('@/mentor-features/quizzes/pages/QuizzesPage'), 'QuizzesPage'),
+      },
+      {
+        path: 'quizzes/:quizId',
+        lazy: lazyPage(() => import('@/mentor-features/quizzes/pages/QuizDetailsPage'), 'QuizDetailsPage'),
+      },
+      {
         path: 'exams',
         lazy: lazyPage(() => import('@/mentor-features/exams/pages/ExamsPage'), 'ExamsPage'),
       },

@@ -9,6 +9,7 @@ interface AttendanceSessionCardProps {
   availableSessions?: SessionInfo[]
   onSessionChange?: (session: SessionInfo) => void
   onSelectSession?: () => void
+  embedded?: boolean
 }
 
 export function AttendanceSessionCard({
@@ -16,6 +17,7 @@ export function AttendanceSessionCard({
   availableSessions = AVAILABLE_SESSIONS,
   onSessionChange,
   onSelectSession,
+  embedded = false,
 }: AttendanceSessionCardProps) {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -87,55 +89,78 @@ export function AttendanceSessionCard({
     setIsOpen(false)
   }
 
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <Card
-        onClick={handleToggle}
-        onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        aria-label="Select subject or session"
-        className={`p-3.5 sm:p-4 bg-surface border-border shadow-sm rounded-2xl cursor-pointer hover:border-emerald-500/40 transition-all select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30 ${
-          isOpen ? 'ring-2 ring-emerald-500/20 border-emerald-500/50' : ''
+  const sessionContent = (
+    <div className="flex items-center justify-between gap-3 w-full">
+      {/* Left: Video Icon Container */}
+      <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-900/40">
+        <Video className="h-4 w-4 sm:h-5 sm:w-5" />
+      </div>
+
+      {/* Center: Title + Live Badge + Lecture details */}
+      <div className="flex-1 min-w-0 space-y-0.5">
+        <span className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-muted-foreground block">
+          SUBJECT
+        </span>
+        <div className="flex items-center gap-2 flex-wrap">
+          <h2 className="text-xs sm:text-sm font-bold text-foreground">
+            {session.subject}
+          </h2>
+          {session.badgeText && (
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-semibold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/50 shrink-0">
+              {session.badgeText}
+            </span>
+          )}
+        </div>
+        <p className="text-[11px] sm:text-xs text-muted-foreground leading-snug break-words">
+          {session.lecture.replace(/·/g, '•')} • {session.timeRange}
+        </p>
+      </div>
+
+      {/* Right: Switch/Chevron Icon with active state */}
+      <div
+        className={`p-1.5 rounded-lg transition-transform duration-200 shrink-0 text-muted-foreground hover:text-foreground ${
+          isOpen
+            ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 rotate-180'
+            : 'hover:bg-muted'
         }`}
       >
-        <div className="flex items-center justify-between gap-3">
-          {/* Left: Video Icon Container */}
-          <div className="h-10 w-10 sm:h-11 sm:w-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-100 dark:border-emerald-900/40">
-            <Video className="h-5 w-5" />
-          </div>
+        <ChevronsUpDown className="h-4 w-4" />
+      </div>
+    </div>
+  )
 
-          {/* Center: Title + Live Badge + Lecture details */}
-          <div className="flex-1 min-w-0 space-y-0.5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-xs sm:text-sm font-bold text-foreground truncate">
-                {session.subject}
-              </h2>
-              {session.badgeText && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/50">
-                  {session.badgeText}
-                </span>
-              )}
-            </div>
-            <p className="text-[11px] sm:text-xs text-muted-foreground truncate">
-              {session.lecture} · {session.timeRange}
-            </p>
-          </div>
-
-          {/* Right: Switch/Chevron Icon with active state */}
-          <div
-            className={`p-1.5 rounded-lg transition-transform duration-200 shrink-0 text-muted-foreground hover:text-foreground ${
-              isOpen
-                ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 rotate-180'
-                : 'hover:bg-muted'
-            }`}
-          >
-            <ChevronsUpDown className="h-4 w-4" />
-          </div>
-        </div>
-      </Card>
+  return (
+    <div className="relative h-full" ref={dropdownRef}>
+      {embedded ? (
+        <button
+          type="button"
+          onClick={handleToggle}
+          onKeyDown={handleKeyDown}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-label="Select subject or session"
+          className={`w-full h-full flex items-center justify-between p-3.5 sm:p-4 text-left transition-colors cursor-pointer hover:bg-muted/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30 md:rounded-tr-2xl ${
+            isOpen ? 'bg-muted/20' : ''
+          }`}
+        >
+          {sessionContent}
+        </button>
+      ) : (
+        <Card
+          onClick={handleToggle}
+          onKeyDown={handleKeyDown}
+          role="button"
+          tabIndex={0}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-label="Select subject or session"
+          className={`p-3.5 sm:p-4 bg-surface border-border shadow-sm rounded-2xl cursor-pointer hover:border-emerald-500/40 transition-all select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30 ${
+            isOpen ? 'ring-2 ring-emerald-500/20 border-emerald-500/50' : ''
+          }`}
+        >
+          {sessionContent}
+        </Card>
+      )}
 
       {/* Selectable Subjects Dropdown Popover */}
       {isOpen && (
@@ -144,7 +169,7 @@ export function AttendanceSessionCard({
           tabIndex={-1}
           aria-label="Available subjects and sessions"
           onKeyDown={handleKeyDown}
-          className="absolute left-0 right-0 top-full mt-1.5 z-40 bg-surface border border-border rounded-xl shadow-2xl py-1.5 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+          className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-surface border border-border rounded-xl shadow-2xl py-1.5 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
         >
           <div className="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border-b border-border/50">
             Select Subject / Session
