@@ -68,10 +68,11 @@ export function ClassBatchSelector({
 
   return (
     <Card className="overflow-visible bg-surface border-border shadow-2xs rounded-2xl">
-      <div className="relative" ref={dropdownRef} onKeyDown={handleKeyDown}>
+      <div className="relative" ref={dropdownRef}>
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
+          onKeyDown={handleKeyDown}
           className="w-full flex items-center justify-between p-3.5 sm:p-4 text-left transition-colors cursor-pointer hover:bg-muted/40 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 select-none"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
@@ -116,6 +117,7 @@ export function ClassBatchSelector({
             role="listbox"
             tabIndex={-1}
             aria-label="Class and Batch options"
+            onKeyDown={handleKeyDown}
             className="absolute left-0 right-0 top-full mt-1.5 z-50 bg-surface border border-border rounded-xl shadow-xl py-1.5 overflow-hidden animate-in fade-in zoom-in-95 duration-150 max-h-80 overflow-y-auto"
           >
             {classes.map((cls, idx) => {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Check, Clock, Circle, CheckCircle2 } from 'lucide-react'
 import {
   Modal,
@@ -32,29 +32,36 @@ export function UpdateProgressModal({
   const [selectedModuleId, setSelectedModuleId] = useState<string>(
     initialModuleId || modules[0]?.id || '',
   )
+  const [prevInitialModuleId, setPrevInitialModuleId] = useState(initialModuleId)
 
-  useEffect(() => {
-    if (initialModuleId) {
-      setSelectedModuleId(initialModuleId)
-    } else if (modules[0]?.id && !selectedModuleId) {
-      setSelectedModuleId(modules[0].id)
-    }
-  }, [initialModuleId, modules, selectedModuleId])
+  if (initialModuleId !== prevInitialModuleId) {
+    setPrevInitialModuleId(initialModuleId)
+    setSelectedModuleId(initialModuleId || modules[0]?.id || '')
+  } else if (!selectedModuleId && modules[0]?.id) {
+    setSelectedModuleId(modules[0].id)
+  }
 
   const activeModule = modules.find((m) => m.id === selectedModuleId) || modules[0]
 
   // Local draft topic statuses for the active module
-  const [draftStatuses, setDraftStatuses] = useState<Record<string, TopicStatus>>({})
+  const [draftStatuses, setDraftStatuses] = useState<Record<string, TopicStatus>>(() => {
+    if (!activeModule) return {}
+    const initialMap: Record<string, TopicStatus> = {}
+    activeModule.topics.forEach((t) => {
+      initialMap[t.id] = t.status
+    })
+    return initialMap
+  })
+  const [prevActiveModuleId, setPrevActiveModuleId] = useState(activeModule?.id)
 
-  useEffect(() => {
-    if (activeModule) {
-      const initialMap: Record<string, TopicStatus> = {}
-      activeModule.topics.forEach((t) => {
-        initialMap[t.id] = t.status
-      })
-      setDraftStatuses(initialMap)
-    }
-  }, [activeModule])
+  if (activeModule && activeModule.id !== prevActiveModuleId) {
+    setPrevActiveModuleId(activeModule.id)
+    const initialMap: Record<string, TopicStatus> = {}
+    activeModule.topics.forEach((t) => {
+      initialMap[t.id] = t.status
+    })
+    setDraftStatuses(initialMap)
+  }
 
   const handleStatusChange = (topicId: string, status: TopicStatus) => {
     setDraftStatuses((prev) => ({
@@ -95,10 +102,14 @@ export function UpdateProgressModal({
         <ModalBody className="space-y-4 flex-1 overflow-y-auto">
           {/* Module Selector */}
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-foreground">
+            <span id="select-module-label" className="text-xs font-bold text-foreground block">
               Select Module
-            </label>
-            <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            </span>
+            <div
+              role="group"
+              aria-labelledby="select-module-label"
+              className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none"
+            >
               {modules.map((mod) => {
                 const isSelected = mod.id === selectedModuleId
                 return (

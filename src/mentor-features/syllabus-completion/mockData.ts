@@ -444,8 +444,8 @@ export function calculateClassSyllabusRecord(
   const completionPercentage =
     totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0
 
-  let status: 'Completed' | 'On Track' | 'In Progress' | 'Behind' = 'On Track'
-  let phaseText = 'Mid-Term Evaluation Phase'
+  let status: 'Completed' | 'On Track' | 'In Progress' | 'Behind'
+  let phaseText: string
 
   if (completionPercentage === 100) {
     status = 'Completed'

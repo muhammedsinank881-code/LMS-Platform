@@ -12,7 +12,7 @@ import type {
 } from '../types'
 
 // Module-level cache so syllabus modifications persist in memory during the session
-let sharedSyllabusModulesMap: Record<string, SyllabusModule[]> = {
+const sharedSyllabusModulesMap: Record<string, SyllabusModule[]> = {
   ...CLASS_SYLLABUS_MODULES_MAP,
 }
 const listeners = new Set<() => void>()
@@ -57,9 +57,9 @@ export function getOverallSyllabusStats(classesList = Object.keys(sharedSyllabus
   const overallPercentage =
     totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0
 
-  let statusText: 'Completed' | 'On Track' | 'In Progress' | 'Behind' = 'On Track'
-  let statusTone: 'success' | 'primary' | 'warning' | 'neutral' = 'success'
-  let phaseText = 'Mid-Term Evaluation Phase'
+  let statusText: 'Completed' | 'On Track' | 'In Progress' | 'Behind'
+  let statusTone: 'success' | 'primary' | 'warning' | 'neutral'
+  let phaseText: string
 
   if (overallPercentage === 100) {
     statusText = 'Completed'
@@ -125,16 +125,21 @@ export function useSyllabusData(initialClassId?: string) {
     return activeClass?.id || mentorClasses[0]?.id || 'cls-102'
   }, [initialClassId, mentorClasses])
 
-  const [selectedClassId, setSelectedClassId] = useState<string>(defaultClassId)
+  const [selectedClassId, setSelectedClassId] = useState<string>(
+    initialClassId || defaultClassId,
+  )
+  const [prevInitialClassId, setPrevInitialClassId] = useState(initialClassId)
 
-  // Keep selectedClassId in sync if initialClassId changes
-  useEffect(() => {
+  if (initialClassId !== prevInitialClassId) {
+    setPrevInitialClassId(initialClassId)
     if (initialClassId) {
       setSelectedClassId(initialClassId)
     } else if (defaultClassId && !selectedClassId) {
       setSelectedClassId(defaultClassId)
     }
-  }, [initialClassId, defaultClassId, selectedClassId])
+  } else if (defaultClassId && !selectedClassId) {
+    setSelectedClassId(defaultClassId)
+  }
 
   // Selected class record
   const currentMentorClass = useMemo(() => {

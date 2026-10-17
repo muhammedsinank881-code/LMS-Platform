@@ -1,20 +1,13 @@
-import { BookOpen, Ellipsis, GraduationCap, LayoutDashboard, Users } from 'lucide-react'
+import { Ellipsis } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { usePermission } from '@/hooks/use-permission'
 import { cn } from '@/lib/cn'
-import { getNavItem, MOBILE_TAB_RESOURCES } from './nav-config'
+import { getNavItem, MENTOR_MOBILE_TAB_ITEMS, MOBILE_TAB_RESOURCES } from './nav-config'
 import { STUDENT_NAV_ITEMS } from './student-nav-config'
 
 export interface MobileTabBarProps {
   onOpenMore: () => void
 }
-
-export const MENTOR_MOBILE_TAB_ITEMS = [
-  { label: 'Home', path: '/mentor/dashboard', icon: LayoutDashboard },
-  { label: 'Classes', path: '/mentor/classes', icon: BookOpen },
-  { label: 'Students', path: '/mentor/students', icon: Users },
-  { label: 'Exams', path: '/mentor/exams', icon: GraduationCap },
-]
 
 const tabClasses =
   'flex min-h-12 py-1.5 flex-1 flex-col items-center justify-center gap-0.5 text-[10px] sm:text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring'

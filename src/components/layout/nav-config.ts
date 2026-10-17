@@ -21,6 +21,7 @@ import {
   Users,
   UsersRound,
   Workflow,
+  GraduationCap,
   type LucideIcon,
 } from 'lucide-react'
 import type { Resource } from '@/types'
@@ -262,3 +263,16 @@ export function getNavItem(resource: Resource): NavItem {
 
 /** Resources pinned to the mobile bottom bar; everything else lives under "More". */
 export const MOBILE_TAB_RESOURCES: Resource[] = ['dashboard', 'followups', 'leads', 'inbox']
+
+export interface MentorMobileTabItem {
+  label: string
+  path: string
+  icon: LucideIcon
+}
+
+export const MENTOR_MOBILE_TAB_ITEMS: MentorMobileTabItem[] = [
+  { label: 'Home', path: '/mentor/dashboard', icon: LayoutDashboard },
+  { label: 'Classes', path: '/mentor/classes', icon: BookOpen },
+  { label: 'Students', path: '/mentor/students', icon: Users },
+  { label: 'Exams', path: '/mentor/exams', icon: GraduationCap },
+]

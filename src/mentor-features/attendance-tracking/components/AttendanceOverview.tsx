@@ -71,24 +71,39 @@ export function AttendanceOverview({
 
       {/* 5 Equal-Width Compact Status Cards across available width */}
       <div className="grid grid-cols-5 gap-1.5 sm:gap-3 md:gap-4">
-        {stats.map((stat) => (
-          <div
-            key={stat.id}
-            onClick={() => onStatusClick && onStatusClick(stat.id)}
-            className={`flex flex-col items-center justify-center py-2.5 sm:py-4 px-1 sm:px-2 rounded-xl sm:rounded-2xl border transition-all active:scale-95 ${
-              stat.bgClass
-            } ${onStatusClick ? 'cursor-pointer hover:opacity-90 hover:shadow-xs' : ''}`}
-          >
-            <span className="text-base sm:text-2xl font-extrabold leading-none tracking-tight">
-              {stat.value}
-            </span>
-            <span
-              className={`text-[10px] sm:text-xs font-semibold mt-1 sm:mt-1.5 tracking-tight ${stat.labelClass}`}
+        {stats.map((stat) => {
+          const content = (
+            <>
+              <span className="text-base sm:text-2xl font-extrabold leading-none tracking-tight">
+                {stat.value}
+              </span>
+              <span
+                className={`text-[10px] sm:text-xs font-semibold mt-1 sm:mt-1.5 tracking-tight ${stat.labelClass}`}
+              >
+                {stat.label}
+              </span>
+            </>
+          )
+
+          const baseClassName = `flex flex-col items-center justify-center py-2.5 sm:py-4 px-1 sm:px-2 rounded-xl sm:rounded-2xl border transition-all active:scale-95 ${
+            stat.bgClass
+          } ${onStatusClick ? 'cursor-pointer hover:opacity-90 hover:shadow-xs' : ''}`
+
+          return onStatusClick ? (
+            <button
+              key={stat.id}
+              type="button"
+              onClick={() => onStatusClick(stat.id)}
+              className={baseClassName}
             >
-              {stat.label}
-            </span>
-          </div>
-        ))}
+              {content}
+            </button>
+          ) : (
+            <div key={stat.id} className={baseClassName}>
+              {content}
+            </div>
+          )
+        })}
       </div>
     </Card>
   )

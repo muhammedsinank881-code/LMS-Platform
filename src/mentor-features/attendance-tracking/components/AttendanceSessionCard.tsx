@@ -88,9 +88,10 @@ export function AttendanceSessionCard({
   }
 
   return (
-    <div className="relative" ref={dropdownRef} onKeyDown={handleKeyDown}>
+    <div className="relative" ref={dropdownRef}>
       <Card
         onClick={handleToggle}
+        onKeyDown={handleKeyDown}
         role="button"
         tabIndex={0}
         aria-haspopup="listbox"
@@ -142,6 +143,7 @@ export function AttendanceSessionCard({
           role="listbox"
           tabIndex={-1}
           aria-label="Available subjects and sessions"
+          onKeyDown={handleKeyDown}
           className="absolute left-0 right-0 top-full mt-1.5 z-40 bg-surface border border-border rounded-xl shadow-2xl py-1.5 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
         >
           <div className="px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground border-b border-border/50">

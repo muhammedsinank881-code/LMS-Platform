@@ -80,16 +80,25 @@ export function TeacherOverrideModal({
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground block">
+            <span
+              id="select-status-label"
+              className="text-xs font-bold uppercase tracking-wider text-muted-foreground block"
+            >
               Select New Status
-            </label>
-            <div className="grid grid-cols-2 gap-2">
+            </span>
+            <div
+              role="radiogroup"
+              aria-labelledby="select-status-label"
+              className="grid grid-cols-2 gap-2"
+            >
               {statuses.map((s) => {
                 const isSelected = selectedStatus === s.id
                 return (
                   <button
                     key={s.id}
                     type="button"
+                    role="radio"
+                    aria-checked={isSelected}
                     onClick={() => setSelectedStatus(s.id)}
                     className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                       isSelected
