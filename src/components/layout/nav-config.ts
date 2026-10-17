@@ -22,6 +22,7 @@ import {
   UsersRound,
   Workflow,
   GraduationCap,
+  HelpCircle,
   type LucideIcon,
 } from 'lucide-react'
 import type { Resource } from '@/types'
@@ -195,6 +196,14 @@ export const MENTOR_NAV_ITEMS: NavItem[] = [
     path: '/mentor/assignments',
     icon: FileText,
     description: 'Create and review student assignments.',
+    section: 'ACADEMICS',
+  },
+  {
+    resource: 'tasks',
+    label: 'Quizzes',
+    path: '/mentor/quizzes',
+    icon: HelpCircle,
+    description: 'Create, manage, publish and evaluate quizzes for your classes.',
     section: 'ACADEMICS',
   },
   {

@@ -68,17 +68,17 @@ export function ClassSelector({
   )
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative h-full" ref={dropdownRef}>
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
         onKeyDown={handleKeyDown}
-        className="w-full flex items-center justify-between p-3.5 sm:p-4 text-left transition-colors cursor-pointer hover:bg-muted/30 rounded-t-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30"
+        className="w-full h-full flex items-center justify-between p-3.5 sm:p-4 text-left transition-colors cursor-pointer hover:bg-muted/30 rounded-t-2xl md:rounded-tr-none md:rounded-tl-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/30"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label="Select class or batch"
       >
-        <div className="space-y-0.5">
+        <div className="space-y-0.5 min-w-0 pr-2">
           <span className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-muted-foreground block">
             CLASS / BATCH
           </span>
