@@ -59,7 +59,7 @@ export function Topbar({ onOpenNav }: TopbarProps) {
         >
           <Search aria-hidden="true" />
         </Button>
-        {userRole !== 'student' && (userRole === 'mentor' ? (
+        {userRole === 'mentor' && (
           <Dropdown>
             <DropdownTrigger asChild>
               <Button
@@ -77,7 +77,9 @@ export function Topbar({ onOpenNav }: TopbarProps) {
               <DropdownItem onSelect={() => navigate('/mentor/exams')}>Create exam</DropdownItem>
             </DropdownContent>
           </Dropdown>
-        ) : can('leads', 'create') || can('followups', 'create') ? (
+        )}
+
+        {userRole !== 'mentor' && userRole !== 'student' && (can('leads', 'create') || can('followups', 'create')) && (
           <Dropdown>
             <DropdownTrigger asChild>
               <Button
@@ -98,8 +100,9 @@ export function Topbar({ onOpenNav }: TopbarProps) {
               ) : null}
             </DropdownContent>
           </Dropdown>
-        ) : null}
-        {userRole === 'mentor' ? (
+        )}
+
+        {userRole === 'mentor' && (
           <Button
             variant="ghost"
             size="icon-sm"
@@ -110,8 +113,7 @@ export function Topbar({ onOpenNav }: TopbarProps) {
             <MessageSquare aria-hidden="true" className="size-4" />
             <span className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-primary" />
           </Button>
-        ) : null}
-        ) : null)}
+        )}
         <NotificationBell />
         <UserMenu />
       </div>
