@@ -8,7 +8,7 @@ export function StudentCertificatesWidget() {
   const cert = MOCK_CERTIFICATE_DATA
 
   return (
-    <Card className="flex h-full flex-col p-4">
+    <Card className="flex h-full flex-col p-4 items-center">
       <button
         type="button"
         onClick={() => navigate('/student/certificates')}

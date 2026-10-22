@@ -35,7 +35,7 @@ export function Sidebar({ collapsed, onToggleCollapsed, onNavigate, className }:
   const toggleLabel = collapsed ? 'Expand sidebar' : 'Collapse sidebar'
 
   return (
-    <div className={cn('flex h-full flex-col bg-surface', className)}>
+    <div className={cn('flex h-full flex-col bg-surface transition-all duration-300 ease-in-out', className)}>
       <div
         className={cn('flex h-16 shrink-0 items-center px-4', collapsed && 'justify-center px-2')}
       >
