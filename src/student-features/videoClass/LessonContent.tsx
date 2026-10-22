@@ -371,7 +371,7 @@ export function LessonContent({
       )}
 
       {/* Previous / Next Navigation */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
+      <div className="flex flex-row items-center justify-between gap-3 border-t border-border/60 pt-4">
         <Button
           variant="outline"
           size="sm"
@@ -380,7 +380,9 @@ export function LessonContent({
           aria-label="Go to previous lesson"
         >
           <ChevronLeft className="h-4 w-4" />
+          <span className='text-[10px]'>
           Previous lesson
+          </span>
         </Button>
 
         <span className="text-xs text-muted-foreground">
@@ -393,7 +395,7 @@ export function LessonContent({
           onClick={onNext}
           aria-label="Go to next lesson"
         >
-          Next lesson
+          <span className='text-[10px]'>Next lesson</span>
           <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
