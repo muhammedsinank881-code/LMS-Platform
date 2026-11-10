@@ -83,7 +83,7 @@ export function AssignmentsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Page Header */}
       <PageHeader
         title="Assignments & Quizzes"
@@ -113,7 +113,7 @@ export function AssignmentsPage() {
         totalCount={tasks.length}
       />
       {tasks.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {tasks.map((task) =>
             task.type === 'quiz' ? (
               <QuizCard

@@ -81,7 +81,7 @@ export function ProjectWorkspacePage() {
         </div>
 
         {/* Right Main Workspace */}
-        <div className="w-full min-w-0 flex-1 space-y-6">
+        <div className="w-full min-w-0 flex-1 space-y-4">
           {/* Collapse expand indicator when collapsed */}
           {isSidebarCollapsed && (
             <div className="flex items-center justify-between rounded-md border border-border bg-surface p-2.5">
